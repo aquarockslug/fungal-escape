@@ -10,7 +10,7 @@ function gameInit() {
 
 	grid = Grid(width, height, rgb(0, 0, 0));
 
-	particle = EngineObject((pos = (0, 0)), (size = (5, 5)), tileInfo, (angle = 0), color, (renderOrder = 0));
+	molecule = EngineObject((pos = (0, 0)), (size = (5, 5)), tileInfo, (angle = 0), color, (renderOrder = 0));
 }
 function gameStart() {}
 function gameUpdate() {

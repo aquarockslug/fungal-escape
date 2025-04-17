@@ -9,14 +9,12 @@ function gameInit() {
 	squareUpdate = (square, color) => ({ square, value: { color } });
 
 	grid = Grid(width, height, rgb(0, 0, 0));
-	greenSnake = snakePattern(rgb(0, 1, 0));
+
+	particle = EngineObject((pos = (0, 0)), (size = (5, 5)), tileInfo, (angle = 0), color, (renderOrder = 0));
 }
 function gameStart() {}
 function gameUpdate() {
 	let squareUpdates = [];
-
-	squareUpdates = scatterPattern(squareUpdates);
-	if (keyIsDown('Space')) squareUpdates = greenSnake(squareUpdates);
 
 	grid.apply(squareUpdates);
 }
@@ -27,19 +25,3 @@ function gameRender() {
 		drawRect(grid.positions()[i], vec2(1), grid.values()[i].color);
 }
 function gameRenderPost() {}
-
-function scatterPattern(updates) {
-	target = randInt(0, width * height);
-	updates.push(squareUpdate(target, rgb(1, 0, 0)));
-	for (n of grid.neighborsOf(target)) updates.push(squareUpdate(n, rgb(1, 0, 0)));
-	return updates;
-}
-
-function snakePattern(color) {
-	headSquare = 0;
-	return (updates) => {
-		headSquare++;
-		updates.push(squareUpdate(headSquare, color));
-		return updates;
-	};
-}

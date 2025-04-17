@@ -17,12 +17,13 @@ function gameInit() {
 }
 function gameStart() {}
 function gameUpdate() {
-	let squareUpdates = [];
+	let moleculeTrail = FPO.map({
+		arr: [1, 2, 3, 4, 5], //molecule.squares(),
+		fn: ({ v }) => squareUpdate(v, rgb(1, 0, 0)),
+	});
 
-	// squareUpdates.push(squareUpdate(
-	// 	grid.findNearestSquare(molecule.position), rgb(1, 0, 0))
-
-	grid.apply(squareUpdates);
+	// combine all squareUpdates into one list and apply them to the grid
+	grid.apply(FPO.flatten({ v: [moleculeTrail] }));
 }
 function gameUpdatePost() {}
 function gameRender() {

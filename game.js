@@ -77,3 +77,11 @@ function trail(molecule, thickness = 5) {
 		fn: ({ v }) => gridUpdate(v, rgb(0, 0, 1)),
 	});
 }
+
+function checkTemp() {
+	FPO.reduce({
+		arr: grid.values(),
+		fn: ({ v }) => {},
+	});
+	return 0.5;
+}

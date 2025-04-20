@@ -1,15 +1,25 @@
 class Molecule extends EngineObject {
 	constructor(pos, size, tileInfo, angle) {
 		super(pos, size, tileInfo, angle);
-		this.direction = vec2(1, 0.2);
 		this.pulse = new Timer(1);
+		this.color = rgb(1, 0, 0);
+		this.velocity = vec2(1, 0.25);
 	}
 
 	update() {
-		this.velocity = this.direction;
-		if (this.pos.x > grid.positions(width * height)) this.direction = vec2(-1);
+		// bounce off the sides of the grid
+		if (
+			this.pos.x < grid.positions()[0].x ||
+			this.pos.x > grid.positions()[width * height - 1].x
+		)
+			this.velocity = this.velocity.multiply(vec2(-1, 1));
+		if (
+			this.pos.y < grid.positions()[0].y ||
+			this.pos.y > grid.positions()[height - 1].y
+		)
+			this.velocity = this.velocity.multiply(vec2(1, -1));
+
 		if (this.pulse.elapsed()) {
-			console.log("pulse")
 			this.pulse = new Timer(1);
 		}
 		super.update();

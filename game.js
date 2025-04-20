@@ -9,49 +9,51 @@ function gameInit() {
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	gridUpdate = (square, color) => ({ square, value: { color } });
-
 	grid = Grid(width, height, rgb(0.5, 0.5, 0.5));
 
 	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
-	molecule = new Molecule(vec2(20, 20), vec2(10, 10), t, 0);
+	molecule = new Molecule(vec2(10, 10), vec2(5), t, 0);
+	particleTimer = new Timer(0.1);
 }
-// WARN only checks blue
 function findColor(color) {
 	return FPO.filter({
 		arr: FPO.map({
 			arr: grid.values(),
 			fn: ({ i, v }) =>
-				v.color.r === color.r || v.color.g === color.g || v.color.b === color.b
+				v?.color.r === color.r &&
+				v?.color.g === color.g &&
+				v?.color.b === color.b
 					? i
 					: -1,
 		}),
 		fn: ({ v }) => v >= 0,
 	});
 }
-function gameStart() {}
-function gameUpdate() {
-	// particle drift
-
-	let blueUpdates = [];
-	let blueParticles = findColor(rgb(0, 0, 1));
-	let blueParticlesOld = FPO.map({
-		arr: blueParticles,
+// randomly move particles of the given color
+function driftParticles(color) {
+	let particles = findColor(color);
+	let particlesOld = FPO.map({
+		arr: particles,
 		fn: ({ v }) => gridUpdate(v, rgb(0.5, 0.5, 0.5)),
 	});
-	let blueParticlesNew = FPO.map({
-		arr: blueParticles,
-		fn: ({ v }) => gridUpdate(grid.neighborsOf(v)[randInt(0, 8)], rgb(0, 0, 1)),
+	let particlesNew = FPO.map({
+		arr: particles,
+		fn: ({ v }) => gridUpdate(grid.neighborsOf(v)[randInt(0, 7)], color),
 	});
-	blueUpdates = FPO.flatten({ v: [blueParticlesOld, blueParticlesNew] });
+	return FPO.flatten({ v: [particlesOld, particlesNew] });
+}
+function gameStart() {}
+function gameUpdate() {
+	let particleUpdates = [];
+	if (particleTimer.elapsed()) {
+		particleUpdates = driftParticles(molecule.color);
+		particleTimer = new Timer(0.5);
+	}
 
-	let example = FPO.map({
-		fn: ({ v }) => gridUpdate(v, rgb(1, 0, 0)),
-	});
-
-	let t = trail(molecule);
+	let t = trail(molecule, 10);
 
 	// combine all gridUpdates into one list and apply them to the grid
-	grid.apply(FPO.flatten({ v: [example, t, blueUpdates] }));
+	grid.apply(FPO.flatten({ v: [t, particleUpdates] }));
 }
 function gameUpdatePost() {}
 function gameRender() {
@@ -74,14 +76,14 @@ function trail(molecule, thickness = 5) {
 			arr: under(molecule),
 			fn: ({ v }) => randInt(0, 100) < thickness,
 		}),
-		fn: ({ v }) => gridUpdate(v, rgb(0, 0, 1)),
+		fn: ({ v }) => gridUpdate(v, molecule.color),
 	});
 }
 
 function checkTemp() {
-	FPO.reduce({
+	return FPO.reduce({
 		arr: grid.values(),
-		fn: ({ v }) => {},
+		fn: ({ acc, v }) => (v?.color.r > 0.8 ? ++acc : acc),
+		v: 0,
 	});
-	return 0.5;
 }

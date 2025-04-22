@@ -1,66 +1,56 @@
 // Written by Aquarocks
 // game where you look through and electron microscope
-// and manage the reactions between molecules
+// goal: find a combo of molecules that are stable
 
 function gameInit() {
-	[width, height] = [150, 150];
+	[width, height] = [100, 100];
 	cameraOffset = vec2(0, 0);
 	cameraScale = 4;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
-	gridUpdate = (square, color) => ({ square, value: { color } });
-	grid = Grid(width, height, rgb(0.5, 0.5, 0.5));
+	particle = (square, color) => ({ square, value: { color } });
+	grid = Grid(width, height, rgb(0, 0, 0));
 
 	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
 	molecule = new Molecule(vec2(10, 10), vec2(5), t, 0);
 	particleTimer = new Timer(0.1);
 
-	tempDisplay = document.getElementById("tempDisplay")
-}
-function findColor(color) {
-	return FPO.filter({
-		arr: FPO.map({
-			arr: grid.values(),
-			fn: ({ i, v }) =>
-				v?.color.r === color.r &&
-				v?.color.g === color.g &&
-				v?.color.b === color.b
-					? i
-					: -1,
-		}),
-		fn: ({ v }) => v >= 0,
-	});
-}
-// randomly move particles of the given color
-function driftParticles(color) {
-	let particles = findColor(color);
-	let particlesOld = FPO.map({
-		arr: particles,
-		fn: ({ v }) => gridUpdate(v, rgb(0.5, 0.5, 0.5)),
-	});
-	let particlesNew = FPO.map({
-		arr: particles,
-		fn: ({ v }) => gridUpdate(grid.neighborsOf(v)[randInt(0, 7)], color),
-	});
-	return FPO.flatten({ v: [particlesOld, particlesNew] });
+	tempDisplay = document.getElementById('tempDisplay');
 }
 function gameStart() {}
 function gameUpdate() {
-	let particleUpdates = [];
+	let warmParticles = [];
+	let hotParticles = [];
 	if (particleTimer.elapsed()) {
-		particleUpdates = driftParticles(molecule.color);
+		warmParticles = fadeParticles(findParticles('warm'), 0.25);
+		hotParticles = fadeParticles(moveParticles(findParticles('hot')), 0.1);
 		particleTimer = new Timer(0.1);
-		tempDisplay.textContent = checkTemp()
 	}
 
-	let t = trail(molecule, 10);
+	let trails = [trail(molecule, 5)];
 
-	// combine all gridUpdates into one list and apply them to the grid
-	grid.apply(FPO.flatten({ v: [t, particleUpdates] }));
+	// player aims and shoot blue? from outside?
+	let blueParticles = [];
+
+	// get a list of engineObjects from littlejs and filter out non-molecules
+	// map the list to a list of trail updates
+
+	// coolent rods are walls like jezz balls
+
+	// combine all particles into one list and apply them to the grid
+	// if two updates change the same square, updates at the end of the list have priority
+	grid.apply(
+		FPO.flatten({ v: [trails, warmParticles, hotParticles, blueParticles] }),
+	);
+	tempDisplay.textContent = checkTemp();
 }
 function gameUpdatePost() {}
 function gameRender() {
-	drawRect(cameraPos, vec2(width * 2, height * 2), rgb(0.9, 0.9, 0.9));
+	drawRect(
+		cameraPos,
+		vec2(width * cameraScale, height * cameraScale),
+		rgb(0.9, 0.9, 0.9),
+	);
 	for (let i = 0; i < width * height; i++)
 		drawRect(grid.positions()[i], vec2(1), grid.values()[i].color);
 }
@@ -73,20 +63,77 @@ function under(molecule) {
 	return squares;
 }
 
+// draw a trail of hot particles under the given molecule
 function trail(molecule, thickness = 5) {
 	return FPO.map({
 		arr: FPO.filter({
 			arr: under(molecule),
 			fn: ({ v }) => randInt(0, 100) < thickness,
 		}),
-		fn: ({ v }) => gridUpdate(v, molecule.color),
+		fn: ({ v }) => particle(v, molecule.color),
 	});
 }
 
-function checkTemp() {
+// count the hot particles, the particles are hot if color.r is greater than the threshold
+function checkTemp(threshold = 0.5) {
 	return FPO.reduce({
 		arr: grid.values(),
-		fn: ({ acc, v }) => (v?.color.r > 0.8 ? ++acc : acc),
+		fn: ({ acc, v }) => (v?.color.r > threshold ? ++acc : acc),
 		v: 0,
+	});
+}
+
+// PARTICLE FUNCTIONS
+
+// a particle is red if its red value is above 0.1
+function findParticles(state) {
+	if ((state = 'hot')) checkColor = ({ i, v }) => (v?.color.r > 0.5 ? i : -1);
+	else if ((state = 'warm'))
+		checkColor = ({ i, v }) => (v?.color.r > 0 && v?.color.r <= 0.5 ? i : -1);
+	else checkColor = ({ i, v }) => -1;
+
+	// a list of the squares that passed the checkColor
+	targetSquares = FPO.filter({
+		arr: FPO.map({
+			arr: grid.values(),
+			fn: checkColor,
+		}),
+		fn: ({ v }) => v >= 0 && v < width * height, // v is the particles "square" value
+	});
+
+	// create particles from the target squares
+	return FPO.map({
+		arr: targetSquares,
+		fn: ({ v }) => particle(v, grid.values()[v].color),
+	});
+}
+// randomly move particles of the given color
+function moveParticles(particles) {
+	let particlesOldPos = FPO.map({
+		arr: particles,
+		fn: ({ v }) => particle(v.square, rgb(0, 0, 0)),
+	});
+	return FPO.flatten({ v: [particlesOldPos, spreadParticles(particles)] });
+}
+// copy particles onto a neighbor
+// TODO parameter for how many squares moved
+function spreadParticles(particles) {
+	return FPO.map({
+		arr: particles,
+		fn: ({ v }) =>
+			particle(
+				grid.neighborsOf(v.square)[randInt(0, 7)],
+				grid.values()[v.square].color,
+			),
+	});
+}
+function fadeParticles(particles, amount) {
+	return FPO.map({
+		arr: particles,
+		fn: ({ v }) =>
+			particle(
+				v.square,
+				new Color(v.value.color.r - amount, v.value.color.g, v.value.color.b),
+			),
 	});
 }

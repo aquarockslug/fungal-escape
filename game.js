@@ -3,7 +3,7 @@
 // goal: find a combo of molecules that are stable
 
 function gameInit() {
-	[width, height] = [100, 100];
+	[width, height] = [150, 150];
 	cameraOffset = vec2(0, 0);
 	cameraScale = 4;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
@@ -13,6 +13,7 @@ function gameInit() {
 
 	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
 	molecule = new Molecule(vec2(10, 10), vec2(5), t, 0);
+	molecule2 = new Molecule(vec2(10, 10), vec2(5), t, 0);
 	particleTimer = new Timer(0.1);
 
 	tempDisplay = document.getElementById('tempDisplay');
@@ -27,15 +28,13 @@ function gameUpdate() {
 		particleTimer = new Timer(0.1);
 	}
 
-	let trails = [trail(molecule, 5)];
+	let trails = FPO.map({
+		arr: FPO.filter({ arr: engineObjects, fn: ({ v }) => v.hasTrail }),
+		fn: ({ v }) => trail(v, 5),
+	});
 
 	// player aims and shoot blue? from outside?
 	let blueParticles = [];
-
-	// get a list of engineObjects from littlejs and filter out non-molecules
-	// map the list to a list of trail updates
-
-	// coolent rods are walls like jezz balls
 
 	// combine all particles into one list and apply them to the grid
 	// if two updates change the same square, updates at the end of the list have priority
@@ -55,6 +54,8 @@ function gameRender() {
 		drawRect(grid.positions()[i], vec2(1), grid.values()[i].color);
 }
 function gameRenderPost() {}
+
+// PARTICLE FUNCTIONS
 
 function under(molecule) {
 	let center = molecule.center();
@@ -82,9 +83,6 @@ function checkTemp(threshold = 0.5) {
 		v: 0,
 	});
 }
-
-// PARTICLE FUNCTIONS
-
 // a particle is red if its red value is above 0.1
 function findParticles(state) {
 	if ((state = 'hot')) checkColor = ({ i, v }) => (v?.color.r > 0.5 ? i : -1);

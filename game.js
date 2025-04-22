@@ -1,6 +1,5 @@
 // Written by Aquarocks
 // game where you look through and electron microscope
-// goal: find a combo of molecules that are stable
 
 function gameInit() {
 	[width, height] = [200, 200];
@@ -32,7 +31,7 @@ function gameUpdate() {
 			grid.values,
 			findParticles('hot'),
 			moveParticles,
-			fadeParticles(0.01),
+			fadeParticles(rand(0.005, 0.025)),
 		])();
 		particleTimer = new Timer(0.05);
 	}
@@ -42,7 +41,7 @@ function gameUpdate() {
 		fn: ({ v }) => trail(v, 5),
 	});
 
-	// player aims and shoot blue? from outside?
+	// TODO player aims and shoots blue cooling rods? from outside a circle?
 	let blueParticles = [];
 
 	// combine all particles into one list and apply them to the grid
@@ -57,7 +56,7 @@ function gameRender() {
 	drawRect(
 		cameraPos,
 		vec2(width * cameraScale, height * cameraScale),
-		rgb(0.9, 0.9, 0.9),
+		rgb(0.75, 0.75, 0.75),
 	);
 	for (let i = 0; i < width * height; i++)
 		drawRect(grid.positions()[i], vec2(1), grid.values()[i].color);
@@ -92,7 +91,8 @@ function checkTemp(threshold = 0.1) {
 		v: 0,
 	});
 }
-// a particle is red if its red value is above 0.1
+
+// find all particles which match the given state
 function findParticles(state) {
 	if (state === 'hot') checkColor = ({ i, v }) => (v?.color.r > 0.5 ? i : -1);
 	else if (state === 'warm')

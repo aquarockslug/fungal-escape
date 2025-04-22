@@ -14,6 +14,8 @@ function gameInit() {
 	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
 	molecule = new Molecule(vec2(10, 10), vec2(5), t, 0);
 	particleTimer = new Timer(0.1);
+
+	tempDisplay = document.getElementById("tempDisplay")
 }
 function findColor(color) {
 	return FPO.filter({
@@ -47,7 +49,8 @@ function gameUpdate() {
 	let particleUpdates = [];
 	if (particleTimer.elapsed()) {
 		particleUpdates = driftParticles(molecule.color);
-		particleTimer = new Timer(0.5);
+		particleTimer = new Timer(0.1);
+		tempDisplay.textContent = checkTemp()
 	}
 
 	let t = trail(molecule, 10);

@@ -3,8 +3,9 @@ class Molecule extends EngineObject {
 		super(pos, size, tileInfo, angle);
 		this.pulse = new Timer(1);
 		this.color = rgb(1, 0, 0);
-		this.velocity = vec2(1, 0.25);
+		this.velocity = randVector();
 		this.hasTrail = true;
+		this.trailThickness = 15;
 	}
 
 	update() {

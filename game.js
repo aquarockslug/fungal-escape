@@ -3,9 +3,9 @@
 // goal: find a combo of molecules that are stable
 
 function gameInit() {
-	[width, height] = [150, 150];
+	[width, height] = [200, 200];
 	cameraOffset = vec2(0, 0);
-	cameraScale = 4;
+	cameraScale = 3;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	particle = (square, color) => ({ square, value: { color } });
@@ -13,7 +13,7 @@ function gameInit() {
 
 	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
 	molecule = new Molecule(vec2(10, 10), vec2(5), t, 0);
-	molecule2 = new Molecule(vec2(10, 10), vec2(5), t, 0);
+	molecule2 = new Molecule(vec2(width - 10, 10), vec2(5), t, 0);
 	particleTimer = new Timer(0.1);
 
 	tempDisplay = document.getElementById('tempDisplay');
@@ -23,9 +23,18 @@ function gameUpdate() {
 	let warmParticles = [];
 	let hotParticles = [];
 	if (particleTimer.elapsed()) {
-		warmParticles = fadeParticles(findParticles('warm'), 0.25);
-		hotParticles = fadeParticles(moveParticles(findParticles('hot')), 0.1);
-		particleTimer = new Timer(0.1);
+		warmParticles = FPO.std.pipe([
+			grid.values,
+			findParticles('warm'),
+			fadeParticles(0.005),
+		])();
+		hotParticles = FPO.std.pipe([
+			grid.values,
+			findParticles('hot'),
+			moveParticles,
+			fadeParticles(0.01),
+		])();
+		particleTimer = new Timer(0.05);
 	}
 
 	let trails = FPO.map({
@@ -65,18 +74,18 @@ function under(molecule) {
 }
 
 // draw a trail of hot particles under the given molecule
-function trail(molecule, thickness = 5) {
+function trail(molecule) {
 	return FPO.map({
 		arr: FPO.filter({
 			arr: under(molecule),
-			fn: ({ v }) => randInt(0, 100) < thickness,
+			fn: ({ v }) => randInt(0, 100) < molecule.trailThickness,
 		}),
 		fn: ({ v }) => particle(v, molecule.color),
 	});
 }
 
 // count the hot particles, the particles are hot if color.r is greater than the threshold
-function checkTemp(threshold = 0.5) {
+function checkTemp(threshold = 0.1) {
 	return FPO.reduce({
 		arr: grid.values(),
 		fn: ({ acc, v }) => (v?.color.r > threshold ? ++acc : acc),
@@ -85,25 +94,27 @@ function checkTemp(threshold = 0.5) {
 }
 // a particle is red if its red value is above 0.1
 function findParticles(state) {
-	if ((state = 'hot')) checkColor = ({ i, v }) => (v?.color.r > 0.5 ? i : -1);
-	else if ((state = 'warm'))
+	if (state === 'hot') checkColor = ({ i, v }) => (v?.color.r > 0.5 ? i : -1);
+	else if (state === 'warm')
 		checkColor = ({ i, v }) => (v?.color.r > 0 && v?.color.r <= 0.5 ? i : -1);
 	else checkColor = ({ i, v }) => -1;
 
-	// a list of the squares that passed the checkColor
-	targetSquares = FPO.filter({
-		arr: FPO.map({
-			arr: grid.values(),
-			fn: checkColor,
-		}),
-		fn: ({ v }) => v >= 0 && v < width * height, // v is the particles "square" value
-	});
+	return (values) => {
+		// a list of the squares that passed the checkColor
+		targetSquares = FPO.filter({
+			arr: FPO.map({
+				arr: values,
+				fn: checkColor,
+			}),
+			fn: ({ v }) => v >= 0 && v < width * height, // v is the particles "square" value
+		});
 
-	// create particles from the target squares
-	return FPO.map({
-		arr: targetSquares,
-		fn: ({ v }) => particle(v, grid.values()[v].color),
-	});
+		// create particles from the target squares
+		return FPO.map({
+			arr: targetSquares,
+			fn: ({ v }) => particle(v, values[v].color),
+		});
+	};
 }
 // randomly move particles of the given color
 function moveParticles(particles) {
@@ -125,13 +136,14 @@ function spreadParticles(particles) {
 			),
 	});
 }
-function fadeParticles(particles, amount) {
-	return FPO.map({
-		arr: particles,
-		fn: ({ v }) =>
-			particle(
-				v.square,
-				new Color(v.value.color.r - amount, v.value.color.g, v.value.color.b),
-			),
-	});
+function fadeParticles(amount) {
+	return (particles) =>
+		FPO.map({
+			arr: particles,
+			fn: ({ v }) =>
+				particle(
+					v.square,
+					new Color(v.value.color.r - amount, v.value.color.g, v.value.color.b),
+				),
+		});
 }

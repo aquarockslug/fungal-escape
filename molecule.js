@@ -1,15 +1,48 @@
 class Molecule extends EngineObject {
-	constructor(pos, size, tileInfo, angle) {
+	constructor(pos, size, tileInfo, angle, state) {
 		super(pos, size, tileInfo, angle);
 		this.pulse = new Timer(1);
-		this.color = rgb(1, 0, 0);
 		this.velocity = randVector();
+		this.velocity = vec2(0).setAngle(angle);
 		this.hasTrail = true;
 		this.trailThickness = 15;
+
+		this.color = rgb(0, 1, 0);
+		this.trailThickness = 15;
+
+		if (state === 'cold') {
+			this.color = rgb(0, 0, 1);
+			this.trailThickness = 50;
+			this.canBounce = false;
+		} else if (state === 'cool') {
+			this.color = rgb(0, 0, 0.5);
+			this.trailThickness = 50;
+			this.canBounce = false;
+		} else if (state === 'hot') {
+			this.color = rgb(1, 0, 0);
+			this.trailThickness = 15;
+			this.canBounce = true;
+		} else if (state === 'warm') {
+			this.color = rgb(0.5, 0, 0);
+			this.trailThickness = 15;
+			this.canBounce = true;
+		}
 	}
 
 	update() {
-		// bounce off the sides of the grid
+		if (this.pulse.elapsed()) {
+			this.pulse = new Timer(1);
+		}
+		if (this.canBounce) this.bounce();
+		super.update();
+	}
+
+	render() {
+		super.render();
+	}
+
+	// bounce off the sides of the grid
+	bounce() {
 		if (
 			this.pos.x < grid.positions()[0].x ||
 			this.pos.x > grid.positions()[width * height - 1].x
@@ -20,15 +53,6 @@ class Molecule extends EngineObject {
 			this.pos.y > grid.positions()[height - 1].y
 		)
 			this.velocity = this.velocity.multiply(vec2(1, -1));
-
-		if (this.pulse.elapsed()) {
-			this.pulse = new Timer(1);
-		}
-		super.update();
-	}
-
-	render() {
-		super.render();
 	}
 
 	// returns the index of the square directly below this molecule

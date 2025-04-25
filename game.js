@@ -2,9 +2,9 @@
 // game where you look through and electron microscope
 
 function gameInit() {
-	[width, height] = [200, 200];
+	[width, height] = [150, 150];
 	cameraOffset = vec2(0, 0);
-	cameraScale = 2;
+	cameraScale = 3.25;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	particle = (square, color) => ({ square, value: { color } });
@@ -78,13 +78,13 @@ function gameUpdate() {
 		FPO.std.pipe([
 			grid.values,
 			findParticles('cold'),
-			fadeParticles(0, 0, rand(0.01, 0.1)),
+			fadeParticles(0, 0, rand(0.01, 0.25)),
 		])(),
 	);
 
 	tempDisplay.textContent = checkTemp();
 
-	particleTimer = new Timer(0.1);
+	particleTimer = new Timer(0.05);
 }
 function gameUpdatePost() {}
 function gameRender() {

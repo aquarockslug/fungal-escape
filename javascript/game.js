@@ -10,7 +10,7 @@ function gameInit() {
 	particle = (square, color) => ({ square, value: { color } });
 	grid = Grid(width, height, rgb(0, 0, 0));
 
-	t = new TileInfo(vec2(5, 5), vec2(32, 32), 0);
+	t = new TileInfo(vec2(0, 0), vec2(32, 32), 0);
 	molecule = new Molecule(
 		vec2(width / 2, height / 2),
 		vec2(5),
@@ -31,6 +31,7 @@ function gameInit() {
 }
 function gameStart() {}
 function gameUpdate() {
+	if (!started) return;
 	if (keyWasPressed('Space') || mouseWasPressed(0)) {
 		let v = mousePos.subtract(vec2(10, 10)).angle();
 		new Molecule(vec2(10, 10), vec2(5), t, v, 'cold');

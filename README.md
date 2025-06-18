@@ -1,5 +1,7 @@
 # Mega Bullet
 
+A Mega Man bullet hell game
+
 ## links
 Scripting Docs: https://killedbyapixel.github.io/LittleJS/docs/  
 

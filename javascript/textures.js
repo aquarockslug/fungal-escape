@@ -20,7 +20,6 @@ function Textures() {
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets list
-	for (let i = 0; i < tilesheets.length; i++) tilesheets[i].index = i;
 	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) });
 
 	// return the sheet with the given name

@@ -1,11 +1,11 @@
 <!doctype html>
 <head>
-  <title>Title</title>
+  <title>Mega Bullet!</title>
   <meta charset="utf-8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel="stylesheet" href="css/tiny-brutalism.css" />
   <link rel="stylesheet" href="css/modern-normalize.min.css" />
+  <link rel="stylesheet" href="css/snes.min.css" />
   <style>
     #ui {
       position: absolute;
@@ -17,41 +17,34 @@
       justify-content: center;
     }
     #menu {
-      display: none;
+      display: flex;
+      flex-direction: column;
       width: 33%;
       background-color: white;
-    }
-    #tempDisplay {
-	    position: absolute;
-	    right: 0px;
-	    top: 0px;
-    }
-    .box {
-	    border-color: white;
-	    color: white;
     }
   </style>
 </head>
 <body>
   <div id="ui">
-    <div id="menu" class="box">
-      <h1>Title</h1>
-      <p>Text explaining the story and instructions</p>
-      <button onclick="gameStart(); sfx.buttonPress.play(); started = true; menu.hidden = true;">Start</button>
+    <div id="menu" class="snes-container">
+      <h1>Mega Bullet!</h1>
+      <p>A mega man bullet hell game</p>
+      <button class="snes-button has-phantom-color" onclick="gameStart(); sfx.chime.play(); started = true; document.getElementById('menu').style.display = 'none';">Start</button>
     </div>
-    <div id="tempDisplay" class="box"></div>
   </div>
-  <script src="lib/littlejs.js"></script>
-  <script src="lib/fpo.src.js"></script>
+  <script src="javascript/lib/littlejs.js"></script>
+  <script src="javascript/lib/fpo.src.js"></script>
   <script src="javascript/textures.js"></script>
   <script src="javascript/grid.js"></script>
+  <script src="javascript/particles.js"></script>
   <script src="javascript/molecule.js"></script>
   <script>
     started = false
 
     settings = {
       screenResolution: vec2(720),
-      particleUpdateInterval: 0.075, // number of seconds between grid particle updates
+      particleUpdateInterval: 0.1, // number of seconds between grid particle updates
+      backgroundScrollSpeed: -0.2
     };
     setCanvasFixedSize(settings.screenResolution);
 
@@ -60,30 +53,7 @@
     };
 
     const sfx = {
-      buttonPress: new Sound([
-        0.5,
-        ,
-        635,
-        0.01,
-        0.04,
-        0.02,
-        3,
-        4.3,
-        ,
-        ,
-        ,
-        ,
-        0.05,
-        ,
-        ,
-        ,
-        ,
-        0.61,
-        0.01,
-        ,
-        -1312,
-      ]),
-      victory: new Sound([
+      chime: new Sound([
         0.2,
         ,
         531,

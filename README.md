@@ -1,6 +1,7 @@
-# Game by Aquarock
+# Mega Bullet
 
 ## links
-Docs: https://killedbyapixel.github.io/LittleJS/docs/
-Particles: https://killedbyapixel.github.io/LittleJS/examples/particles/
-SFX: https://killedbyapixel.github.io/ZzFX/
+Scripting Docs: https://killedbyapixel.github.io/LittleJS/docs/
+Snes css theme: https://snes-css.sadlative.com/
+Particle Effect generator: https://killedbyapixel.github.io/LittleJS/examples/particles/
+SFX generator: https://killedbyapixel.github.io/ZzFX/

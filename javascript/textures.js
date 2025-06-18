@@ -4,6 +4,16 @@ function Textures() {
 	// tilesheets is a list so that each tilesheet has an index that can be used by littlejs
 	tilesheets = [
 		{
+			name: 'absolute_man',
+			path: 'assets/textures/absolute_man.png',
+			tiles: {
+				background: {
+					pos: vec2(200, 0),
+					size: vec2(200),
+				},
+			},
+		},
+		{
 			name: 'encrypt_man',
 			path: 'assets/textures/encrypt_man.png', // path to the tile sheet
 			tiles: {
@@ -32,6 +42,7 @@ function Textures() {
 		tile: (sheetName, tileName) => {
 			let s = sheet(sheetName);
 			let t = s.tiles[tileName];
+			if (!t) console.log(`tile "${tileName}" was not found!`);
 			return new TileInfo(t.pos, t.size, s.index);
 		},
 		sheet,

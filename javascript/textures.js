@@ -8,8 +8,8 @@ function Textures() {
 			path: 'assets/textures/encrypt_man.png', // path to the tile sheet
 			tiles: {
 				bg_wires: {
-					pos: vec2(0, 0), // the coordinates of the tile on the texture map
-					size: vec2(50, 50), // the size of the tile on the texture map
+					pos: vec2(0, 0), // the coordinates for the upper left pixel of the tile on the tilesheet
+					size: vec2(50, 50), // the size of the tile on the texture map in pixels
 				},
 			},
 		},
@@ -17,6 +17,7 @@ function Textures() {
 
 	// automatically label the tilesheets with their index in the tilesheets list
 	for (let i = 0; i < tilesheets.length; i++) tilesheets[i].index = i;
+	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) });
 
 	// return the sheet with the given name
 	let sheet = (name) => tilesheets.find((entry) => entry.name === name); // textures.tile('encrypt_man', 'bg_wires') => info for TileInfo,
@@ -30,5 +31,6 @@ function Textures() {
 			let t = s.tiles[tileName];
 			return new TileInfo(t.pos, t.size, s.index);
 		},
+		sheet,
 	};
 }

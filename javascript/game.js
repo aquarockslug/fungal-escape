@@ -2,25 +2,30 @@
 // game where you look through and electron microscope
 
 function gameInit() {
-	[width, height] = [150, 150];
+	[width, height] = [150, 200];
 	cameraOffset = vec2(0, 0);
-	cameraScale = 3.25;
+	cameraScale = 3.5;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	particle = (square, color) => ({ square, value: { color } });
 	grid = Grid(width, height, rgb(0, 0, 0));
 
-	t = new TileInfo(vec2(0, 0), vec2(32, 32), 0);
+	// TODO get tile info from textures.js
+	// textures = Textures()
+	// bg_tile = textures.tile('encrypt_man', 'bg_wires')
+	// console.log(bg_tile)
+	t = new TileInfo(vec2(20, 0), vec2(32, 32), 0);
+
 	molecule = new Molecule(
 		vec2(width / 2, height / 2),
-		vec2(5),
+		vec2(16),
 		t,
 		randInt(0, 360),
 		'hot',
 	);
 	molecule2 = new Molecule(
 		vec2(width / 2, height / 2),
-		vec2(5),
+		vec2(8),
 		t,
 		randInt(0, 360),
 		'hot',
@@ -31,7 +36,6 @@ function gameInit() {
 }
 function gameStart() {}
 function gameUpdate() {
-	if (!started) return;
 	if (keyWasPressed('Space') || mouseWasPressed(0)) {
 		let v = mousePos.subtract(vec2(10, 10)).angle();
 		new Molecule(vec2(10, 10), vec2(5), t, v, 'cold');
@@ -94,8 +98,14 @@ function gameRender() {
 		vec2(width * cameraScale, height * cameraScale),
 		rgb(0.75, 0.75, 0.75),
 	);
-	for (let i = 0; i < width * height; i++)
-		drawRect(grid.positions()[i], vec2(1), grid.values()[i].color);
+	drawRect(cameraPos, vec2(width, height), rgb(0, 0, 0));
+	drawRect(cameraPos, vec2(width / 4, height / 4), rgb(1, 0, 1));
+	for (let i = 0; i < width * height; i++) {
+		let pixelColor = grid.values()[i].color;
+		// dont render black squares
+		if (pixelColor.r >= 0.25 || pixelColor.g >= 0.25 || pixelColor.b >= 0.25)
+			drawRect(grid.positions()[i], vec2(1), pixelColor);
+	}
 }
 function gameRenderPost() {}
 
@@ -135,6 +145,7 @@ function checkTemp(threshold = 0.1) {
 // find all particles which match the given state
 function findParticles(state) {
 	// find the state of the squares from the color values
+	// TODO create a function that determines the state of the particle
 	if (state === 'hot')
 		state = ({ i, v }) => (v?.color.r > 0.5 && v?.color.b <= 0 ? i : -1);
 	else if (state === 'warm')

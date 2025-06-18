@@ -3,52 +3,90 @@
 
 function gameInit() {
 	[width, height] = [150, 200];
-	cameraOffset = vec2(0, 0);
+	cameraOffset = vec2(20, 0);
 	cameraScale = 3.5;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	particle = (square, color) => ({ square, value: { color } });
 	grid = Grid(width, height, rgb(0, 0, 0));
 
-	// TODO get tile info from textures.js
-	// textures = Textures()
-	// bg_tile = textures.tile('encrypt_man', 'bg_wires')
-	// console.log(bg_tile)
-	t = new TileInfo(vec2(20, 0), vec2(32, 32), 0);
+	let textures = Textures();
+	blockTile = textures.tile('encrypt_man', 'block');
+	wiresTile = textures.tile('encrypt_man', 'bg_wires');
 
 	molecule = new Molecule(
 		vec2(width / 2, height / 2),
 		vec2(16),
-		t,
+		blockTile,
 		randInt(0, 360),
 		'hot',
 	);
 	molecule2 = new Molecule(
 		vec2(width / 2, height / 2),
-		vec2(8),
-		t,
+		vec2(16),
+		blockTile,
 		randInt(0, 360),
 		'hot',
 	);
 	particleTimer = new Timer(0.1);
 
+	background = [];
+	background.push(
+		new EngineObject(
+			vec2(width / 2, height / 2),
+			vec2(32),
+			wiresTile,
+			0,
+			rgb(1, 1, 1),
+			-1,
+		),
+		new EngineObject(
+			vec2(width / 2 + 32, height / 2),
+			vec2(32),
+			wiresTile,
+			0,
+			rgb(1, 1, 1),
+			-1,
+		),
+		new EngineObject(
+			vec2(width / 2 + 64, height / 2),
+			vec2(32),
+			wiresTile,
+			0,
+			rgb(1, 1, 1),
+			-1,
+		),
+	);
+	for (obj of background) {
+		obj.velocity = vec2(0, -0.25);
+	}
 	tempDisplay = document.getElementById('tempDisplay');
 }
 function gameStart() {}
 function gameUpdate() {
 	if (keyWasPressed('Space') || mouseWasPressed(0)) {
-		let v = mousePos.subtract(vec2(10, 10)).angle();
-		new Molecule(vec2(10, 10), vec2(5), t, v, 'cold');
+		let v = mousePos.subtract(vec2(width / 2, 10)).angle();
+		new Molecule(vec2(width / 2, 10), vec2(5), blockTile, v, 'cold');
 	}
+
+	// move background objects which scrolled off the bottom back to the top
+	FPO.map({
+		arr: background,
+		fn: ({ v }) => {
+			if (v.pos.y < 0 - v.size.y / 2) {
+				v.pos.y = height + v.size.y / 2;
+			}
+		},
+	});
+
+	if (!particleTimer.elapsed()) return;
 
 	grid.apply(
 		FPO.map({
 			arr: FPO.filter({ arr: engineObjects, fn: ({ v }) => v.hasTrail }),
-			fn: ({ v }) => thinTrail(v),
+			fn: ({ v }) => particle(v.center(), v.color),
 		}),
 	);
-
-	if (!particleTimer.elapsed()) return;
 
 	grid.apply(
 		FPO.std.pipe([
@@ -89,17 +127,11 @@ function gameUpdate() {
 
 	tempDisplay.textContent = checkTemp();
 
-	particleTimer = new Timer(0.05);
+	particleTimer = new Timer(settings.particleUpdateInterval);
 }
 function gameUpdatePost() {}
-function gameRender() {
-	drawRect(
-		cameraPos,
-		vec2(width * cameraScale, height * cameraScale),
-		rgb(0.75, 0.75, 0.75),
-	);
-	drawRect(cameraPos, vec2(width, height), rgb(0, 0, 0));
-	drawRect(cameraPos, vec2(width / 4, height / 4), rgb(1, 0, 1));
+function gameRender() {}
+function gameRenderPost() {
 	for (let i = 0; i < width * height; i++) {
 		let pixelColor = grid.values()[i].color;
 		// dont render black squares
@@ -107,7 +139,6 @@ function gameRender() {
 			drawRect(grid.positions()[i], vec2(1), pixelColor);
 	}
 }
-function gameRenderPost() {}
 
 function under(molecule) {
 	let center = molecule.center();

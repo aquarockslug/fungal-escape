@@ -28,7 +28,7 @@
   <div id="ui">
     <div id="menu" class="snes-container">
       <h1>Mega Bullet!</h1>
-      <p>A mega man bullet hell game</p>
+      <p>A mega man bullet hell game. Click and press space to shoot</p>
       <button class="snes-button has-phantom-color" onclick="gameStart(); sfx.chime.play(); started = true; document.getElementById('menu').style.display = 'none';">Start</button>
     </div>
   </div>
@@ -38,13 +38,14 @@
   <script src="javascript/grid.js"></script>
   <script src="javascript/particles.js"></script>
   <script src="javascript/molecule.js"></script>
+  <script src="javascript/player.js"></script>
   <script>
     started = false
 
     settings = {
-      screenResolution: vec2(720),
+      screenResolution: vec2(640),
       particleUpdateInterval: 0.1, // number of seconds between grid particle updates
-      backgroundScrollSpeed: -0.2
+      backgroundScrollSpeed: -0.1
     };
     setCanvasFixedSize(settings.screenResolution);
 
@@ -53,29 +54,9 @@
     };
 
     const sfx = {
-      chime: new Sound([
-        0.2,
-        ,
-        531,
-        0.08,
-        0.29,
-        0.36,
-        ,
-        0.2,
-        ,
-        ,
-        472,
-        0.06,
-        0.09,
-        ,
-        ,
-        ,
-        ,
-        0.8,
-        0.16,
-        ,
-        846,
-      ]),
+      chime: new Sound([0.2,,531,0.08,0.29,0.36,,0.2,,,472,0.06,0.09,,,,,0.8,0.16,,846,]),
+      shoot: new Sound([,,173,,.03,.2,2,1.4,-17,15,,,,.9,,,,.58,.2]),
+      shoot2: new Sound([1.2,,99,,.04,.06,3,3.8,-14,-4,,,,,,.3,.2,.6,.17,,585])
     };
   </script>
   <script src="javascript/game.js"></script>

@@ -5,7 +5,6 @@ class Molecule extends EngineObject {
 		this.velocity = randVector();
 		this.velocity = vec2(0).setAngle(angle);
 		this.hasTrail = true;
-		this.trailThickness = 15;
 
 		this.color = rgb(0, 1, 0);
 		this.trailThickness = 15;

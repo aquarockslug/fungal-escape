@@ -1,7 +1,8 @@
 // Written by Aquarocks
 
 function gameInit() {
-	[width, height] = [200, 200];
+	[width, height] = [150, 150];
+	center = vec2(width / 2, height / 2);
 	cameraOffset = vec2(0, 0);
 	cameraScale = 3.5;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
@@ -12,7 +13,9 @@ function gameInit() {
 	let textures = Textures();
 	blockTile = textures.tile('encrypt_man', 'block');
 	wiresTile = textures.tile('encrypt_man', 'bg_wires');
+	new Player(center, vec2(8), 0);
 
+	background = [];
 	background = initBackground();
 }
 function gameStart() {
@@ -25,19 +28,6 @@ function gameStart() {
 }
 function gameUpdate() {
 	if (!started) return;
-	if (mouseWasPressed(0)) {
-		let v = mousePos.subtract(vec2(width / 2, 10)).angle();
-		new Molecule(vec2(width / 2, 10), vec2(1), blockTile, v, 'cold');
-	}
-	if (keyWasPressed('Space')) {
-		new Molecule(
-			vec2(width / 2, height / 2),
-			vec2(1),
-			blockTile,
-			randInt(0, 360),
-			'hot',
-		);
-	}
 
 	// wrap the background around to the other side if if went off the screen
 	FPO.map({
@@ -99,17 +89,16 @@ function initBackground() {
 	background = [];
 	background.push(
 		new EngineObject(
-			// +1's are to remove gaps between textures
-			vec2(width + 1, height / 2),
-			vec2(width + 1, height + 10),
+			vec2(0, height / 2),
+			vec2(width * 1.5, height * 1.5),
 			Textures().tile('absolute_man', 'background'),
 			0,
 			rgb(1, 1, 1),
 			-1,
 		),
 		new EngineObject(
-			vec2(0, height / 2),
-			vec2(width + 1, height + 10),
+			vec2(width * 1.5, height / 2),
+			vec2(width * 1.5, height * 1.5),
 			Textures().tile('absolute_man', 'background'),
 			0,
 			rgb(1, 1, 1),

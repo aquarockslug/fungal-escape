@@ -1,11 +1,12 @@
 // Written by Aquarocks
 
-function Grid(width, height, initColor) {
+function Grid(width, height, pos, initColor) {
 	let values = [];
 	for (let i = 0; i < width * height; i++) values.push({ color: initColor });
 
 	let positions = [];
-	for (let x = 0.5; x < width; x++) for (let y = 0.5; y < height; y++) positions.push(vec2(x, y));
+	for (let x = 0.5; x < width; x++)
+		for (let y = 0.5; y < height; y++) positions.push(vec2(x, y).add(pos));
 
 	return {
 		// return the values after applying the given updates
@@ -46,9 +47,13 @@ function isBorder(square, direction, moves) {
 
 	if (
 		(onTopEdge(square) &&
-			(direction === 'up' || direction === 'upperLeft' || direction === 'upperRight')) ||
+			(direction === 'up' ||
+				direction === 'upperLeft' ||
+				direction === 'upperRight')) ||
 		(onBottomEdge(square) &&
-			(direction === 'down' || direction === 'lowerLeft' || direction === 'lowerRight'))
+			(direction === 'down' ||
+				direction === 'lowerLeft' ||
+				direction === 'lowerRight'))
 	)
 		return true;
 
@@ -63,6 +68,7 @@ function getValidNeighbors(square) {
 	// only return valid neighbors
 	neighbors = calcNeighbors(width, height);
 	for (direction of neighbors())
-		if (!isBorder(neighbors, square, direction)) out.push(neighbors(square)[direction]);
+		if (!isBorder(neighbors, square, direction))
+			out.push(neighbors(square)[direction]);
 	return out;
 }

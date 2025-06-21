@@ -1,13 +1,13 @@
 // Written by Aquarocks
 
 function gameInit() {
-	[width, height] = [235, 150];
+	[width, height] = [210, 140];
 	center = vec2(width / 2, height / 2);
 	cameraOffset = vec2(0, 0);
-	cameraScale = 2;
+	cameraScale = 3;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
-	grid = Grid(width, height, rgb(0, 0, 0));
+	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 	particle = (square, color) => ({ square, value: { color } });
 
 	let textures = Textures();
@@ -86,8 +86,9 @@ function checkTemp(threshold = 0.1) {
 }
 
 function initBackground(bgTexture) {
+	let blockSize = vec2(16, 8); // TODO use blockSize = vec2(16) instead of vec2(16, 8)
 	let b1 = new EngineObject(
-		vec2(0, height / 2),
+		vec2(0, height / 2 + blockSize.y * 1.5),
 		vec2(width, height),
 		bgTexture,
 		0,
@@ -95,7 +96,7 @@ function initBackground(bgTexture) {
 		-1,
 	);
 	let b2 = new EngineObject(
-		vec2(width, height / 2),
+		vec2(width, height / 2 + blockSize.y * 1.5),
 		vec2(width, height),
 		bgTexture,
 		0,
@@ -103,7 +104,7 @@ function initBackground(bgTexture) {
 		-1,
 	);
 	let b3 = new EngineObject(
-		vec2(width * 2, height / 2),
+		vec2(width * 2, height / 2 + blockSize.y * 1.5),
 		vec2(width, height),
 		bgTexture,
 		0,
@@ -111,7 +112,7 @@ function initBackground(bgTexture) {
 		-1,
 	);
 	let b4 = new EngineObject(
-		vec2(width * 3, height / 2),
+		vec2(width * 3, height / 2 + blockSize.y * 1.5),
 		vec2(width, height),
 		bgTexture,
 		0,
@@ -119,11 +120,10 @@ function initBackground(bgTexture) {
 		-1,
 	);
 	let blocks = [];
-	let blockSize = vec2(16, 8);
 	for (let i = 0; i <= 32; i++) {
 		blocks.push(
 			new EngineObject(
-				vec2(blockSize.x * i - blockSize.x / 2, 0),
+				vec2(blockSize.x * i - blockSize.x / 2, blockSize.y),
 				blockSize,
 				Textures().tile('absolute_man', 'snow'),
 				0,
@@ -131,8 +131,8 @@ function initBackground(bgTexture) {
 				-1,
 			),
 			new EngineObject(
-				vec2(blockSize.x * i - blockSize.x / 2, 0 - blockSize.y),
-				blockSize,
+				vec2(blockSize.x * i - blockSize.x / 2, -blockSize.y / 2),
+				vec2(16, 16),
 				Textures().tile('absolute_man', 'block'),
 				0,
 				rgb(1, 1, 1),

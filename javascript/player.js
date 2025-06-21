@@ -16,7 +16,7 @@ class Player extends EngineObject {
 		if (keyIsDown('ArrowLeft')) this.velocity.x += -this.speed;
 		if (mouseWasPressed(0)) {
 			new Molecule(
-				this.pos.add(direction.scale(5)), // launch the molecule from in front of the player
+				this.pos.add(direction.scale(10)), // launch the molecule from in front of the player
 				vec2(4),
 				this.ti,
 				angle,

@@ -11,9 +11,17 @@ function Textures() {
 					pos: vec2(160, 0),
 					size: vec2(240),
 				},
-				block: {
+				snow: {
 					pos: vec2(18, 36),
 					size: vec2(32, 16),
+				},
+				block: {
+					pos: vec2(37, 161),
+					size: vec2(32, 32),
+				},
+				snowman: {
+					pos: vec2(40, 197),
+					size: vec2(20, 32),
 				},
 			},
 		},
@@ -21,13 +29,13 @@ function Textures() {
 			name: 'encrypt_man',
 			path: 'assets/textures/encrypt_man.png', // path to the tile sheet
 			tiles: {
-				block: {
-					pos: vec2(20, 0), // the coordinates for the upper left pixel of the tile on the tilesheet
-					size: vec2(32, 32), // the size of the tile on the texture map in pixels
-				},
 				bg_wires: {
 					pos: vec2(41, 35),
 					size: vec2(64, 64),
+				},
+				block: {
+					pos: vec2(20, 0), // the coordinates for the upper left pixel of the tile on the tilesheet
+					size: vec2(32, 32), // the size of the tile on the texture map in pixels
 				},
 			},
 		},

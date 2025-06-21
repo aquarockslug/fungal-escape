@@ -1,17 +1,17 @@
 // Written by Aquarocks
 
 function gameInit() {
-	[width, height] = [150, 150];
+	[width, height] = [235, 150];
 	center = vec2(width / 2, height / 2);
 	cameraOffset = vec2(0, 0);
-	cameraScale = 3.5;
+	cameraScale = 2;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	grid = Grid(width, height, rgb(0, 0, 0));
 	particle = (square, color) => ({ square, value: { color } });
 
 	let textures = Textures();
-	new Player(center, vec2(8), 0);
+	new Player(center, vec2(16, 32), 0);
 
 	background = initBackground(textures.tile('absolute_man', 'background'));
 }
@@ -21,7 +21,7 @@ function gameStart() {
 		obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
 	}
 	for (obj of background[1]) {
-		obj.velocity = vec2(settings.backgroundScroll * 0.01 * 1.5, 0);
+		obj.velocity = vec2(settings.backgroundScroll * 0.01 * 2, 0);
 	}
 
 	particleTimer = new Timer(settings.particleUpdateInterval);
@@ -120,10 +120,18 @@ function initBackground(bgTexture) {
 	);
 	let blocks = [];
 	let blockSize = vec2(16, 8);
-	for (let i = 0; i <= 30; i++) {
+	for (let i = 0; i <= 32; i++) {
 		blocks.push(
 			new EngineObject(
-				vec2(blockSize.x * i - blockSize.x / 2, 4),
+				vec2(blockSize.x * i - blockSize.x / 2, 0),
+				blockSize,
+				Textures().tile('absolute_man', 'snow'),
+				0,
+				rgb(1, 1, 1),
+				-1,
+			),
+			new EngineObject(
+				vec2(blockSize.x * i - blockSize.x / 2, 0 - blockSize.y),
 				blockSize,
 				Textures().tile('absolute_man', 'block'),
 				0,

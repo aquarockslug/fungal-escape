@@ -28,7 +28,7 @@
   <div id="ui">
     <div id="menu" class="snes-container">
       <h1>Mega Bullet!</h1>
-      <p>A mega man bullet hell game. Use the arrow keys to move and use the mouse to shoot</p>
+      <p>A mega man bullet hell game. Use the arrow keys to move and use the mouse to shoot. Press space to switch weapon</p>
       <button class="snes-button has-phantom-color" onclick="gameStart(); sfx.chime.play(); started = true; document.getElementById('menu').style.display = 'none';">Start</button>
     </div>
   </div>
@@ -43,9 +43,9 @@
     started = false
 
     settings = {
-      screenResolution: vec2(640),
+      screenResolution: vec2(480, 360),
       particleUpdateInterval: 0.1, // number of seconds between grid particle updates
-      backgroundScroll: -5
+      backgroundScroll: -20
     };
     setCanvasFixedSize(settings.screenResolution);
 

@@ -8,8 +8,8 @@ function Textures() {
 			path: 'assets/textures/absolute_man.png',
 			tiles: {
 				background: {
-					pos: vec2(200, 0),
-					size: vec2(200),
+					pos: vec2(160, 0),
+					size: vec2(240),
 				},
 			},
 		},
@@ -30,7 +30,7 @@ function Textures() {
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets list
-	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) }); // TODO use FPO
+	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) }); // TODO use FPO setProp?
 
 	// return the sheet with the given name
 	let sheet = (name) => tilesheets.find((entry) => entry.name === name); // textures.tile('encrypt_man', 'bg_wires') => info for TileInfo,

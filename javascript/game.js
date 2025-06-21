@@ -15,8 +15,7 @@ function gameInit() {
 	wiresTile = textures.tile('encrypt_man', 'bg_wires');
 	new Player(center, vec2(8), 0);
 
-	background = [];
-	background = initBackground();
+	background = initBackground(textures.tile('absolute_man', 'background'));
 }
 function gameStart() {
 	// start scrolling the background
@@ -33,8 +32,8 @@ function gameUpdate() {
 	FPO.map({
 		arr: background,
 		fn: ({ v }) => {
-			if (v.pos.x < 0 - v.size.x / 2) {
-				v.pos.x = width + v.size.x / 2;
+			if (v.pos.x < -v.size.x) {
+				v.pos.x = width * 2;
 			}
 		},
 	});
@@ -85,25 +84,31 @@ function checkTemp(threshold = 0.1) {
 	});
 }
 
-function initBackground() {
-	background = [];
-	background.push(
-		new EngineObject(
-			vec2(0, height / 2),
-			vec2(width * 1.5, height * 1.5),
-			Textures().tile('absolute_man', 'background'),
-			0,
-			rgb(1, 1, 1),
-			-1,
-		),
-		new EngineObject(
-			vec2(width * 1.5, height / 2),
-			vec2(width * 1.5, height * 1.5),
-			Textures().tile('absolute_man', 'background'),
-			0,
-			rgb(1, 1, 1),
-			-1,
-		),
+function initBackground(bgTexture) {
+	let b1 = new EngineObject(
+		vec2(0, height / 2),
+		vec2(width, height),
+		bgTexture,
+		0,
+		rgb(1, 1, 1),
+		-1,
 	);
+	let b2 = new EngineObject(
+		vec2(width, height / 2),
+		vec2(width, height),
+		bgTexture,
+		0,
+		rgb(1, 1, 1),
+		-1,
+	);
+	let b3 = new EngineObject(
+		vec2(width * 2, height / 2),
+		vec2(width, height),
+		bgTexture,
+		0,
+		rgb(1, 1, 1),
+		-1,
+	);
+	background = [b1, b2, b3];
 	return background;
 }

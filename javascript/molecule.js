@@ -5,6 +5,8 @@ class Molecule extends EngineObject {
 		this.velocity = randVector();
 		this.velocity = vec2(0).setAngle(angle);
 		this.hasTrail = true;
+		this.maxBounces = 3;
+		this.bounces = 0;
 
 		this.color = rgb(0, 1, 0);
 		this.trailThickness = 15;
@@ -45,13 +47,19 @@ class Molecule extends EngineObject {
 		if (
 			this.pos.x < grid.positions()[0].x ||
 			this.pos.x > grid.positions()[width * height - 1].x
-		)
+		) {
+			this.bounces++;
+			if (this.bounces > this.maxBounces) this.destroy();
 			this.velocity = this.velocity.multiply(vec2(-1, 1));
+		}
 		if (
 			this.pos.y < grid.positions()[0].y ||
 			this.pos.y > grid.positions()[height - 1].y
-		)
+		) {
+			this.bounces++;
+			if (this.bounces > this.maxBounces) this.destroy();
 			this.velocity = this.velocity.multiply(vec2(1, -1));
+		}
 	}
 
 	// returns the index of the square directly below this molecule

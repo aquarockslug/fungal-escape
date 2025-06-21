@@ -18,7 +18,7 @@ class Player extends EngineObject {
 			new Molecule(this.pos, vec2(4), blockTile, this.angle, 'hot');
 			sfx.shoot2.play();
 		}
-		this.velocity = this.velocity.scale(0.9);
+		this.velocity = this.velocity.scale(0.9); // TODO use this.damping instead
 		super.update();
 	}
 	render() {

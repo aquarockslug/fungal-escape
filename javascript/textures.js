@@ -30,7 +30,7 @@ function Textures() {
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets list
-	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) });
+	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) }); // TODO use FPO
 
 	// return the sheet with the given name
 	let sheet = (name) => tilesheets.find((entry) => entry.name === name); // textures.tile('encrypt_man', 'bg_wires') => info for TileInfo,

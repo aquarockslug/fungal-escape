@@ -1,6 +1,7 @@
 // Written by Aquarocks
 
 function gameInit() {
+	// TODO create more settings variables
 	[width, height] = [210, 140];
 	center = vec2(width / 2, height / 2);
 	cameraOffset = vec2(0, 0);
@@ -17,6 +18,7 @@ function gameInit() {
 }
 function gameStart() {
 	// start scrolling the background
+	// TODO create a "Stage"/"Background" class for all scrolling gameObjects?
 	for (obj of background[0]) {
 		obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
 	}
@@ -71,17 +73,6 @@ function trail(molecule) {
 			fn: ({ v }) => randInt(0, 100) < molecule.trailThickness,
 		}),
 		fn: ({ v }) => particle(v, molecule.color),
-	});
-}
-
-// count the hot particles, the particles are hot if color.r is greater than the threshold
-// TODO subtract cold particles?
-function checkTemp(threshold = 0.1) {
-	return FPO.reduce({
-		arr: grid.values(),
-		fn: ({ acc, v }) =>
-			v?.color.r > threshold && v?.color.b < threshold ? ++acc : acc,
-		v: 0,
 	});
 }
 

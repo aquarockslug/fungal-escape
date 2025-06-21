@@ -11,6 +11,10 @@ function Textures() {
 					pos: vec2(160, 0),
 					size: vec2(240),
 				},
+				block: {
+					pos: vec2(18, 36),
+					size: vec2(32, 16),
+				},
 			},
 		},
 		{

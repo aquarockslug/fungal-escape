@@ -11,16 +11,17 @@ function gameInit() {
 	particle = (square, color) => ({ square, value: { color } });
 
 	let textures = Textures();
-	blockTile = textures.tile('encrypt_man', 'block');
-	wiresTile = textures.tile('encrypt_man', 'bg_wires');
 	new Player(center, vec2(8), 0);
 
 	background = initBackground(textures.tile('absolute_man', 'background'));
 }
 function gameStart() {
 	// start scrolling the background
-	for (obj of background) {
-		obj.velocity = vec2(settings.backgroundScrollSpeed, 0);
+	for (obj of background[0]) {
+		obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
+	}
+	for (obj of background[1]) {
+		obj.velocity = vec2(settings.backgroundScroll * 0.01 * 1.5, 0);
 	}
 
 	particleTimer = new Timer(settings.particleUpdateInterval);
@@ -30,9 +31,9 @@ function gameUpdate() {
 
 	// wrap the background around to the other side if if went off the screen
 	FPO.map({
-		arr: background,
+		arr: FPO.flatten({ v: background }),
 		fn: ({ v }) => {
-			if (v.pos.x < -v.size.x) {
+			if (v.pos.x < 0 - v.size.x * 2) {
 				v.pos.x = width * 2;
 			}
 		},
@@ -109,6 +110,27 @@ function initBackground(bgTexture) {
 		rgb(1, 1, 1),
 		-1,
 	);
-	background = [b1, b2, b3];
-	return background;
+	let b4 = new EngineObject(
+		vec2(width * 3, height / 2),
+		vec2(width, height),
+		bgTexture,
+		0,
+		rgb(1, 1, 1),
+		-1,
+	);
+	let blocks = [];
+	let blockSize = vec2(16, 8);
+	for (let i = 0; i <= 30; i++) {
+		blocks.push(
+			new EngineObject(
+				vec2(blockSize.x * i - blockSize.x / 2, 4),
+				blockSize,
+				Textures().tile('absolute_man', 'block'),
+				0,
+				rgb(1, 1, 1),
+				-1,
+			),
+		);
+	}
+	return [[b1, b2, b3, b4], blocks];
 }

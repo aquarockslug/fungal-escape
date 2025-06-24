@@ -27,15 +27,16 @@ function Textures() {
 		},
 	];
 
-	// automatically label the tilesheets with their index in the tilesheets list
-	FPO.map({ arr: tilesheets, fn: ({ i, v }) => (v.index = i) }); // TODO use FPO setProp?
+	// automatically label the tilesheets with their index in the tilesheets
+	tilesheets = FPO.map({
+		arr: tilesheets,
+		fn: ({ i, v }) => FPO.setProp({ o: v, prop: 'index', v: i }),
+	});
 
 	// return the sheet with the given name
-	let sheet = (name) => tilesheets.find((entry) => entry.name === name); // textures.tile('encrypt_man', 'bg_wires') => info for TileInfo,
+	let sheet = (name) => tilesheets.find((entry) => entry.name === name);
 
 	return {
-		// returns a list of all the tilesheet paths
-		paths: tilesheets.map((sheet) => sheet.path),
 		// returns TileInfo for the given tile from the given sheet
 		tile: (sheetName, tileName) => {
 			let s = sheet(sheetName);
@@ -43,6 +44,8 @@ function Textures() {
 			if (!t) console.log(`tile "${tileName}" was not found!`);
 			return new TileInfo(t.pos, t.size, s.index);
 		},
+		// returns a list of all the tilesheet paths
+		paths: tilesheets.map((sheet) => sheet.path),
 		sheet,
 	};
 }

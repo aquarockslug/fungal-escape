@@ -47,15 +47,17 @@ function particleUpdate() {
 	);
 }
 // find all particles which match the given state
-function findParticles(state) {
+function findParticles(stateName) {
 	// find the state of the squares from the color values
 	// TODO create a function that determines the state of the particle
-	if (state === 'hot')
+	if (stateName === 'hot')
 		state = ({ i, v }) => (v?.color.r > 0.5 && v?.color.b <= 0 ? i : -1);
-	else if (state === 'warm')
+	else if (stateName === 'warm')
 		state = ({ i, v }) => (v?.color.r <= 0.5 && v?.color.b <= 0 ? i : -1);
-	else if (state === 'cold') state = ({ i, v }) => (v?.color.b > 0.5 ? i : -1);
-	else if (state === 'cool') state = ({ i, v }) => (v?.color.b <= 0.5 ? i : -1);
+	else if (stateName === 'cold')
+		state = ({ i, v }) => (v?.color.b > 0.5 ? i : -1);
+	else if (stateName === 'cool')
+		state = ({ i, v }) => (v?.color.b <= 0.5 ? i : -1);
 	else state = ({ i, v }) => -1;
 
 	return (values) => {

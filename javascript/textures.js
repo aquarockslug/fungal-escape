@@ -25,20 +25,6 @@ function Textures() {
 				},
 			},
 		},
-		{
-			name: 'encrypt_man',
-			path: 'assets/textures/encrypt_man.png', // path to the tile sheet
-			tiles: {
-				bg_wires: {
-					pos: vec2(41, 35),
-					size: vec2(64, 64),
-				},
-				block: {
-					pos: vec2(20, 0), // the coordinates for the upper left pixel of the tile on the tilesheet
-					size: vec2(32, 32), // the size of the tile on the texture map in pixels
-				},
-			},
-		},
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets list

@@ -14,11 +14,10 @@ function gameInit() {
 	let textures = Textures();
 	new Player(center, vec2(16, 32), 0);
 
-	background = initBackground(textures.tile('absolute_man', 'background'));
+	background = initStage(textures.tile('absolute_man', 'background'));
 }
 function gameStart() {
 	// start scrolling the background
-	// TODO create a "Stage"/"Background" class for all scrolling gameObjects?
 	for (obj of background[0]) {
 		obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
 	}
@@ -76,7 +75,8 @@ function trail(molecule) {
 	});
 }
 
-function initBackground(bgTexture) {
+// TODO create a "Stage" class to combine scrolling gameObjects?, ex. return new Stage('ice')
+function initStage(bgTexture) {
 	let blockSize = vec2(16, 8); // TODO use blockSize = vec2(16) instead of vec2(16, 8)
 	let b1 = new EngineObject(
 		vec2(0, height / 2 + blockSize.y * 1.5),

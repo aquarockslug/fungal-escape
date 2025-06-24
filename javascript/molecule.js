@@ -42,6 +42,10 @@ class Molecule extends EngineObject {
 		super.render();
 	}
 
+	under(molecule) {
+		return [molecule.center(), ...grid.neighborsOf(molecule.center())];
+	}
+
 	// bounce off the sides of the grid
 	bounce() {
 		if (

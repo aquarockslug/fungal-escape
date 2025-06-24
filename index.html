@@ -21,15 +21,20 @@
       flex-direction: column;
       width: 66%;
       background-color: white;
+      align-items: center;
+    }
+    #h1 {
+
+      justify-self: center;
     }
   </style>
 </head>
 <body>
   <div id="ui">
     <div id="menu" class="snes-container">
-      <h1>Mega Bullet!</h1>
-      <p>A mega man bullet hell game. Use the arrow keys to move and use the mouse to shoot. Press space to switch weapon</p>
-      <button class="snes-button has-phantom-color" onclick="gameStart(); sfx.chime.play(); started = true; document.getElementById('menu').style.display = 'none';">Start</button>
+      <h1>Spore Shooter!</h1>
+      <p>A bullet hell game. Use the arrow keys to move and use the mouse to shoot. Press space to switch weapon</p>
+      <button class="snes-button has-phantom-color" onclick="gameStart(); document.getElementById('menu').style.display = 'none';">Start</button>
     </div>
   </div>
   <script src="javascript/lib/littlejs.js"></script>
@@ -39,11 +44,11 @@
   <script src="javascript/particles.js"></script>
   <script src="javascript/molecule.js"></script>
   <script src="javascript/player.js"></script>
+  <script src="javascript/stages/snowy.js"></script>
   <script>
     started = false
 
     settings = {
-      //screenResolution: vec2(480, 360), // for camerScale = 2
       screenResolution: vec2(640, 480), // for camerScale = 3
       particleUpdateInterval: 0.1, // number of seconds between grid particle updates
       backgroundScroll: -20

@@ -9,36 +9,18 @@ function gameInit() {
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
-	particle = (square, color) => ({ square, value: { color } });
 
-	let textures = Textures();
-	new Player(center, vec2(16, 32), 0);
-
-	background = initStage(textures.tile('absolute_man', 'background'));
+	stage = new IceStage();
 }
 function gameStart() {
-	// start scrolling the background
-	for (obj of background[0]) {
-		obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
-	}
-	for (obj of background[1]) {
-		obj.velocity = vec2(settings.backgroundScroll * 0.01 * 2, 0);
-	}
-
 	particleTimer = new Timer(settings.particleUpdateInterval);
+	stage.start();
+	started = true;
+	sfx.chime.play();
+	new Player(center, vec2(16, 32), 0);
 }
 function gameUpdate() {
 	if (!started) return;
-
-	// wrap the background around to the other side if if went off the screen
-	FPO.map({
-		arr: FPO.flatten({ v: background }),
-		fn: ({ v }) => {
-			if (v.pos.x < 0 - v.size.x * 2) {
-				v.pos.x = width * 2;
-			}
-		},
-	});
 
 	if (particleTimer.elapsed()) {
 		particleUpdate();
@@ -54,82 +36,4 @@ function gameRenderPost() {
 		if (pixelColor.r >= 0.25 || pixelColor.g >= 0.25 || pixelColor.b >= 0.25)
 			drawRect(grid.positions()[i], vec2(1), pixelColor);
 	}
-}
-
-// returns squares in the same position as the given molecule
-function under(molecule) {
-	let center = molecule.center();
-	let squares = grid.neighborsOf(center);
-	squares.push(center);
-	return squares;
-}
-
-// draw a trail of particles under the given molecule
-function trail(molecule) {
-	return FPO.map({
-		arr: FPO.filter({
-			arr: under(molecule),
-			fn: ({ v }) => randInt(0, 100) < molecule.trailThickness,
-		}),
-		fn: ({ v }) => particle(v, molecule.color),
-	});
-}
-
-// TODO create a "Stage" class to combine scrolling gameObjects?, ex. return new Stage('ice')
-function initStage(bgTexture) {
-	let blockSize = vec2(16, 8); // TODO use blockSize = vec2(16) instead of vec2(16, 8)
-	let b1 = new EngineObject(
-		vec2(0, height / 2 + blockSize.y * 1.5),
-		vec2(width, height),
-		bgTexture,
-		0,
-		rgb(1, 1, 1),
-		-1,
-	);
-	let b2 = new EngineObject(
-		vec2(width, height / 2 + blockSize.y * 1.5),
-		vec2(width, height),
-		bgTexture,
-		0,
-		rgb(1, 1, 1),
-		-1,
-	);
-	let b3 = new EngineObject(
-		vec2(width * 2, height / 2 + blockSize.y * 1.5),
-		vec2(width, height),
-		bgTexture,
-		0,
-		rgb(1, 1, 1),
-		-1,
-	);
-	let b4 = new EngineObject(
-		vec2(width * 3, height / 2 + blockSize.y * 1.5),
-		vec2(width, height),
-		bgTexture,
-		0,
-		rgb(1, 1, 1),
-		-1,
-	);
-	let blocks = [];
-	for (let i = 0; i <= 32; i++) {
-		blocks.push(
-			new EngineObject(
-				vec2(blockSize.x * i - blockSize.x / 2, blockSize.y),
-				blockSize,
-				Textures().tile('absolute_man', 'snow'),
-				0,
-				rgb(1, 1, 1),
-				-1,
-			),
-			new EngineObject(
-				vec2(blockSize.x * i - blockSize.x / 2, -blockSize.y / 2),
-				vec2(16, 16),
-				Textures().tile('absolute_man', 'block'),
-				0,
-				rgb(1, 1, 1),
-				-1,
-			),
-		);
-	}
-	return [[b1, b2, b3, b4], blocks];
 }

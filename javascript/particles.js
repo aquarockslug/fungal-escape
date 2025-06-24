@@ -1,3 +1,6 @@
+function particle(square, color) {
+	return { square, value: { color } };
+}
 function particleUpdate() {
 	grid.apply(
 		FPO.map({

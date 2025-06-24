@@ -1,6 +1,6 @@
-# Mega Bullet
+# Spore Shooter
 
-A Mega Man bullet hell game
+A bullet hell game
 
 ## links
 Scripting Docs: https://killedbyapixel.github.io/LittleJS/docs/  

@@ -25,6 +25,20 @@ function Textures() {
 				},
 			},
 		},
+		{
+			name: 'player',
+			path: 'assets/textures/red_shroomy.png',
+			tiles: {
+				idle: {
+					pos: vec2(0),
+					size: vec2(35, 24),
+				},
+				walk: {
+					pos: vec2(115, 0),
+					size: vec2(35, 24),
+				},
+			},
+		},
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets

@@ -30,11 +30,11 @@ function Textures() {
 			path: 'assets/textures/red_shroomy.png',
 			tiles: {
 				idle: {
-					pos: vec2(0),
+					pos: vec2(48, 46),
 					size: vec2(35, 24),
 				},
 				walk: {
-					pos: vec2(115, 0),
+					pos: vec2(0, 76),
 					size: vec2(35, 24),
 				},
 			},

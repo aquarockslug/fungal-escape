@@ -26,7 +26,7 @@ function Textures() {
 			},
 		},
 		{
-			name: 'red',
+			name: 'red_shroomy',
 			path: 'assets/textures/red_shroomy.png',
 			tiles: {
 				idle: {
@@ -40,7 +40,7 @@ function Textures() {
 			},
 		},
 		{
-			name: 'blue',
+			name: 'blue_shroomy',
 			path: 'assets/textures/blue_shroomy.png',
 			tiles: {
 				idle: {
@@ -68,6 +68,7 @@ function Textures() {
 		// returns TileInfo for the given tile from the given sheet
 		tile: (sheetName, tileName) => {
 			let s = sheet(sheetName);
+			if (!s) console.log(`sheet "${sheetName}" was not found!`);
 			let t = s.tiles[tileName];
 			if (!t) console.log(`tile "${tileName}" was not found!`);
 			return new TileInfo(t.pos, t.size, s.index);

@@ -1,6 +1,6 @@
 // the player runs at the bottom of the screen and moves or jumps over obstacles
 class Player extends EngineObject {
-	constructor(pos, sheetName = 'red') {
+	constructor(pos, sheetName = 'red_shroomy') {
 		let idleTI = Textures().tile(sheetName, 'idle');
 		super(pos, vec2(16, 12), idleTI, 0);
 		this.idleTI = idleTI;

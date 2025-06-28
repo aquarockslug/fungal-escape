@@ -40,10 +40,12 @@ class Player extends EngineObject {
 	}
 	render() {
 		if (started) {
+			// idle
 			let frame = ((time * 8) % 6) | 0;
 			drawTile(this.pos, this.size, this.walkTI.frame(frame));
 		} else {
-			let frame = ((time * 8) % 3) | 0;
+			// walk
+			let frame = ((time * 4) % 3) | 0;
 			drawTile(this.pos, this.size, this.idleTI.frame(frame));
 		}
 

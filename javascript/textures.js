@@ -44,8 +44,8 @@ function Textures() {
 			path: 'assets/textures/blue_shroomy.png',
 			tiles: {
 				idle: {
-					pos: vec2(48, 46),
-					size: vec2(34, 34),
+					pos: vec2(50, 47),
+					size: vec2(35, 34),
 				},
 				walk: {
 					pos: vec2(0, 79),

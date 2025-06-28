@@ -26,7 +26,7 @@ function Textures() {
 			},
 		},
 		{
-			name: 'player',
+			name: 'red',
 			path: 'assets/textures/red_shroomy.png',
 			tiles: {
 				idle: {
@@ -34,22 +34,22 @@ function Textures() {
 					size: vec2(35, 24),
 				},
 				walk: {
-					pos: vec2(0, 76),
+					pos: vec2(0, 77),
 					size: vec2(35, 24),
 				},
 			},
 		},
 		{
-			name: 'blue_shroomy',
+			name: 'blue',
 			path: 'assets/textures/blue_shroomy.png',
 			tiles: {
 				idle: {
-					pos: vec2(0),
-					size: vec2(35, 24),
+					pos: vec2(48, 46),
+					size: vec2(34, 34),
 				},
 				walk: {
-					pos: vec2(115, 0),
-					size: vec2(35, 24),
+					pos: vec2(0, 79),
+					size: vec2(34, 34),
 				},
 			},
 		},

@@ -11,7 +11,8 @@ function gameInit() {
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 
 	stage = new IceStage();
-	player = new Player(vec2(center.x / 2, 16), vec2(16, 32), 0);
+	player = new Player(vec2(center.x / 2, 16), 'red');
+	player2 = new Player(vec2(center.x / 2 + 32, 16), 'blue');
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);

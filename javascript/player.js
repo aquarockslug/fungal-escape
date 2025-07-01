@@ -5,46 +5,43 @@ class Player extends EngineObject {
 		super(pos, vec2(16, 12), idleTI, 0);
 		this.idleTI = idleTI;
 		this.walkTI = Textures().tile(sheetName, 'walk');
-		this.weapon = 'hot';
+		this.mass = 1;
 	}
 	update() {
-		let mouseDirection = mousePos.subtract(this.pos).normalize();
-		this.angle = mouseDirection.angle();
+		if (!started) return;
 
-		// TODO increase max speed
-		if (
-			keyIsDown('ArrowRight') &&
-			this.pos.x < center.x * 2 - this.size.x / 2
-		) {
-			this.velocity = this.velocity.add(vec2(0.25, 0));
-		} else if (keyIsDown('ArrowLeft') && this.pos.x > this.size.x / 2) {
-			this.velocity = this.velocity.add(vec2(-0.25, 0));
-		} else this.velocity = vec2(0); // TODO use dampening to slow down when no arrows are pressed
+		if (keyIsDown('ArrowRight')) {
+			this.applyAcceleration(vec2(1, 0));
+			if (this.isGrounded()) this.velocity.x += 1;
+		}
+		if (keyIsDown('ArrowLeft')) {
+			this.applyAcceleration(vec2(-2, 0));
+			this.velocity.x -= 1;
+		}
 
-		if (mouseWasPressed(0)) {
-			new Molecule(
-				this.pos.add(mouseDirection.scale(10)), // launch the molecule from in front of the player
-				vec2(4),
-				undefined,
-				this.angle,
-				this.weapon,
-			);
-			if (this.weapon === 'cold') sfx.shoot.play();
-			if (this.weapon === 'hot') sfx.shoot2.play();
+		if (this.isGrounded() && keyWasPressed('ArrowUp')) {
+			this.applyAcceleration(vec2(0, 500));
 		}
-		if (keyWasPressed('Space')) {
-			this.weapon = this.weapon === 'hot' ? 'cold' : 'hot';
-			// TODO add jumping
-		}
+
+		if (this.isGrounded()) this.pos.y = 20;
+		this.velocity.x *= 0.3;
+
+		this.pos.x = clamp(this.pos.x, this.size.x / 2, center.x * 1.5);
+
 		super.update();
 	}
 	render() {
 		if (started) {
-			// idle
-			let frame = ((time * 8) % 6) | 0;
-			drawTile(this.pos, this.size, this.walkTI.frame(frame));
+			if (this.isGrounded()) {
+				// walk
+				let frame = ((time * 8) % 6) | 0;
+				drawTile(this.pos, this.size, this.walkTI.frame(frame));
+			} else {
+				// jump
+				drawTile(this.pos, this.size, this.walkTI.frame(0));
+			}
 		} else {
-			// walk
+			// idle
 			let frame = ((time * 4) % 3) | 0;
 			drawTile(this.pos, this.size, this.idleTI.frame(frame));
 		}
@@ -53,5 +50,8 @@ class Player extends EngineObject {
 			drawRect(vec2(0, height), vec2(16, 8), rgb(1, 0, 0));
 		else if (this.weapon === 'cold')
 			drawRect(vec2(0, height), vec2(16, 8), rgb(0, 0, 1));
+	}
+	isGrounded() {
+		return this.pos.y < 20;
 	}
 }

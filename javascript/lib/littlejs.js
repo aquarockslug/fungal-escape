@@ -36,7 +36,7 @@ const debugPointSize = .5;
  *  @type {Boolean}
  *  @default
  *  @memberof Debug */
-let showWatermark = true;
+let showWatermark = false;
 
 /** Key code used to toggle debug mode, Esc by default
  *  @type {String}

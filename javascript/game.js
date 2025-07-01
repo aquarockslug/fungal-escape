@@ -10,17 +10,17 @@ function gameInit() {
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 
-	stage = new IceStage();
-	player = new Player(vec2(center.x / 2, 16));
+	gravity = -0.25;
+	objectMaxSpeed = 5;
 
-	blue_shroomy_spritesheet_test = new Player(
-		vec2(center.x / 2 + 32, 16),
-		'blue_shroomy',
-	);
+	stage = new IceStage();
+
+	player = new Player(vec2(center.x / 2, 16));
+	rival = new Rival(vec2(center.x * 1.75, center.y / 2), 'blue_shroomy');
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
-	stage.start();
+	stage.startScroll();
 	started = true;
 	sfx.chime.play();
 }

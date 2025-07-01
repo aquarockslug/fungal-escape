@@ -59,8 +59,12 @@ class IceStage extends EngineObject {
 		}
 		let images = [b1, b2, b3, b4];
 		this.background = [images, blocks];
+
+		this.setup();
+		this.mass = 0;
+		this.setCollision(false, false);
 	}
-	start() {
+	startScroll() {
 		// far background
 		for (let obj of this.background[0])
 			obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
@@ -77,6 +81,17 @@ class IceStage extends EngineObject {
 				if (v.pos.x < 0 - v.size.x * 2) {
 					v.pos.x = width * 2;
 				}
+			},
+		});
+		super.update();
+	}
+	setup() {
+		FPO.map({
+			arr: FPO.flatten({ v: this.background }),
+			fn: ({ v }) => {
+				v.mass = 0;
+				v.setCollision(false, false);
+				v.gravityScale = 0;
 			},
 		});
 	}

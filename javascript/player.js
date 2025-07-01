@@ -45,11 +45,6 @@ class Player extends EngineObject {
 			let frame = ((time * 4) % 3) | 0;
 			drawTile(this.pos, this.size, this.idleTI.frame(frame));
 		}
-
-		if (this.weapon === 'hot')
-			drawRect(vec2(0, height), vec2(16, 8), rgb(1, 0, 0));
-		else if (this.weapon === 'cold')
-			drawRect(vec2(0, height), vec2(16, 8), rgb(0, 0, 1));
 	}
 	isGrounded() {
 		return this.pos.y < 20;

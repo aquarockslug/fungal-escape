@@ -8,19 +8,15 @@ function gameInit() {
 	cameraScale = 3;
 	cameraPos = vec2(width, height).scale(0.5).add(cameraOffset);
 
-	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
-
 	gravity = -0.25;
 	objectMaxSpeed = 5;
 
+	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 	stage = new IceStage();
-
-	player = new Player(vec2(center.x / 2, 16));
-	rival = new Rival(vec2(center.x * 1.75, center.y / 2), 'blue_shroomy');
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
-	stage.startScroll();
+	stage.start();
 	started = true;
 	sfx.chime.play();
 }

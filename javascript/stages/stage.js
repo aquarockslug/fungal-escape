@@ -98,3 +98,28 @@ class Stage extends EngineObject {
 		super.update();
 	}
 }
+
+function loadStage(number) {
+	// TODO search the engineObject list and unload any already loaded stage
+	switch (Number(number)) {
+		case 1:
+			console.log(number);
+			return new Stage1();
+			break;
+		case 2:
+			return new Stage2();
+			break;
+		case 3:
+			return new Stage3();
+			break;
+		case 4:
+			return new Stage4();
+			break;
+		case 5:
+			return new Stage5();
+			break;
+		case 6:
+			return new Stage6();
+			break;
+	}
+}

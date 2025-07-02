@@ -23,6 +23,9 @@
       background-color: white;
       align-items: center;
     }
+    #stage-select {
+      background-color: white;
+    }
     #h1 {
 
       justify-self: center;
@@ -34,6 +37,20 @@
     <div id="menu" class="snes-container">
       <h1>Spore Shooter!</h1>
       <p>Use the arrow keys to move and jump.</p>
+    </div>
+    <div id="stage-select" class="snes-container">
+      <input type="radio" id="s1" name="stages" value="1" checked>
+      <label for="s1">Stage 1</label><br>
+      <input type="radio" id="s2" name="stages" value="2">
+      <label for="s1">Stage 2</label><br>
+      <input type="radio" id="s3" name="stages" value="3">
+      <label for="s1">Stage 3</label><br>
+      <input type="radio" id="s4" name="stages" value="4">
+      <label for="s1">Stage 4</label><br>
+      <input type="radio" id="s5" name="stages" value="5">
+      <label for="s1">Stage 5</label><br>
+      <input type="radio" id="s6" name="stages" value="6">
+      <label for="s1">Stage 6</label><br>
       <button class="snes-button has-phantom-color" onclick="gameStart(); document.getElementById('menu').style.display = 'none';">Start</button>
     </div>
   </div>
@@ -49,7 +66,13 @@
   <script src="javascript/rival.js"></script>
 
   <script src="javascript/stages/stage.js"></script>
-  <script src="javascript/stages/snowy.js"></script>
+  <script src="javascript/stages/stage1.js"></script>
+  <script src="javascript/stages/stage2.js"></script>
+  <script src="javascript/stages/stage3.js"></script>
+  <script src="javascript/stages/stage4.js"></script>
+  <script src="javascript/stages/stage5.js"></script>
+  <script src="javascript/stages/stage6.js"></script>
+
   <script>
     started = false
 

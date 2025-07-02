@@ -12,10 +12,14 @@ function gameInit() {
 	objectMaxSpeed = 5;
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
-	stage = new IceStage();
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
+	let selectedStage = FPO.filter({
+		arr: document.getElementsByName('stages'),
+		fn: ({ v }) => v.checked,
+	})[0].value;
+	stage = loadStage(selectedStage);
 	stage.start();
 	started = true;
 	sfx.chime.play();

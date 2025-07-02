@@ -4,6 +4,56 @@ function Textures() {
 	// tilesheets is a list so that each tilesheet has an index that can be used by littlejs
 	tilesheets = [
 		{
+			name: 'backgrounds',
+			path: 'assets/textures/backgrounds.png',
+			tiles: {
+				dredge: {
+					pos: vec2(0, 0),
+					size: vec2(240),
+				},
+				skate: {
+					pos: vec2(0, 240),
+					size: vec2(240),
+				},
+				absolute: {
+					pos: vec2(0, 240 * 2),
+					size: vec2(240),
+				},
+				nimbus: {
+					pos: vec2(0, 240 * 3),
+					size: vec2(240),
+				},
+				encrypt: {
+					pos: vec2(0, 240 * 4),
+					size: vec2(240),
+				},
+				rag: {
+					pos: vec2(0, 240 * 5),
+					size: vec2(240),
+				},
+				extinguish: {
+					pos: vec2(0, 240 * 6),
+					size: vec2(240),
+				},
+				deception: {
+					pos: vec2(0, 240 * 7),
+					size: vec2(240),
+				},
+				rift: {
+					pos: vec2(0, 240 * 8),
+					size: vec2(240),
+				},
+				queen: {
+					pos: vec2(0, 240 * 9),
+					size: vec2(240),
+				},
+				scrap: {
+					pos: vec2(0, 240 * 10),
+					size: vec2(240),
+				},
+			},
+		},
+		{
 			name: 'absolute_man',
 			path: 'assets/textures/absolute_man.png',
 			tiles: {

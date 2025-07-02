@@ -39,19 +39,23 @@
   </div>
   <script src="javascript/lib/littlejs.js"></script>
   <script src="javascript/lib/fpo.src.js"></script>
+
   <script src="javascript/textures.js"></script>
   <script src="javascript/grid.js"></script>
   <script src="javascript/particles.js"></script>
+
   <script src="javascript/molecule.js"></script>
   <script src="javascript/player.js"></script>
   <script src="javascript/rival.js"></script>
+
+  <script src="javascript/stages/stage.js"></script>
   <script src="javascript/stages/snowy.js"></script>
   <script>
     started = false
 
     settings = {
-      screenResolution: vec2(640, 480), // for camerScale = 3
-      particleUpdateInterval: 0.05, // number of seconds between grid particle updates
+      screenResolution: vec2(640, 480),
+      particleUpdateInterval: 0.1, // number of seconds between grid particle updates
       backgroundScroll: -20
     };
     setCanvasFixedSize(settings.screenResolution);

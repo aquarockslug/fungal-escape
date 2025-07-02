@@ -35,7 +35,10 @@ function gameUpdate() {
 function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
-	drawRect(cameraPos, vec2(width, height), PURPLE);
+	if (!started) {
+		drawRect(cameraPos, vec2(width, height), PURPLE);
+		return;
+	}
 	for (let i = 0; i < width * height; i++) {
 		let pixelColor = grid.values()[i].color;
 		// dont render black squares

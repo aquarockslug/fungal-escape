@@ -9,5 +9,4 @@ setopt extendedglob && 7z u -tzip $ARCHIVE_NAME **/^(*.zip|*.md|*.sh|biome.json)
 # upload the zip file to itch.io
 echo && butler push $ARCHIVE_NAME.zip aquarock/spore-shooter:build
 
-# open the public itch.io page if "open" is the first argument
-if [ "$1" = "open" ]; then wsl-open https://aquarock.itch.io/spore-shooter; fi
+wsl-open https://aquarock.itch.io/spore-shooter

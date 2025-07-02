@@ -27,7 +27,6 @@
       background-color: white;
     }
     #h1 {
-
       justify-self: center;
     }
   </style>
@@ -51,7 +50,9 @@
       <label for="s1">Stage 5</label><br>
       <input type="radio" id="s6" name="stages" value="6">
       <label for="s1">Stage 6</label><br>
-      <button class="snes-button has-phantom-color" onclick="gameStart(); document.getElementById('menu').style.display = 'none';">Start</button>
+      <button class="snes-button has-phantom-color" onclick="gameStart();
+	      document.getElementById('menu').style.display = 'none';
+	      document.getElementById('stage-select').style.display = 'none';">Start</button>
     </div>
   </div>
   <script src="javascript/lib/littlejs.js"></script>

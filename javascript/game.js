@@ -36,7 +36,8 @@ function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
 	if (!started) {
-		drawRect(cameraPos, vec2(width, height), PURPLE);
+		// TODO drawRect(cameraPos, vec2(width, height), rgb(185, 142, 237, 1));
+		drawRect(cameraPos, settings.screenResolution, PURPLE);
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {

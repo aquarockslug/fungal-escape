@@ -26,7 +26,11 @@ class Player extends EngineObject {
 		if (this.isGrounded()) this.pos.y = 27;
 		this.velocity.x *= 0.3;
 
-		this.pos.x = clamp(this.pos.x, this.size.x / 2, center.x * 1.5);
+		this.pos.x = clamp(
+			this.pos.x,
+			this.size.x / 2,
+			center.x * 2 - this.size.x / 2,
+		);
 
 		super.update();
 	}

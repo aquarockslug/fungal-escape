@@ -54,28 +54,6 @@ function Textures() {
 			},
 		},
 		{
-			name: 'absolute_man',
-			path: 'assets/textures/absolute_man.png',
-			tiles: {
-				background: {
-					pos: vec2(160, 0),
-					size: vec2(240),
-				},
-				snow: {
-					pos: vec2(18, 36),
-					size: vec2(32, 16),
-				},
-				block: {
-					pos: vec2(37, 161),
-					size: vec2(32, 32),
-				},
-				snowman: {
-					pos: vec2(40, 197),
-					size: vec2(20, 32),
-				},
-			},
-		},
-		{
 			name: 'red_shroomy',
 			path: 'assets/textures/red_shroomy.png',
 			tiles: {
@@ -100,6 +78,20 @@ function Textures() {
 				walk: {
 					pos: vec2(0, 79),
 					size: vec2(34, 34),
+				},
+			},
+		},
+		{
+			name: 'foregrounds',
+			path: 'assets/textures/foregrounds.png',
+			tiles: {
+				metal_top: {
+					pos: vec2(0, 20),
+					size: vec2(53, 17),
+				},
+				metal_bottom: {
+					pos: vec2(0, 0),
+					size: vec2(53, 17),
 				},
 			},
 		},

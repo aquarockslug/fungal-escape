@@ -4,22 +4,22 @@ class Stage extends EngineObject {
 		super(vec2(0), vec2(1));
 
 		let bgTexture = Textures().tile('backgrounds', backgroundName);
-		let blockSize = vec2(16, 8); // TODO use blockSize = vec2(16) instead of vec2(16, 8)
+		let blockSize = vec2(32, 16);
 		let blocks = [];
-		for (let i = 0; i <= 32; i++) {
+		for (let i = 0; i <= settings.screenResolution.x / blockSize.x; i++) {
 			blocks.push(
 				new EngineObject(
-					vec2(blockSize.x * i - blockSize.x / 2, blockSize.y),
+					vec2(blockSize.x * i, blockSize.y / 2),
 					blockSize,
-					Textures().tile('absolute_man', blockNames[0]),
+					Textures().tile('foregrounds', blockNames[1]),
 					0,
 					rgb(1, 1, 1),
 					-1,
 				),
 				new EngineObject(
-					vec2(blockSize.x * i - blockSize.x / 2, -blockSize.y / 2),
-					vec2(16, 16),
-					Textures().tile('absolute_man', blockNames[1]),
+					vec2(blockSize.x * i, -(blockSize.y / 2) + 1),
+					blockSize,
+					Textures().tile('foregrounds', blockNames[0]),
 					0,
 					rgb(1, 1, 1),
 					-1,
@@ -27,40 +27,19 @@ class Stage extends EngineObject {
 			);
 		}
 
-		// TODO create these background images with a loop
-		let b1 = new EngineObject(
-			vec2(0, height / 2 + blockSize.y * 1.5),
-			vec2(width, height),
-			bgTexture,
-			0,
-			rgb(1, 1, 1),
-			-1,
-		);
-		let b2 = new EngineObject(
-			vec2(width, height / 2 + blockSize.y * 1.5),
-			vec2(width, height),
-			bgTexture,
-			0,
-			rgb(1, 1, 1),
-			-1,
-		);
-		let b3 = new EngineObject(
-			vec2(width * 2, height / 2 + blockSize.y * 1.5),
-			vec2(width, height),
-			bgTexture,
-			0,
-			rgb(1, 1, 1),
-			-1,
-		);
-		let b4 = new EngineObject(
-			vec2(width * 3, height / 2 + blockSize.y * 1.5),
-			vec2(width, height),
-			bgTexture,
-			0,
-			rgb(1, 1, 1),
-			-1,
-		);
-		let images = [b1, b2, b3, b4];
+		let images = [];
+		for (let i = 0; i < 4; i++) {
+			images.push(
+				new EngineObject(
+					vec2(width * i + 1, height / 2 + blockSize.y - 1),
+					vec2(width, height),
+					bgTexture,
+					0,
+					rgb(1, 1, 1),
+					-1,
+				),
+			);
+		}
 
 		this.background = [images, blocks];
 
@@ -90,7 +69,7 @@ class Stage extends EngineObject {
 			arr: FPO.flatten({ v: this.background }),
 			fn: ({ v }) => {
 				if (v.pos.x < 0 - v.size.x * 2) {
-					v.pos.x = width * 2;
+					v.pos.x = width + v.size.x;
 				}
 			},
 		});
@@ -103,7 +82,6 @@ function loadStage(number) {
 	// TODO search the engineObject list and unload any already loaded stage
 	switch (Number(number)) {
 		case 1:
-			console.log(number);
 			return new Stage1();
 			break;
 		case 2:

@@ -23,7 +23,7 @@ class Player extends EngineObject {
 			this.applyAcceleration(vec2(0, 500));
 		}
 
-		if (this.isGrounded()) this.pos.y = 20;
+		if (this.isGrounded()) this.pos.y = 27;
 		this.velocity.x *= 0.3;
 
 		this.pos.x = clamp(this.pos.x, this.size.x / 2, center.x * 1.5);
@@ -47,6 +47,6 @@ class Player extends EngineObject {
 		}
 	}
 	isGrounded() {
-		return this.pos.y < 20;
+		return this.pos.y < 27;
 	}
 }

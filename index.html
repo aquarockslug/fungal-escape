@@ -43,6 +43,9 @@
     #h1 {
       justify-self: center;
     }
+    #stage-select button {
+      margin: 0px 40px 0px 40px;
+    }
   </style>
 </head>
 <body>
@@ -58,12 +61,15 @@
 	">START</button>
       </div>
       <div id="stage-select" class="snes-container">
+	<div>
         <input type="radio" id="s1" name="stages" value="1" checked>
         <label for="s1">Stage 1</label>
         <input type="radio" id="s2" name="stages" value="2">
         <label for="s1">Stage 2</label>
         <input type="radio" id="s3" name="stages" value="3">
         <label for="s1">Stage 3</label>
+	</div>
+	<div>
         <input type="radio" id="s4" name="stages" value="4">
         <label for="s1">Stage 4</label>
         <input type="radio" id="s5" name="stages" value="5">
@@ -75,6 +81,7 @@
 		document.getElementById('health-bar').style.display = 'block';
 		gameStart();
 	">PLAY</button>
+	</div>
     </div>
   </div>
   <script src="javascript/lib/littlejs.js"></script>

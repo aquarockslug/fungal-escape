@@ -28,17 +28,15 @@
       background-color: white;
       margin: 20px;
     }
-    #health-display {
+    #health-bar {
       display: flex;
       position: absolute;
+      background-color: red;
       top: 15px;
       left: 15px;
-      background-color: white;
+      width: 500px;
       padding: 0px;
       margin: 10px;
-    }
-    #health-display img {
-      margin: -10px 0px 0px 0px;
     }
     #h1 {
       justify-self: center;
@@ -47,10 +45,7 @@
 </head>
 <body>
   <div id="ui">
-    <div id="health-display" class="snes-container">
-      <img src="https://opengameart.org/sites/default/files/heart_6.png" width="48" height="48">
-      <img src="https://opengameart.org/sites/default/files/heart_6.png" width="48" height="48">
-      <img src="https://opengameart.org/sites/default/files/heart_6.png" width="48" height="48">
+    <div id="health-bar" class="snes-container">
     </div>
     <div id="menu" class="snes-container">
       <h1>Spore Shooter!</h1>

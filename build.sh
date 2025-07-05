@@ -10,4 +10,5 @@ setopt extendedglob && 7z u -tzip $ARCHIVE_NAME **/^(*.zip|*.md|*.sh|biome.json)
 echo && butler push $ARCHIVE_NAME.zip aquarock/spore-shooter:build
 
 sleep 5
-wsl-open https://aquarock.itch.io/spore-shooter
+if [ -f /bin/wsl-open ]; then wsl-open https://aquarock.itch.io/spore-shooter
+elif [ -f /bin/firefox ]; then firefox https://aquarock.itch.io/spore-shooter; fi

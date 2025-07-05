@@ -37,7 +37,11 @@ function gameRender() {}
 function gameRenderPost() {
 	if (!started) {
 		// TODO drawRect(cameraPos, vec2(width, height), rgb(185, 142, 237, 1));
-		drawRect(cameraPos, settings.screenResolution, PURPLE);
+		drawTile(
+			cameraPos,
+			settings.screenResolution.divide(vec2(2)),
+			Textures().tile('images', 'crime'),
+		);
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {

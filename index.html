@@ -13,19 +13,19 @@
       width: 100%;
       height: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
     }
     #menu {
       display: flex;
       flex-direction: column;
       width: 66%;
-      background-color: white;
+      background-color: rgba(1, 1, 1, 0.2);
       align-items: center;
       margin: 20px;
     }
     #stage-select {
-      background-color: white;
+      background-color: rgba(1, 1, 1, 0.2);
       margin: 20px;
     }
     #health-bar {
@@ -47,24 +47,24 @@
   <div id="ui">
     <div id="health-bar" class="snes-container">
     </div>
-    <div id="menu" class="snes-container">
-      <h1>Spore Shooter!</h1>
-      <p>Use the arrow keys to move and jump.</p>
-    </div>
-    <div id="stage-select" class="snes-container">
-      <input type="radio" id="s1" name="stages" value="1" checked>
-      <label for="s1">Stage 1</label><br>
-      <input type="radio" id="s2" name="stages" value="2">
-      <label for="s1">Stage 2</label><br>
-      <input type="radio" id="s3" name="stages" value="3">
-      <label for="s1">Stage 3</label><br>
-      <input type="radio" id="s4" name="stages" value="4">
-      <label for="s1">Stage 4</label><br>
-      <input type="radio" id="s5" name="stages" value="5">
-      <label for="s1">Stage 5</label><br>
-      <input type="radio" id="s6" name="stages" value="6">
-      <label for="s1">Stage 6</label><br>
-      <button class="snes-button has-phantom-color" onclick="gameStart();
+      <div id="menu" class="snes-container">
+        <h1>Spore Shooter!</h1>
+        <p>Use the arrow keys to move and jump.</p>
+      </div>
+      <div id="stage-select" class="snes-container">
+        <input type="radio" id="s1" name="stages" value="1" checked>
+        <label for="s1">Stage 1</label><br>
+        <input type="radio" id="s2" name="stages" value="2">
+        <label for="s1">Stage 2</label><br>
+        <input type="radio" id="s3" name="stages" value="3">
+        <label for="s1">Stage 3</label><br>
+        <input type="radio" id="s4" name="stages" value="4">
+        <label for="s1">Stage 4</label><br>
+        <input type="radio" id="s5" name="stages" value="5">
+        <label for="s1">Stage 5</label><br>
+        <input type="radio" id="s6" name="stages" value="6">
+        <label for="s1">Stage 6</label><br>
+        <button class="snes-button has-phantom-color" onclick="gameStart();
 	      document.getElementById('menu').style.display = 'none';
 	      document.getElementById('stage-select').style.display = 'none';">Start</button>
     </div>

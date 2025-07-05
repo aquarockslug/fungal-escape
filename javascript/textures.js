@@ -103,6 +103,16 @@ function Textures() {
 				},
 			},
 		},
+		{
+			name: 'images',
+			path: 'assets/textures/go-do-crime.png',
+			tiles: {
+				crime: {
+					pos: vec2(0),
+					size: vec2(407, 605),
+				},
+			},
+		},
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets

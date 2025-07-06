@@ -1,87 +1,59 @@
 <!doctype html>
 <head>
-  <title>Spore Shooter!</title>
+  <title>Spore Runner!</title>
   <meta charset="utf-8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <link rel="stylesheet" href="css/modern-normalize.min.css" />
   <link rel="stylesheet" href="css/snes.min.css" />
-  <style>
-    #ui {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-    }
-    #title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 66%;
-      background-color: white;
-      margin: 20px;
-    }
-    #stage-select {
-      display: none;
-      flex-direction: column;
-      background-color: white;
-      margin: 20px;
-    }
-    #health-bar {
-      display: none;
-      position: absolute;
-      background-color: red;
-      top: 15px;
-      left: 15px;
-      width: 300px;
-      padding: 0px;
-      margin: 10px;
-    }
-    #h1 {
-      justify-self: center;
-    }
-    #stage-select button {
-      margin: 0px 40px 0px 40px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div id="ui">
-    <div id="health-bar" class="snes-container">
-    </div>
-      <div id="title" class="snes-container">
-        <h1>Spore Shooter!</h1>
-        <p>Use the arrow keys to move and jump.</p>
-	<button class="snes-button has-phantom-color" onclick="
+    <div id="health-bar" class="snes-container"></div>
+    <div id="title" class="snes-container">
+      <h1>Spore Runner!</h1>
+      <p>Use the arrow keys to move and jump.</p>
+      <button
+        class="snes-button has-phantom-color"
+        onclick="
 		document.getElementById('title').style.display = 'none';
 		document.getElementById('stage-select').style.display = 'flex';
-	">START</button>
-      </div>
-      <div id="stage-select" class="snes-container">
-	<div>
-        <input type="radio" id="s1" name="stages" value="1" checked>
-        <label for="s1">Stage 1</label>
-        <input type="radio" id="s2" name="stages" value="2">
-        <label for="s1">Stage 2</label>
-        <input type="radio" id="s3" name="stages" value="3">
-        <label for="s1">Stage 3</label>
-	</div>
-	<div>
-        <input type="radio" id="s4" name="stages" value="4">
-        <label for="s1">Stage 4</label>
-        <input type="radio" id="s5" name="stages" value="5">
-        <label for="s1">Stage 5</label>
-        <input type="radio" id="s6" name="stages" value="6">
-        <label for="s1">Stage 6</label>
-        <button class="snes-button has-phantom-color" onclick="
+	"
+      >
+        START
+      </button>
+    </div>
+    <div id="stage-select" class="snes-form-group snes-container">
+      <label>PLAYER SELECT</label>
+      <div class="snes-radio snes-radio--vertical">
+        <label class="snes-radio__item has-ember-icon">
+          <input type="radio" name="player-select" value="red" checked />
+          <span class="snes-radio__item__content">RED</span>
+        </label>
+        <label class="snes-radio__item has-turquoise-icon">
+          <input type="radio" id="blue" name="player-select" value="blue" />
+          <span class="snes-radio__item__content">BLUE</span>
+        </label>
+        <label class="snes-radio__item has-galaxy-icon">
+          <input type="radio" id="purple" name="player-select" value="purple" />
+          <span class="snes-radio__item__content">PURPLE</span>
+        </label>
+        <label class="snes-radio__item has-green-icon">
+          <input type="radio" id="green" name="player-select" value="green" />
+          <span class="snes-radio__item__content">GREEN</span>
+        </label>
+        <button
+          class="snes-button has-phantom-color"
+          onclick="
 		document.getElementById('stage-select').style.display = 'none';
 		document.getElementById('health-bar').style.display = 'block';
 		gameStart();
-	">PLAY</button>
-	</div>
+	"
+        >
+          PLAY
+        </button>
+      </div>
     </div>
   </div>
   <script src="javascript/lib/littlejs.js"></script>
@@ -104,12 +76,12 @@
   <script src="javascript/stages/stage6.js"></script>
 
   <script>
-    started = false
+    started = false;
 
     settings = {
       screenResolution: vec2(640, 480),
       particleUpdateInterval: 0.1, // number of seconds between grid particle updates
-      backgroundScroll: -20
+      backgroundScroll: -20,
     };
     setCanvasFixedSize(settings.screenResolution);
 
@@ -118,12 +90,74 @@
     };
 
     sfx = {
-      chime: new Sound([0.2,,531,0.08,0.29,0.36,,0.2,,,472,0.06,0.09,,,,,0.8,0.16,,846,]),
-      shoot: new Sound([,,173,,.03,.2,2,1.4,-17,15,,,,.9,,,,.58,.2]),
-      shoot2: new Sound([1.2,,99,,.04,.06,3,3.8,-14,-4,,,,,,.3,.2,.6,.17,,585])
+      chime: new Sound([
+        0.2,
+        ,
+        531,
+        0.08,
+        0.29,
+        0.36,
+        ,
+        0.2,
+        ,
+        ,
+        472,
+        0.06,
+        0.09,
+        ,
+        ,
+        ,
+        ,
+        0.8,
+        0.16,
+        ,
+        846,
+      ]),
+      shoot: new Sound([
+        ,
+        ,
+        173,
+        ,
+        0.03,
+        0.2,
+        2,
+        1.4,
+        -17,
+        15,
+        ,
+        ,
+        ,
+        0.9,
+        ,
+        ,
+        ,
+        0.58,
+        0.2,
+      ]),
+      shoot2: new Sound([
+        1.2,
+        ,
+        99,
+        ,
+        0.04,
+        0.06,
+        3,
+        3.8,
+        -14,
+        -4,
+        ,
+        ,
+        ,
+        ,
+        ,
+        0.3,
+        0.2,
+        0.6,
+        0.17,
+        ,
+        585,
+      ]),
     };
-
-
   </script>
   <script src="javascript/game.js"></script>
   <script>
@@ -133,7 +167,7 @@
       gameUpdatePost,
       gameRender,
       gameRenderPost,
-      Textures().paths
+      Textures().paths,
     );
   </script>
 </body>

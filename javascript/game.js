@@ -15,10 +15,11 @@ function gameInit() {
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
-	let selectedStage = FPO.filter({
-		arr: document.getElementsByName('stages'),
-		fn: ({ v }) => v.checked,
-	})[0].value;
+	// let selectedStage = FPO.filter({
+	// 	arr: document.getElementsByName('stages'),
+	// 	fn: ({ v }) => v.checked,
+	// })[0].value;
+	let selectedStage = 1;
 	stage = loadStage(selectedStage);
 	stage.start();
 	started = true;

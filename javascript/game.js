@@ -45,12 +45,12 @@ function gameRenderPost() {
 			settings.screenResolution.divide(vec2(3)),
 			Textures().tile('menus2', 'run_away_red'),
 		);
-		if (state == 'main_menu')
-			drawTile(
-				cameraPos.add(vec2(0, -11)),
-				settings.screenResolution.divide(vec2(3)),
-				Textures().tile('menus', 'title'),
-			);
+		// if (state == 'main_menu')
+		// 	drawTile(
+		// 		cameraPos.add(vec2(0, -11)),
+		// 		settings.screenResolution.divide(vec2(3)),
+		// 		Textures().tile('menus', 'title'),
+		// 	);
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {

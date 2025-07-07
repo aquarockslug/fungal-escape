@@ -10,19 +10,23 @@
 </head>
 <body>
   <div id="ui">
-    <div id="health-bar" class="snes-container"></div>
-      <div
-	id="start-button"
-        onclick="
+    <img id="main-menu" src='assets/textures/fungal-escape-titlemenu.png'/>
+    <div
+      id="start-button"
+      onclick="
 		document.getElementById('start-button').style.display = 'none';
+		document.getElementById('main-menu').style.display = 'none';
 		document.getElementById('stage-select').style.display = 'flex';
+		document.getElementById('ui').style.display = 'flex';
+		document.getElementById('ui').style['justify-content'] = 'flex-end';
 		gameCharacterSelect()
 	"
-      >
+    >
       <h1>START</h1>
-      </div>
+    </div>
+    <div id="health-bar" class="snes-container"></div>
     <div id="stage-select" class="snes-form-group snes-container">
-	    <label>CHARACTER SELECT</label>
+      <label>CHARACTER SELECT</label>
       <div class="snes-radio snes-radio--vertical">
         <label class="snes-radio__item has-ember-icon">
           <input type="radio" name="player-select" value="red" checked />
@@ -74,7 +78,7 @@
 
   <script>
     started = false;
-    state = "main_menu"
+    state = "main_menu";
 
     settings = {
       screenResolution: vec2(640, 480),

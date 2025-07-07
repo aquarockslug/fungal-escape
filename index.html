@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-  <title>Spore Runner!</title>
+  <title>Fungal Escape</title>
   <meta charset="utf-8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
@@ -11,21 +11,18 @@
 <body>
   <div id="ui">
     <div id="health-bar" class="snes-container"></div>
-    <div id="title" class="snes-container">
-      <h1>Spore Runner!</h1>
-      <p>Use the arrow keys to move and jump.</p>
-      <button
-        class="snes-button has-phantom-color"
+      <div
+	id="start-button"
         onclick="
-		document.getElementById('title').style.display = 'none';
+		document.getElementById('start-button').style.display = 'none';
 		document.getElementById('stage-select').style.display = 'flex';
+		gameCharacterSelect()
 	"
       >
-        START
-      </button>
-    </div>
+      <h1>START</h1>
+      </div>
     <div id="stage-select" class="snes-form-group snes-container">
-      <label>PLAYER SELECT</label>
+	    <label>CHARACTER SELECT</label>
       <div class="snes-radio snes-radio--vertical">
         <label class="snes-radio__item has-ember-icon">
           <input type="radio" name="player-select" value="red" checked />
@@ -77,6 +74,7 @@
 
   <script>
     started = false;
+    state = "main_menu"
 
     settings = {
       screenResolution: vec2(640, 480),

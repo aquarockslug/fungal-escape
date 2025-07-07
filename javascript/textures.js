@@ -96,12 +96,22 @@ function Textures() {
 			},
 		},
 		{
-			name: 'images',
-			path: 'assets/textures/go-do-crime.png',
+			name: 'menus',
+			path: 'assets/textures/fungal-escape-titlemenu.png',
 			tiles: {
-				crime: {
+				title: {
 					pos: vec2(0),
-					size: vec2(407, 605),
+					size: vec2(833, 831),
+				},
+			},
+		},
+		{
+			name: 'menus2',
+			path: 'assets/textures/fungal-escape-titleart.png',
+			tiles: {
+				run_away_red: {
+					pos: vec2(0),
+					size: vec2(833, 831),
 				},
 			},
 		},

@@ -25,6 +25,9 @@ function gameStart() {
 	started = true;
 	sfx.chime.play();
 }
+function gameCharacterSelect() {
+	state = 'character_select';
+}
 function gameUpdate() {
 	if (!started) return;
 
@@ -37,12 +40,17 @@ function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
 	if (!started) {
-		// TODO drawRect(cameraPos, vec2(width, height), rgb(185, 142, 237, 1));
 		drawTile(
 			cameraPos,
-			settings.screenResolution.divide(vec2(2)),
-			Textures().tile('images', 'crime'),
+			settings.screenResolution.divide(vec2(3)),
+			Textures().tile('menus2', 'run_away_red'),
 		);
+		if (state == 'main_menu')
+			drawTile(
+				cameraPos.add(vec2(0, -11)),
+				settings.screenResolution.divide(vec2(3)),
+				Textures().tile('menus', 'title'),
+			);
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {

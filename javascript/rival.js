@@ -4,15 +4,17 @@ class Rival extends EngineObject {
 		super(pos, vec2(16, 12), idleTI, 0);
 		this.idleTI = idleTI;
 		this.walkTI = Textures().tile(sheetName, 'walk');
+		this.bulletTI = Textures().tile(sheetName, 'bullet')
 
 		this.player = player;
 		this.lookAt(player);
 
 		this.gravityScale = 0;
 		this.mass = 0;
+		this.emitter = new ParticleEmitter(this.pos, 0, ...vfx.jetpack)
 	}
 	update() {
-		if (!started) return;
+		this.emitter.emitParticle()
 		this.lookAt(this.player);
 		super.update();
 	}
@@ -32,6 +34,6 @@ class Rival extends EngineObject {
 	}
 	attack(target, moleculeType) {
 		this.lookAt(target);
-		new Molecule(this.pos, vec2(1), undefined, this.angle, moleculeType);
+		new Molecule(this.pos, vec2(6), this.bulletTI, this.angle, moleculeType);
 	}
 }

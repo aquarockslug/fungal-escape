@@ -25,6 +25,10 @@ function Textures() {
 					pos: vec2(0, 77),
 					size: vec2(35, 24),
 				},
+				bullet: {
+					pos: vec2(96, 0),
+					size: vec2(12),
+				},
 			},
 		},
 		{
@@ -38,6 +42,10 @@ function Textures() {
 				walk: {
 					pos: vec2(0, 79),
 					size: vec2(34, 34),
+				},
+				bullet: {
+					pos: vec2(96, 0),
+					size: vec2(12),
 				},
 			},
 		},

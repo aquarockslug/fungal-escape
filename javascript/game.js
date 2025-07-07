@@ -1,7 +1,5 @@
 // Written by Aquarocks
-
 function gameInit() {
-	// TODO create more settings variables
 	[width, height] = [210, 140];
 	center = vec2(width / 2, height / 2);
 	cameraOffset = vec2(0, 0);
@@ -12,6 +10,7 @@ function gameInit() {
 	objectMaxSpeed = 5;
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
+    	setCanvasFixedSize(settings.screenResolution);
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);

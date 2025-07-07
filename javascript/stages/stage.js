@@ -82,7 +82,7 @@ function loadStage(number) {
 	// TODO search the engineObject list and unload any already loaded stage
 	switch (Number(number)) {
 		case 1:
-			return new Stage1();
+			return new Toxic();
 			break;
 		case 2:
 			return new Stage2();

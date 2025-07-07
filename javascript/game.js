@@ -15,18 +15,15 @@ function gameInit() {
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
-	// let selectedStage = FPO.filter({
-	// 	arr: document.getElementsByName('stages'),
-	// 	fn: ({ v }) => v.checked,
-	// })[0].value;
-	let selectedStage = 1;
-	stage = loadStage(selectedStage);
+	selectedCharacter = FPO.filter({
+		arr: document.getElementsByName('player-select'),
+		fn: ({ v }) => v.checked,
+	})[0].value;
+	let selectedStages = stageSequences(selectedCharacter);
+	stage = loadStage(selectedStages[0]);
 	stage.start();
 	started = true;
 	sfx.chime.play();
-}
-function gameCharacterSelect() {
-	state = 'character_select';
 }
 function gameUpdate() {
 	if (!started) return;
@@ -43,14 +40,8 @@ function gameRenderPost() {
 		drawTile(
 			cameraPos,
 			settings.screenResolution.divide(vec2(3)),
-			Textures().tile('menus2', 'run_away_red'),
+			Textures().tile('menus', 'run_away_red'),
 		);
-		// if (state == 'main_menu')
-		// 	drawTile(
-		// 		cameraPos.add(vec2(0, -11)),
-		// 		settings.screenResolution.divide(vec2(3)),
-		// 		Textures().tile('menus', 'title'),
-		// 	);
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {
@@ -59,4 +50,10 @@ function gameRenderPost() {
 		if (pixelColor.r >= 0.25 || pixelColor.g >= 0.25 || pixelColor.b >= 0.25)
 			drawRect(grid.positions()[i], vec2(1), pixelColor);
 	}
+}
+function stageSequences(characterName) {
+	if (characterName === 'red') return ['toxic'];
+	if (characterName === 'blue') return ['toxic'];
+	if (characterName === 'green') return ['toxic'];
+	if (characterName === 'purple') return ['toxic'];
 }

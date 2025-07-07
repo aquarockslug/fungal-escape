@@ -56,7 +56,7 @@ function Textures() {
 			},
 		},
 		{
-			name: 'menus2',
+			name: 'menus',
 			path: 'assets/textures/fungal-escape-titleart.png',
 			tiles: {
 				run_away_red: {

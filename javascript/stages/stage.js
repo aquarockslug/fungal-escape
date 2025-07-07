@@ -78,10 +78,10 @@ class Stage extends EngineObject {
 	}
 }
 
-function loadStage(number) {
+function loadStage(name) {
 	// TODO search the engineObject list and unload any already loaded stage
-	switch (Number(number)) {
-		case 1:
+	switch (name) {
+		case 'toxic':
 			return new Toxic();
 			break;
 		case 2:

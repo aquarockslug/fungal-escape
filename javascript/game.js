@@ -10,7 +10,7 @@ function gameInit() {
 	objectMaxSpeed = 5;
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
-    	setCanvasFixedSize(settings.screenResolution);
+	setCanvasFixedSize(settings.screenResolution);
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);

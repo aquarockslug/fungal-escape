@@ -3,16 +3,7 @@
 function Textures() {
 	// tilesheets is a list so that each tilesheet has an index that can be used by littlejs
 	tilesheets = [
-		{
-			name: 'backgrounds',
-			path: 'assets/stages/backgrounds.png',
-			tiles: {
-				toxic: {
-					pos: vec2(240 * 2, 0),
-					size: vec2(240),
-				},
-			},
-		},
+		,
 		{
 			name: 'red_shroomy',
 			path: 'assets/characters/deimos.png',
@@ -54,15 +45,15 @@ function Textures() {
 			path: 'assets/characters/io.png',
 			tiles: {
 				idle: {
-					pos: vec2(50, 47),
+					pos: vec2(0, 52),
 					size: vec2(35, 34),
 				},
 				walk: {
-					pos: vec2(0, 79),
+					pos: vec2(0, 85),
 					size: vec2(34, 34),
 				},
 				bullet: {
-					pos: vec2(96, 0),
+					pos: vec2(45, 0),
 					size: vec2(12),
 				},
 			},
@@ -72,16 +63,26 @@ function Textures() {
 			path: 'assets/characters/europa.png',
 			tiles: {
 				idle: {
-					pos: vec2(50, 47),
+					pos: vec2(0, 56),
 					size: vec2(35, 34),
 				},
 				walk: {
-					pos: vec2(0, 79),
+					pos: vec2(0, 90),
 					size: vec2(34, 34),
 				},
 				bullet: {
-					pos: vec2(96, 0),
+					pos: vec2(8, 5),
 					size: vec2(12),
+				},
+			},
+		},
+		{
+			name: 'backgrounds',
+			path: 'assets/stages/backgrounds.png',
+			tiles: {
+				toxic: {
+					pos: vec2(240 * 2, 0),
+					size: vec2(240),
 				},
 			},
 		},

@@ -1,6 +1,6 @@
 class Greenhouse extends Stage {
 	constructor() {
-		super('toxic', ['metal_bottom', 'metal_top']);
+		super('greenhouse', 'greenhouse');
 
 		this.player = new Player(vec2(center.x, 16));
 		this.rival = new Rival(

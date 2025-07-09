@@ -98,7 +98,7 @@ function Textures() {
 			name: 'backgrounds',
 			path: 'assets/stages/backgrounds.png',
 			tiles: {
-				toxic: {
+				greenhouse: {
 					pos: vec2(240 * 2, 0),
 					size: vec2(240),
 				},
@@ -108,13 +108,9 @@ function Textures() {
 			name: 'foregrounds',
 			path: 'assets/stages/foregrounds.png',
 			tiles: {
-				metal_top: {
-					pos: vec2(0, 20),
-					size: vec2(53, 17),
-				},
-				metal_bottom: {
+				greenhouse: {
 					pos: vec2(0, 0),
-					size: vec2(53, 17),
+					size: vec2(255, 62),
 				},
 			},
 		},

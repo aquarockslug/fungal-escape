@@ -34,10 +34,10 @@ class Rival extends EngineObject {
 	}
 	attack(target, moleculeType) {
 		new Molecule(
-			this.pos,
+			this.pos.add(vec2(0, 8)),
 			vec2(6),
 			this.bulletTI,
-			randVector().angle(),
+			abs(randVector().angle()) - PI / 2, // randomly shoot upwards
 			moleculeType,
 		);
 	}

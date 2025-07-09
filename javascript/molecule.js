@@ -6,8 +6,9 @@ class Molecule extends EngineObject {
 			.setAngle(angle + randInt(PI / 4, PI / 3))
 			.multiply(vec2(5));
 		this.hasTrail = true;
-		this.maxBounces = 3;
+		this.maxBounces = 2;
 		this.bounces = 0;
+		this.bounceOnCeiling = false;
 
 		this.color = rgb(0, 1, 0);
 		this.trailThickness = 15;
@@ -57,10 +58,12 @@ class Molecule extends EngineObject {
 			if (this.bounces > this.maxBounces) this.destroy();
 			this.velocity = this.velocity.multiply(vec2(-1, 1));
 		}
-		if (
-			this.pos.y < grid.positions()[0].y ||
-			this.pos.y > grid.positions()[height - 1].y
-		) {
+		if (this.bounceOnCeiling && this.pos.y > grid.positions()[height - 1].y) {
+			this.bounces++;
+			if (this.bounces > this.maxBounces) this.destroy();
+			this.velocity = this.velocity.multiply(vec2(1, -1));
+		}
+		if (this.pos.y < grid.positions()[0].y) {
 			this.bounces++;
 			if (this.bounces > this.maxBounces) this.destroy();
 			this.velocity = this.velocity.multiply(vec2(1, -1));

@@ -5,7 +5,7 @@ function Textures() {
 	tilesheets = [
 		{
 			name: 'backgrounds',
-			path: 'assets/textures/backgrounds.png',
+			path: 'assets/stages/backgrounds.png',
 			tiles: {
 				toxic: {
 					pos: vec2(240 * 2, 0),
@@ -15,15 +15,51 @@ function Textures() {
 		},
 		{
 			name: 'red_shroomy',
-			path: 'assets/textures/red_shroomy.png',
+			path: 'assets/characters/deimos.png',
 			tiles: {
 				idle: {
-					pos: vec2(48, 46),
+					pos: vec2(0, 46),
 					size: vec2(35, 24),
 				},
 				walk: {
-					pos: vec2(0, 77),
+					pos: vec2(0, 81),
 					size: vec2(35, 24),
+				},
+				bullet: {
+					pos: vec2(21, 0),
+					size: vec2(12),
+				},
+			},
+		},
+		{
+			name: 'blue_shroomy',
+			path: 'assets/characters/phobos.png',
+			tiles: {
+				idle: {
+					pos: vec2(0, 54),
+					size: vec2(35, 34),
+				},
+				walk: {
+					pos: vec2(0, 90),
+					size: vec2(34, 34),
+				},
+				bullet: {
+					pos: vec2(24, 0),
+					size: vec2(12),
+				},
+			},
+		},
+		{
+			name: 'green_shroomy',
+			path: 'assets/characters/io.png',
+			tiles: {
+				idle: {
+					pos: vec2(50, 47),
+					size: vec2(35, 34),
+				},
+				walk: {
+					pos: vec2(0, 79),
+					size: vec2(34, 34),
 				},
 				bullet: {
 					pos: vec2(96, 0),
@@ -32,8 +68,8 @@ function Textures() {
 			},
 		},
 		{
-			name: 'blue_shroomy',
-			path: 'assets/textures/blue_shroomy.png',
+			name: 'purple_shroomy',
+			path: 'assets/characters/europa.png',
 			tiles: {
 				idle: {
 					pos: vec2(50, 47),
@@ -51,7 +87,7 @@ function Textures() {
 		},
 		{
 			name: 'foregrounds',
-			path: 'assets/textures/foregrounds.png',
+			path: 'assets/stages/foregrounds.png',
 			tiles: {
 				metal_top: {
 					pos: vec2(0, 20),
@@ -65,7 +101,7 @@ function Textures() {
 		},
 		{
 			name: 'menus',
-			path: 'assets/textures/fungal-escape-titleart.png',
+			path: 'assets/fungal-escape-titleart.png',
 			tiles: {
 				run_away_red: {
 					pos: vec2(0),

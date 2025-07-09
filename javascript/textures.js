@@ -77,6 +77,24 @@ function Textures() {
 			},
 		},
 		{
+			name: 'security',
+			path: 'assets/characters/security-system.png',
+			tiles: {
+				idle: {
+					pos: vec2(0),
+					size: vec2(84, 106),
+				},
+				walk: {
+					pos: vec2(0),
+					size: vec2(84, 106),
+				},
+				bullet: {
+					pos: vec2(70, 104),
+					size: vec2(16, 12),
+				},
+			},
+		},
+		{
 			name: 'backgrounds',
 			path: 'assets/stages/backgrounds.png',
 			tiles: {

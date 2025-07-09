@@ -51,8 +51,8 @@ function gameRenderPost() {
 	}
 }
 function stageSequences(characterName) {
-	if (characterName === 'red') return ['toxic'];
-	if (characterName === 'blue') return ['toxic'];
-	if (characterName === 'green') return ['toxic'];
-	if (characterName === 'purple') return ['toxic'];
+	if (characterName === 'red') return ['greenhouse', 'toxic'];
+	if (characterName === 'blue') return ['greenhouse', 'toxic'];
+	if (characterName === 'green') return ['greenhouse', 'toxic'];
+	if (characterName === 'purple') return ['greenhouse', 'extra'];
 }

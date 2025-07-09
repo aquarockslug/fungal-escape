@@ -84,8 +84,8 @@ function loadStage(name) {
 		case 'toxic':
 			return new Toxic();
 			break;
-		case 2:
-			return new Stage2();
+		case 'greenhouse':
+			return new Greenhouse();
 			break;
 		case 3:
 			return new Stage3();

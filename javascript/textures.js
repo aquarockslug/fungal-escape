@@ -98,9 +98,13 @@ function Textures() {
 			name: 'backgrounds',
 			path: 'assets/stages/backgrounds.png',
 			tiles: {
-				greenhouse: {
-					pos: vec2(240 * 2, 0),
+				dark: {
+					pos: vec2(0, 336),
 					size: vec2(240),
+				},
+				greenhouse: {
+					pos: vec2(263, 336),
+					size: vec2(256, 240),
 				},
 			},
 		},

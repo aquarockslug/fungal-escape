@@ -1,7 +1,7 @@
 // all stages have scrolling background images
 class Stage extends EngineObject {
 	constructor(backgroundName, blockName) {
-		super(vec2(0), vec2(1));
+		super(vec2(0), vec2(1), undefined, 0, undefined, -1);
 
 		let bgTexture = Textures().tile('backgrounds', backgroundName);
 		let blockSize = vec2(255, 36);
@@ -9,12 +9,12 @@ class Stage extends EngineObject {
 		for (let i = 0; i <= 3; i++) {
 			blocks.push(
 				new EngineObject(
-					vec2(blockSize.x * i, -2),
+					vec2(blockSize.x * i, 0),
 					blockSize,
 					Textures().tile('foregrounds', blockName),
 					0,
 					rgb(1, 1, 1),
-					-1,
+					0,
 				),
 			);
 		}
@@ -23,7 +23,7 @@ class Stage extends EngineObject {
 		for (let i = 0; i < 4; i++) {
 			images.push(
 				new EngineObject(
-					vec2(width * i + 1, height / 2 + blockSize.y - 1),
+					vec2(width * i + 1, height * 0.6),
 					vec2(width, height),
 					bgTexture,
 					0,
@@ -67,6 +67,9 @@ class Stage extends EngineObject {
 		});
 
 		super.update();
+	}
+	render() {
+		drawRect(center, vec2(10000), GRAY);
 	}
 }
 

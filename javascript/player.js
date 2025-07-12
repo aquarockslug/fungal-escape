@@ -27,9 +27,16 @@ class Player extends EngineObject {
 	render() {
 		if (started) {
 			if (this.isGrounded()) {
-				// walk
-				let frame = ((time * 8) % 6) | 0;
-				drawTile(this.pos, this.size, this.walkTI.frame(frame));
+				console.log(this.velocity.length());
+				if (this.velocity.length() < 5.3) {
+					// idle
+					let frame = ((time * 4) % 3) | 0;
+					drawTile(this.pos, this.size, this.idleTI.frame(frame));
+				} else {
+					// walk
+					let frame = ((time * 8) % 6) | 0;
+					drawTile(this.pos, this.size, this.walkTI.frame(frame));
+				}
 			} else {
 				// jump
 				drawTile(this.pos, this.size, this.walkTI.frame(0));
@@ -44,12 +51,18 @@ class Player extends EngineObject {
 		return this.pos.y < 27;
 	}
 	handleMovement() {
+		// walking
 		if (keyIsDown('ArrowRight')) {
 			this.applyAcceleration(vec2(1, 0));
-			if (this.isGrounded()) this.velocity.x += 1;
+			if (this.isGrounded()) this.velocity.x += 3;
 		}
 		if (keyIsDown('ArrowLeft')) {
 			this.applyAcceleration(vec2(-2, 0));
+			this.velocity.x -= 3;
+		}
+
+		// idle
+		if (!keyIsDown('ArrowLeft') || !keyIsDown('ArrowRight')) {
 			this.velocity.x -= 1;
 		}
 

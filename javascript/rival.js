@@ -11,6 +11,7 @@ class Rival extends EngineObject {
 
 		this.gravityScale = 0;
 		this.mass = 0;
+		this.setCollision();
 		if (this.sheetName !== 'security')
 			this.emitter = new ParticleEmitter(this.pos, 0, ...vfx.jetpack);
 	}
@@ -35,7 +36,7 @@ class Rival extends EngineObject {
 	attack(target, moleculeType) {
 		new Molecule(
 			this.pos.add(vec2(0, 8)),
-			vec2(6),
+			vec2(12),
 			this.bulletTI,
 			abs(randVector().angle()) - PI / 2, // randomly shoot upwards
 			moleculeType,

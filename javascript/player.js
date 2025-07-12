@@ -10,31 +10,17 @@ class Player extends EngineObject {
 		this.idleTI = idleTI;
 		this.walkTI = Textures().tile(sheetName, 'walk');
 		this.mass = 1;
+		this.healthbar = document.getElementById('health-bar');
+		this.healthbar.style.width = this.health * 3 + 'px';
+		this.health = 100;
+		this.setCollision();
 	}
 	update() {
 		if (!started) return;
 
-		if (keyIsDown('ArrowRight')) {
-			this.applyAcceleration(vec2(1, 0));
-			if (this.isGrounded()) this.velocity.x += 1;
-		}
-		if (keyIsDown('ArrowLeft')) {
-			this.applyAcceleration(vec2(-2, 0));
-			this.velocity.x -= 1;
-		}
+		this.handleMovement();
 
-		if (this.isGrounded() && keyWasPressed('ArrowUp')) {
-			this.applyAcceleration(vec2(0, 500));
-		}
-
-		if (this.isGrounded()) this.pos.y = 27;
-		this.velocity.x *= 0.3;
-
-		this.pos.x = clamp(
-			this.pos.x,
-			this.size.x / 2,
-			center.x * 2 - this.size.x / 2,
-		);
+		if (this.health <= 0) this.destroy();
 
 		super.update();
 	}
@@ -56,5 +42,34 @@ class Player extends EngineObject {
 	}
 	isGrounded() {
 		return this.pos.y < 27;
+	}
+	handleMovement() {
+		if (keyIsDown('ArrowRight')) {
+			this.applyAcceleration(vec2(1, 0));
+			if (this.isGrounded()) this.velocity.x += 1;
+		}
+		if (keyIsDown('ArrowLeft')) {
+			this.applyAcceleration(vec2(-2, 0));
+			this.velocity.x -= 1;
+		}
+
+		if (this.isGrounded() && keyWasPressed('ArrowUp')) {
+			this.applyAcceleration(vec2(0, 500));
+		}
+
+		if (this.isGrounded()) this.pos.y = 27;
+		this.velocity.x *= 0.3;
+
+		this.pos.x = clamp(
+			this.pos.x,
+			this.size.x / 2,
+			center.x * 2 - this.size.x / 2,
+		);
+	}
+	collideWithObject(o) {
+		if (o.damage) {
+			this.health -= o.damage;
+			this.healthbar.style.width = this.health * 3 + 'px';
+		}
 	}
 }

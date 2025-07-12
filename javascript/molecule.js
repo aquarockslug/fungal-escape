@@ -9,6 +9,8 @@ class Molecule extends EngineObject {
 		this.maxBounces = 2;
 		this.bounces = 0;
 		this.bounceOnCeiling = false;
+		this.damage = 1;
+		this.setCollision();
 
 		this.color = rgb(0, 1, 0);
 		this.trailThickness = 15;

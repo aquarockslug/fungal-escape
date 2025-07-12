@@ -14,10 +14,7 @@ function gameInit() {
 }
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
-	selectedCharacter = FPO.filter({
-		arr: document.getElementsByName('player-select'),
-		fn: ({ v }) => v.checked,
-	})[0].value;
+	selectedCharacter = characterSelect();
 	let selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
@@ -36,11 +33,7 @@ function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
 	if (!started) {
-		drawTile(
-			cameraPos,
-			settings.screenResolution.divide(vec2(3)),
-			Textures().tile('menus', 'run_away_red'),
-		);
+		characterSelect();
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {
@@ -55,4 +48,27 @@ function stageSequences(characterName) {
 	if (characterName === 'blue') return ['greenhouse', 'toxic'];
 	if (characterName === 'green') return ['greenhouse', 'toxic'];
 	if (characterName === 'purple') return ['greenhouse', 'extra'];
+}
+function characterSelect() {
+	selectedCharacterFrame = FPO.filter({
+		arr: document.getElementsByName('player-select'),
+		fn: ({ v }) => v.checked,
+	})[0].value;
+	drawTile(
+		cameraPos,
+		settings.screenResolution.divide(vec2(3)),
+		Textures().tile('art', 'characters').frame(Number(selectedCharacterFrame)),
+	);
+	switch (Number(selectedCharacterFrame)) {
+		case 0:
+			return 'red';
+		case 1:
+			return 'yellow';
+		case 2:
+			return 'purple';
+		case 3:
+			return 'green';
+		case 4:
+			return 'blue';
+	}
 }

@@ -3,7 +3,6 @@
 function Textures() {
 	// tilesheets is a list so that each tilesheet has an index that can be used by littlejs
 	tilesheets = [
-		,
 		{
 			name: 'red_shroomy',
 			path: 'assets/characters/deimos.png',
@@ -119,10 +118,10 @@ function Textures() {
 			},
 		},
 		{
-			name: 'menus',
+			name: 'art',
 			path: 'assets/fungal-escape-titleart.png',
 			tiles: {
-				run_away_red: {
+				characters: {
 					pos: vec2(0),
 					size: vec2(833, 831),
 				},

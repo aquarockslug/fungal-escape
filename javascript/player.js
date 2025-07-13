@@ -54,7 +54,7 @@ class Player extends EngineObject {
 		// walking
 		if (keyIsDown('ArrowRight')) {
 			this.applyAcceleration(vec2(1, 0));
-			if (this.isGrounded()) this.velocity.x += 3;
+			this.velocity.x += 3;
 		}
 		if (keyIsDown('ArrowLeft')) {
 			this.applyAcceleration(vec2(-2, 0));
@@ -62,7 +62,10 @@ class Player extends EngineObject {
 		}
 
 		// idle
-		if (!keyIsDown('ArrowLeft') || !keyIsDown('ArrowRight')) {
+		if (
+			(this.isGrounded && !keyIsDown('ArrowLeft')) ||
+			!keyIsDown('ArrowRight')
+		) {
 			this.velocity.x -= 1;
 		}
 

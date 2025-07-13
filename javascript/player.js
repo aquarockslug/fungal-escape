@@ -27,15 +27,22 @@ class Player extends EngineObject {
 	render() {
 		if (started) {
 			if (this.isGrounded()) {
-				console.log(this.velocity.length());
-				if (this.velocity.length() < 5.3) {
+				let speedThreshold = 5.3;
+				if (this.velocity.length() < speedThreshold) {
 					// idle
 					let frame = ((time * 4) % 3) | 0;
 					drawTile(this.pos, this.size, this.idleTI.frame(frame));
 				} else {
 					// walk
 					let frame = ((time * 8) % 6) | 0;
-					drawTile(this.pos, this.size, this.walkTI.frame(frame));
+					drawTile(
+						this.pos,
+						this.size,
+						this.walkTI.frame(frame),
+						undefined,
+						0,
+						keyIsDown('ArrowLeft'),
+					);
 				}
 			} else {
 				// jump

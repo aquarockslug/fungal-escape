@@ -9,6 +9,9 @@ function gameInit() {
 	gravity = -0.25;
 	objectMaxSpeed = 5;
 
+	stageTimer = new Timer(10);
+	stageTimerDisplay = document.getElementById('timer');
+
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 	setCanvasFixedSize(settings.screenResolution);
 }
@@ -18,15 +21,24 @@ function gameStart() {
 	selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
+	stageTimerDisplay.style.display = 'inline';
 	started = true;
 	sfx.chime.play();
 }
 function gameUpdate() {
 	if (!started) return;
 
+	stageTimerDisplay.innerHTML = formatTime(abs(stageTimer.get()));
+
 	if (particleTimer.elapsed()) {
 		particleUpdate();
 		particleTimer = new Timer(settings.particleUpdateInterval);
+	}
+
+	if (stageTimer.elapsed()) {
+		console.log('stage end');
+		this.stageTimerDisplay.style.display = 'none';
+		stage.stop();
 	}
 }
 function gameUpdatePost() {}

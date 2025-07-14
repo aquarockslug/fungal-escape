@@ -38,6 +38,17 @@
 	bottom: 450px;
 	background-color: #959ea6
 }
+#timer {
+      display: none;
+      position: absolute;
+      background-color: white;
+      top: 15px;
+      left: 90%;
+      width: 72px;
+      padding: 0px 0px 5px 0px;
+      margin: 10px;
+
+}
 html {
 	background-color: black;
 }

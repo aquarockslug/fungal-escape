@@ -46,6 +46,10 @@ function particleUpdate() {
 		])(),
 	);
 }
+// set all particles to black
+function clearParticles() {
+	grid.apply(FPO.std.pipe([grid.values, (v) => particle(v, rgb(0, 0, 0))])());
+}
 // find all particles which match the given state
 function findParticles(stateName) {
 	// find the state of the squares from the color values

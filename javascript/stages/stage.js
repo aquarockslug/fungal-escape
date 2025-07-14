@@ -55,6 +55,16 @@ class Stage extends EngineObject {
 
 		this.rivalAttackTimer = new Timer(2);
 	}
+	stop() {
+		this.destroy();
+		FPO.map({
+			arr: FPO.flatten({ v: this.background }),
+			fn: ({ v }) => v.destroy(),
+		});
+		this.player.healthbar.style.display = 'none';
+		this.player.destroy();
+		this.rival.destroy();
+	}
 	update() {
 		// wrap the background object around to the other side if it went off the screen
 		FPO.map({
@@ -74,13 +84,11 @@ class Stage extends EngineObject {
 }
 
 function loadStage(name) {
-	// TODO search the engineObject list and unload any already loaded stage or menu
+	// TODO search the engineObject list and unload any already loaded stage
 	switch (name) {
 		case 'backstreets':
 			return new Backstreets();
-			break;
 		case 'greenhouse':
 			return new Greenhouse();
-			break;
 	}
 }

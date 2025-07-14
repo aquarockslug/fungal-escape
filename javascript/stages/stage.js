@@ -74,25 +74,13 @@ class Stage extends EngineObject {
 }
 
 function loadStage(name) {
-	// TODO search the engineObject list and unload any already loaded stage
+	// TODO search the engineObject list and unload any already loaded stage or menu
 	switch (name) {
-		case 'toxic':
-			return new Toxic();
+		case 'backstreets':
+			return new Backstreets();
 			break;
 		case 'greenhouse':
 			return new Greenhouse();
-			break;
-		case 3:
-			return new Stage3();
-			break;
-		case 4:
-			return new Stage4();
-			break;
-		case 5:
-			return new Stage5();
-			break;
-		case 6:
-			return new Stage6();
 			break;
 	}
 }

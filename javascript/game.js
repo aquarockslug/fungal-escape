@@ -15,7 +15,7 @@ function gameInit() {
 function gameStart() {
 	particleTimer = new Timer(settings.particleUpdateInterval);
 	selectedCharacter = characterSelect();
-	let selectedStages = stageSequences(selectedCharacter);
+	selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
 	started = true;
@@ -44,10 +44,10 @@ function gameRenderPost() {
 	}
 }
 function stageSequences(characterName) {
-	if (characterName === 'red') return ['greenhouse', 'toxic'];
-	if (characterName === 'blue') return ['greenhouse', 'toxic'];
-	if (characterName === 'green') return ['greenhouse', 'toxic'];
-	if (characterName === 'purple') return ['greenhouse', 'extra'];
+	if (characterName === 'red') return ['greenhouse', 'backstreets'];
+	if (characterName === 'blue') return ['greenhouse', 'scrapyard'];
+	if (characterName === 'green') return ['greenhouse', 'scrapyard'];
+	if (characterName === 'purple') return ['backstreets', 'scrapyard'];
 }
 function characterSelect() {
 	selectedCharacterFrame = FPO.filter({

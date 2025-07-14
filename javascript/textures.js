@@ -105,6 +105,10 @@ function Textures() {
 					pos: vec2(263, 336),
 					size: vec2(256, 240),
 				},
+				scrapyard: {
+					pos: vec2(512, 336),
+					size: vec2(256, 240),
+				},
 			},
 		},
 		{
@@ -113,6 +117,10 @@ function Textures() {
 			tiles: {
 				greenhouse: {
 					pos: vec2(0, 0),
+					size: vec2(255, 62),
+				},
+				scrapyard: {
+					pos: vec2(240, 0),
 					size: vec2(255, 62),
 				},
 			},

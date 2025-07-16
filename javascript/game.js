@@ -38,19 +38,13 @@ function gameUpdate() {
 		particleTimer = new Timer(settings.particleUpdateInterval);
 	}
 
-	if (stageTimer.elapsed()) stageTransition();
+	if (stageTimer.elapsed()) nextStage();
 }
 function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
-	if (!started && stageIndex == 0) {
-		characterSelect();
-		return;
-	}
-	if (!started && stageIndex >= 1) {
-		showCharacterArt();
-		return;
-	}
+	if (!started && stageIndex == 0) return characterSelect();
+	if (!started && stageIndex >= 1) return showCharacterArt();
 	for (let i = 0; i < width * height; i++) {
 		let pixelColor = grid.values()[i].color;
 		// dont render black squares
@@ -73,19 +67,21 @@ function stageSequences(characterName) {
 		return ['greenhouse', 'scrapyard', 'greenhouse'];
 }
 function showCharacterArt() {
-	selectedCharacterFrame = FPO.filter({
-		arr: document.getElementsByName('player-select'),
-		fn: ({ v }) => v.checked,
-	})[0].value;
+	let selectedCharacterFrame = Number(
+		FPO.filter({
+			arr: document.getElementsByName('player-select'),
+			fn: ({ v }) => v.checked,
+		})[0].value,
+	);
 	drawTile(
 		cameraPos,
 		settings.screenResolution.divide(vec2(3)),
-		Textures().tile('art', 'characters').frame(Number(selectedCharacterFrame)),
+		Textures().tile('art', 'characters').frame(selectedCharacterFrame),
 	);
+	return selectedCharacterFrame;
 }
 function characterSelect() {
-	showCharacterArt();
-	switch (Number(selectedCharacterFrame)) {
+	switch (showCharacterArt()) {
 		case 0:
 			return 'red';
 		case 1:
@@ -98,7 +94,8 @@ function characterSelect() {
 			return 'blue';
 	}
 }
-function stageTransition() {
+// load the next stage in the stage sequence after showing the transition screen for the given amount of time
+function nextStage(transitionLength = 3) {
 	console.log('stage end');
 	this.stageTimerDisplay.style.display = 'none';
 	this.messageDisplay.style.display = 'flex';
@@ -107,7 +104,7 @@ function stageTransition() {
 	stageIndex++;
 	if (!selectedStages[stageIndex]) gameOver();
 	after(
-		3000,
+		transitionLength * 1000,
 		(stageName) => {
 			stage = loadStage(stageName);
 			if (!stage) {

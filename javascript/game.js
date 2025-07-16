@@ -66,11 +66,11 @@ function stageSequences(characterName) {
 	if (characterName === 'red')
 		return ['greenhouse', 'backstreets', 'greenhouse'];
 	if (characterName === 'blue')
-		return ['greenhouse', 'backstreets', 'greenhouse'];
+		return ['greenhouse', 'scrapyard', 'greenhouse'];
 	if (characterName === 'green')
-		return ['greenhouse', 'backstreets', 'greenhouse'];
+		return ['greenhouse', 'scrapyard', 'greenhouse'];
 	if (characterName === 'purple')
-		return ['greenhouse', 'backstreets', 'greenhouse'];
+		return ['greenhouse', 'scrapyard', 'greenhouse'];
 }
 function showCharacterArt() {
 	selectedCharacterFrame = FPO.filter({
@@ -110,9 +110,13 @@ function stageTransition() {
 		3000,
 		(stageName) => {
 			stage = loadStage(stageName);
-			stage.start();
-			stageTimer = new Timer(10);
+			if (!stage) {
+				console.log("couldn't load " + stageName);
+				return;
+			}
 			started = true;
+			stageTimer = new Timer(10);
+			stage.start();
 			this.messageDisplay.style.display = 'none';
 			this.stageTimerDisplay.style.display = 'flex';
 		},

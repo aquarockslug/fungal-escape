@@ -1,4 +1,4 @@
-class Backstreets extends Stage {
+class Scrapyard extends Stage {
 	constructor() {
 		super('scrapyard', 'scrapyard');
 
@@ -6,7 +6,7 @@ class Backstreets extends Stage {
 		this.rival = new Rival(
 			center.multiply(vec2(1, 1.8)),
 			this.player,
-			'green_shroomy', // TODO change to yellow once the texture is added
+			'red_shroomy',
 		);
 	}
 	start() {

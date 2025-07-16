@@ -5,15 +5,15 @@ A bullet hell game
 
 ## stage list
 
-| Name           | Rival          |
-| :------------- | :------------- |
-| Greenhouse     | Beta-Chaser    |
-| Backstreets    | Oberon         |
-| Electric Plant | IO             |
-| Night City     | Phobos         |
-| Mossy Shrine   | Europa         |
-| Dawn Forest    | Final-Chaser   |
-| Scrapyard      | Deimos         |
+| Name           | Rival          | Rival Color    |
+| :------------- | :------------- | :------------- |
+| Greenhouse     | Beta-Chaser    |                |
+| Backstreets    | Oberon         | Yellow         |
+| Electric Plant | IO             | Green          |
+| Night City     | Phobos         | Blue           |
+| Mossy Shrine   | Europa         | Purple         |
+| Dawn Forest    | Final-Chaser   |                |
+| Scrapyard      | Deimos         | Red            |
 
 ## links
 

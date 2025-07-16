@@ -89,10 +89,11 @@ class Stage extends EngineObject {
 }
 
 function loadStage(name) {
-	// TODO search the engineObject list and unload any already loaded stage
 	switch (name) {
 		case 'backstreets':
 			return new Backstreets();
+		case 'scrapyard':
+			return new Scrapyard();
 		case 'greenhouse':
 			return new Greenhouse();
 	}

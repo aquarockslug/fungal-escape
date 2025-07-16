@@ -38,32 +38,17 @@ function gameUpdate() {
 		particleTimer = new Timer(settings.particleUpdateInterval);
 	}
 
-	if (stageTimer.elapsed()) {
-		console.log('stage end');
-		this.stageTimerDisplay.style.display = 'none';
-		this.messageDisplay.style.display = 'flex';
-		started = false;
-		stage.stop();
-		stageIndex++;
-		if (!selectedStages[stageIndex]) gameOver();
-		after(
-			3000,
-			(stageName) => {
-				stage = loadStage(stageName);
-				stage.start();
-				stageTimer = new Timer(10);
-				started = true;
-				this.messageDisplay.style.display = 'none';
-			},
-			selectedStages[stageIndex],
-		);
-	}
+	if (stageTimer.elapsed()) stageTransition();
 }
 function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
 	if (!started && stageIndex == 0) {
 		characterSelect();
+		return;
+	}
+	if (!started && stageIndex >= 1) {
+		showCharacterArt();
 		return;
 	}
 	for (let i = 0; i < width * height; i++) {
@@ -87,7 +72,7 @@ function stageSequences(characterName) {
 	if (characterName === 'purple')
 		return ['greenhouse', 'backstreets', 'greenhouse'];
 }
-function characterSelect() {
+function showCharacterArt() {
 	selectedCharacterFrame = FPO.filter({
 		arr: document.getElementsByName('player-select'),
 		fn: ({ v }) => v.checked,
@@ -97,6 +82,9 @@ function characterSelect() {
 		settings.screenResolution.divide(vec2(3)),
 		Textures().tile('art', 'characters').frame(Number(selectedCharacterFrame)),
 	);
+}
+function characterSelect() {
+	showCharacterArt();
 	switch (Number(selectedCharacterFrame)) {
 		case 0:
 			return 'red';
@@ -109,6 +97,27 @@ function characterSelect() {
 		case 4:
 			return 'blue';
 	}
+}
+function stageTransition() {
+	console.log('stage end');
+	this.stageTimerDisplay.style.display = 'none';
+	this.messageDisplay.style.display = 'flex';
+	started = false;
+	stage.stop();
+	stageIndex++;
+	if (!selectedStages[stageIndex]) gameOver();
+	after(
+		3000,
+		(stageName) => {
+			stage = loadStage(stageName);
+			stage.start();
+			stageTimer = new Timer(10);
+			started = true;
+			this.messageDisplay.style.display = 'none';
+			this.stageTimerDisplay.style.display = 'flex';
+		},
+		selectedStages[stageIndex],
+	);
 }
 async function after(ms, fn, ...args) {
 	await new Promise((resolve) => setTimeout(resolve, ms));

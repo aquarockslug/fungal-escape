@@ -11,6 +11,7 @@ class Player extends EngineObject {
 		this.walkTI = Textures().tile(sheetName, 'walk');
 		this.mass = 1;
 		this.healthbar = document.getElementById('health-bar');
+		this.healthbar.style.display = 'flex';
 		this.healthbar.style.width = this.health * 3 + 'px';
 		this.health = 100;
 		this.setCollision();

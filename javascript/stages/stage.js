@@ -3,6 +3,9 @@ class Stage extends EngineObject {
 	constructor(backgroundName, blockName) {
 		super(vec2(0), vec2(1), undefined, 0, undefined, -1);
 
+		this.name = backgroundName;
+		console.log('loading stage ' + this.name);
+
 		let bgTexture = Textures().tile('backgrounds', backgroundName);
 		let blockSize = vec2(255, 36);
 		let blocks = [];
@@ -45,6 +48,8 @@ class Stage extends EngineObject {
 		});
 	}
 	start() {
+		console.log('starting stage ' + this.name);
+
 		// far background
 		for (let obj of this.background[0])
 			obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
@@ -56,7 +61,6 @@ class Stage extends EngineObject {
 		this.rivalAttackTimer = new Timer(2);
 	}
 	stop() {
-		this.destroy();
 		FPO.map({
 			arr: FPO.flatten({ v: this.background }),
 			fn: ({ v }) => v.destroy(),
@@ -64,6 +68,7 @@ class Stage extends EngineObject {
 		this.player.healthbar.style.display = 'none';
 		this.player.destroy();
 		this.rival.destroy();
+		this.destroy();
 	}
 	update() {
 		// wrap the background object around to the other side if it went off the screen

@@ -49,6 +49,10 @@
       margin: 10px;
 
 }
+#message {
+      display: none;
+      background-color: white;
+}
 html {
 	background-color: black;
 }

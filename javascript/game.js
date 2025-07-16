@@ -9,8 +9,10 @@ function gameInit() {
 	gravity = -0.25;
 	objectMaxSpeed = 5;
 
-	stageTimer = new Timer(10);
 	stageTimerDisplay = document.getElementById('timer');
+	stageIndex = 0;
+
+	messageDisplay = document.getElementById('message');
 
 	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 	setCanvasFixedSize(settings.screenResolution);
@@ -21,6 +23,7 @@ function gameStart() {
 	selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
+	stageTimer = new Timer(10);
 	stageTimerDisplay.style.display = 'inline';
 	started = true;
 	sfx.chime.play();
@@ -38,13 +41,28 @@ function gameUpdate() {
 	if (stageTimer.elapsed()) {
 		console.log('stage end');
 		this.stageTimerDisplay.style.display = 'none';
+		this.messageDisplay.style.display = 'flex';
+		started = false;
 		stage.stop();
+		stageIndex++;
+		if (!selectedStages[stageIndex]) gameOver();
+		after(
+			3000,
+			(stageName) => {
+				stage = loadStage(stageName);
+				stage.start();
+				stageTimer = new Timer(10);
+				started = true;
+				this.messageDisplay.style.display = 'none';
+			},
+			selectedStages[stageIndex],
+		);
 	}
 }
 function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
-	if (!started) {
+	if (!started && stageIndex == 0) {
 		characterSelect();
 		return;
 	}
@@ -55,11 +73,19 @@ function gameRenderPost() {
 			drawRect(grid.positions()[i], vec2(1), pixelColor);
 	}
 }
+function gameOver() {
+	// TODO create ending screen
+	console.log('game over');
+}
 function stageSequences(characterName) {
-	if (characterName === 'red') return ['greenhouse', 'backstreets'];
-	if (characterName === 'blue') return ['greenhouse', 'scrapyard'];
-	if (characterName === 'green') return ['greenhouse', 'scrapyard'];
-	if (characterName === 'purple') return ['backstreets', 'scrapyard'];
+	if (characterName === 'red')
+		return ['greenhouse', 'backstreets', 'greenhouse'];
+	if (characterName === 'blue')
+		return ['greenhouse', 'backstreets', 'greenhouse'];
+	if (characterName === 'green')
+		return ['greenhouse', 'backstreets', 'greenhouse'];
+	if (characterName === 'purple')
+		return ['greenhouse', 'backstreets', 'greenhouse'];
 }
 function characterSelect() {
 	selectedCharacterFrame = FPO.filter({
@@ -83,4 +109,8 @@ function characterSelect() {
 		case 4:
 			return 'blue';
 	}
+}
+async function after(ms, fn, ...args) {
+	await new Promise((resolve) => setTimeout(resolve, ms));
+	return fn(...args);
 }

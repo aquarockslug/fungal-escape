@@ -26,7 +26,7 @@ class Stage extends EngineObject {
 		for (let i = 0; i < 4; i++) {
 			images.push(
 				new EngineObject(
-					vec2(width * i + 1, height * 0.6),
+					vec2(width * i, height * 0.6),
 					vec2(width, height),
 					bgTexture,
 					0,

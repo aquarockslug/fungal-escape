@@ -106,8 +106,8 @@ function Textures() {
 					size: vec2(256, 240),
 				},
 				scrapyard: {
-					pos: vec2(512, 336),
-					size: vec2(256, 240),
+					pos: vec2(526, 336),
+					size: vec2(254, 240),
 				},
 			},
 		},
@@ -116,12 +116,12 @@ function Textures() {
 			path: 'assets/stages/foregrounds.png',
 			tiles: {
 				greenhouse: {
-					pos: vec2(0, 0),
-					size: vec2(255, 62),
+					pos: vec2(0, 4),
+					size: vec2(255, 47),
 				},
 				scrapyard: {
-					pos: vec2(240, 0),
-					size: vec2(255, 62),
+					pos: vec2(264, 4),
+					size: vec2(255, 47),
 				},
 			},
 		},

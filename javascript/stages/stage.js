@@ -27,7 +27,7 @@ class Stage extends EngineObject {
 			images.push(
 				new EngineObject(
 					vec2(width * i, height * 0.6),
-					vec2(width, height),
+					vec2(width + 2, height),
 					bgTexture,
 					0,
 					rgb(1, 1, 1),
@@ -96,5 +96,7 @@ function loadStage(name) {
 			return new Scrapyard();
 		case 'greenhouse':
 			return new Greenhouse();
+		case 'nightcity':
+			return new NightCity();
 	}
 }

@@ -1,12 +1,12 @@
-class Backstreets extends Stage {
+class NightCity extends Stage {
 	constructor() {
-		super('backstreets', 'backstreets');
+		super('night', 'night');
 
 		this.player = new Player(vec2(center.x, 16));
 		this.rival = new Rival(
 			center.multiply(vec2(1, 1.8)),
 			this.player,
-			'yellow_shroomy',
+			'blue_shroomy',
 		);
 	}
 	start() {

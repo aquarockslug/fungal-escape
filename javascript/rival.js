@@ -12,11 +12,11 @@ class Rival extends EngineObject {
 		this.gravityScale = 0;
 		this.mass = 0;
 		this.setCollision();
-		if (this.sheetName !== 'security')
-			this.emitter = new ParticleEmitter(this.pos, 0, ...vfx.jetpack);
+		// if (this.sheetName !== 'security') this.emitter.emitParticle(); // TODO fix particle emitter's broken texture
+		// if (this.sheetName !== 'security')
+		// 	this.emitter = new ParticleEmitter(this.pos, 0, ...vfx.jetpack);
 	}
 	update() {
-		// if (this.sheetName !== 'security') this.emitter.emitParticle(); // TODO fix particle emitter's broken texture
 		super.update();
 	}
 	render() {

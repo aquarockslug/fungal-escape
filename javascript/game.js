@@ -23,7 +23,7 @@ function gameStart() {
 	selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
-	stageTimer = new Timer(10);
+	stageTimer = new Timer(5);
 	stageTimerDisplay.style.display = 'inline';
 	started = true;
 	sfx.chime.play();
@@ -57,14 +57,12 @@ function gameOver() {
 	console.log('game over');
 }
 function stageSequences(characterName) {
-	if (characterName === 'red')
-		return ['greenhouse', 'backstreets', 'greenhouse'];
-	if (characterName === 'blue')
-		return ['greenhouse', 'scrapyard', 'greenhouse'];
-	if (characterName === 'green')
-		return ['greenhouse', 'scrapyard', 'greenhouse'];
-	if (characterName === 'purple')
-		return ['greenhouse', 'scrapyard', 'greenhouse'];
+	return {
+		red: ['greenhouse', 'backstreets', 'nightcity'],
+		blue: ['greenhouse', 'scrapyard', 'backstreets'],
+		green: ['greenhouse', 'scrapyard', 'nightcity'],
+		purple: ['greenhouse', 'scrapyard', 'nightcity'],
+	}[characterName];
 }
 function showCharacterArt() {
 	let selectedCharacterFrame = Number(
@@ -112,7 +110,7 @@ function nextStage(transitionLength = 3) {
 				return;
 			}
 			started = true;
-			stageTimer = new Timer(10);
+			stageTimer = new Timer(5);
 			stage.start();
 			this.messageDisplay.style.display = 'none';
 			this.stageTimerDisplay.style.display = 'flex';

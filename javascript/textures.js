@@ -76,6 +76,24 @@ function Textures() {
 			},
 		},
 		{
+			name: 'yellow_shroomy',
+			path: 'assets/characters/oberon.png',
+			tiles: {
+				idle: {
+					pos: vec2(0, 56),
+					size: vec2(35, 34),
+				},
+				walk: {
+					pos: vec2(0, 90),
+					size: vec2(34, 34),
+				},
+				bullet: {
+					pos: vec2(8, 5),
+					size: vec2(12),
+				},
+			},
+		},
+		{
 			name: 'security',
 			path: 'assets/characters/security-system.png',
 			tiles: {
@@ -97,9 +115,9 @@ function Textures() {
 			name: 'backgrounds',
 			path: 'assets/stages/backgrounds.png',
 			tiles: {
-				dark: {
+				backstreets: {
 					pos: vec2(0, 336),
-					size: vec2(240),
+					size: vec2(254, 240),
 				},
 				greenhouse: {
 					pos: vec2(263, 336),
@@ -109,18 +127,30 @@ function Textures() {
 					pos: vec2(526, 336),
 					size: vec2(254, 240),
 				},
+				night: {
+					pos: vec2(788, 336),
+					size: vec2(254, 240),
+				},
 			},
 		},
 		{
 			name: 'foregrounds',
 			path: 'assets/stages/foregrounds.png',
 			tiles: {
-				greenhouse: {
+				backstreets: {
 					pos: vec2(0, 4),
+					size: vec2(254, 47),
+				},
+				greenhouse: {
+					pos: vec2(264, 4),
 					size: vec2(255, 47),
 				},
 				scrapyard: {
-					pos: vec2(264, 4),
+					pos: vec2(527, 4),
+					size: vec2(255, 47),
+				},
+				night: {
+					pos: vec2(791, 4),
 					size: vec2(255, 47),
 				},
 			},
@@ -159,4 +189,8 @@ function Textures() {
 		paths: tilesheets.map((sheet) => sheet.path),
 		sheet,
 	};
+	render();
+	{
+		drawRect(center, vec2(1000), BLACK);
+	}
 }

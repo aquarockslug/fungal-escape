@@ -58,9 +58,9 @@ function gameOver() {
 }
 function stageSequences(characterName) {
 	return {
-		red: ['greenhouse', 'backstreets', 'nightcity'],
-		blue: ['greenhouse', 'scrapyard', 'backstreets'],
-		green: ['greenhouse', 'scrapyard', 'nightcity'],
+		red: ['greenhouse', 'backstreets', 'nightcity', 'electricplant'],
+		blue: ['greenhouse', 'scrapyard', 'backstreets', 'electricplant'],
+		green: ['greenhouse', 'scrapyard', 'nightcity', 'backstreets'],
 		purple: ['greenhouse', 'scrapyard', 'nightcity'],
 	}[characterName];
 }

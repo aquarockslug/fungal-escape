@@ -98,5 +98,7 @@ function loadStage(name) {
 			return new Greenhouse();
 		case 'nightcity':
 			return new NightCity();
+		case 'electricplant':
+			return new ElectricPlant();
 	}
 }

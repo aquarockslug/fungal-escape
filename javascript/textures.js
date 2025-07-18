@@ -131,6 +131,10 @@ function Textures() {
 					pos: vec2(788, 336),
 					size: vec2(254, 240),
 				},
+				electric: {
+					pos: vec2(1050, 336),
+					size: vec2(254, 240),
+				},
 			},
 		},
 		{
@@ -151,6 +155,10 @@ function Textures() {
 				},
 				night: {
 					pos: vec2(791, 4),
+					size: vec2(255, 47),
+				},
+				electric: {
+					pos: vec2(1050, 4),
 					size: vec2(255, 47),
 				},
 			},

@@ -116,7 +116,7 @@ function characterSelect() {
 			return 'blue';
 	}
 }
-// load the next stage in the stage sequence after showing the transition screen for the given amount of time
+// load the next stage in the stage sequence after showing the transition screen for the given amount of seconds
 function nextStage(transitionLength = 3) {
 	console.log('stage end');
 	this.stageTimerDisplay.style.display = 'none';

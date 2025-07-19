@@ -6,7 +6,7 @@ class MossyShrine extends Stage {
 		this.rival = new Rival(
 			center.multiply(vec2(1, 1.8)),
 			this.player,
-			'green_shroomy',
+			'purple_shroomy',
 		);
 	}
 	start() {

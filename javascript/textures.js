@@ -136,7 +136,7 @@ function Textures() {
 					size: vec2(254, 240),
 				},
 				mossy: {
-					pos: vec2(1050, 336),
+					pos: vec2(1313, 336),
 					size: vec2(254, 240),
 				},
 			},
@@ -161,8 +161,12 @@ function Textures() {
 					pos: vec2(791, 4),
 					size: vec2(255, 47),
 				},
-				mossy: {
+				electric: {
 					pos: vec2(1050, 4),
+					size: vec2(255, 47),
+				},
+				mossy: {
+					pos: vec2(1313, 4),
 					size: vec2(255, 47),
 				},
 			},

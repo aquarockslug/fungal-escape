@@ -100,5 +100,7 @@ function loadStage(name) {
 			return new NightCity();
 		case 'electricplant':
 			return new ElectricPlant();
+		case 'mossyshrine':
+			return new MossyShrine();
 	}
 }

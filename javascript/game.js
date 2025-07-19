@@ -58,10 +58,34 @@ function gameOver() {
 }
 function stageSequences(characterName) {
 	return {
-		red: ['greenhouse', 'backstreets', 'nightcity', 'electricplant'],
-		blue: ['greenhouse', 'scrapyard', 'backstreets', 'electricplant'],
-		green: ['greenhouse', 'scrapyard', 'nightcity', 'backstreets'],
-		purple: ['greenhouse', 'scrapyard', 'nightcity'],
+		red: [
+			'greenhouse',
+			'backstreets',
+			'nightcity',
+			'electricplant',
+			'mossyshrine',
+		],
+		blue: [
+			'greenhouse',
+			'scrapyard',
+			'backstreets',
+			'electricplant',
+			'mossyshrine',
+		],
+		green: [
+			'greenhouse',
+			'scrapyard',
+			'nightcity',
+			'backstreets',
+			'mossyshrine',
+		],
+		purple: [
+			'greenhouse',
+			'scrapyard',
+			'nightcity',
+			'electricplant',
+			'backstreets',
+		],
 	}[characterName];
 }
 function showCharacterArt() {

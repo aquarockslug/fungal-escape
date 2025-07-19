@@ -102,5 +102,7 @@ function loadStage(name) {
 			return new ElectricPlant();
 		case 'mossyshrine':
 			return new MossyShrine();
+		case 'dawnforest':
+			return new DawnForest();
 	}
 }

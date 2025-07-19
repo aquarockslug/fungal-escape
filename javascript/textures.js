@@ -139,6 +139,10 @@ function Textures() {
 					pos: vec2(1313, 336),
 					size: vec2(254, 240),
 				},
+				dawn: {
+					pos: vec2(1578, 336),
+					size: vec2(254, 240),
+				},
 			},
 		},
 		{
@@ -167,6 +171,10 @@ function Textures() {
 				},
 				mossy: {
 					pos: vec2(1313, 4),
+					size: vec2(255, 47),
+				},
+				dawn: {
+					pos: vec2(1578, 4),
 					size: vec2(255, 47),
 				},
 			},

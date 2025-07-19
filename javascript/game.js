@@ -64,6 +64,7 @@ function stageSequences(characterName) {
 			'nightcity',
 			'electricplant',
 			'mossyshrine',
+			'dawnforest',
 		],
 		blue: [
 			'greenhouse',
@@ -71,6 +72,7 @@ function stageSequences(characterName) {
 			'backstreets',
 			'electricplant',
 			'mossyshrine',
+			'dawnforest',
 		],
 		green: [
 			'greenhouse',
@@ -78,6 +80,7 @@ function stageSequences(characterName) {
 			'nightcity',
 			'backstreets',
 			'mossyshrine',
+			'dawnforest',
 		],
 		purple: [
 			'greenhouse',
@@ -85,6 +88,7 @@ function stageSequences(characterName) {
 			'nightcity',
 			'electricplant',
 			'backstreets',
+			'dawnforest',
 		],
 	}[characterName];
 }

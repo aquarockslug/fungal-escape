@@ -119,28 +119,56 @@ function Textures() {
 					pos: vec2(0, 336),
 					size: vec2(254, 240),
 				},
+				backstreets2: {
+					pos: vec2(0, 90),
+					size: vec2(254, 240),
+				},
 				greenhouse: {
 					pos: vec2(263, 336),
+					size: vec2(256, 240),
+				},
+				greenhouse2: {
+					pos: vec2(263, 90),
 					size: vec2(256, 240),
 				},
 				scrapyard: {
 					pos: vec2(526, 336),
 					size: vec2(254, 240),
 				},
+				scrapyard2: {
+					pos: vec2(526, 90),
+					size: vec2(254, 240),
+				},
 				night: {
 					pos: vec2(788, 336),
+					size: vec2(254, 240),
+				},
+				night2: {
+					pos: vec2(788, 90),
 					size: vec2(254, 240),
 				},
 				electric: {
 					pos: vec2(1050, 336),
 					size: vec2(254, 240),
 				},
+				electric2: {
+					pos: vec2(1050, 90),
+					size: vec2(254, 240),
+				},
 				mossy: {
 					pos: vec2(1313, 336),
 					size: vec2(254, 240),
 				},
+				mossy2: {
+					pos: vec2(1313, 70),
+					size: vec2(254, 240),
+				},
 				dawn: {
 					pos: vec2(1578, 336),
+					size: vec2(254, 240),
+				},
+				dawn2: {
+					pos: vec2(1578, 90),
 					size: vec2(254, 240),
 				},
 			},
@@ -213,8 +241,4 @@ function Textures() {
 		paths: tilesheets.map((sheet) => sheet.path),
 		sheet,
 	};
-	render();
-	{
-		drawRect(center, vec2(1000), BLACK);
-	}
 }

@@ -23,7 +23,7 @@ function gameStart() {
 	selectedStages = stageSequences(selectedCharacter);
 	stage = loadStage(selectedStages[0]);
 	stage.start();
-	stageTimer = new Timer(5);
+	stageTimer = new Timer(settings.stageTimerLength);
 	stageTimerDisplay.style.display = 'inline';
 	started = true;
 	sfx.chime.play();

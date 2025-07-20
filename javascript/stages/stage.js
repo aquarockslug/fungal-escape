@@ -1,4 +1,4 @@
-// all stages have scrolling background images
+// all stages have scrolling background farBackgroundObj
 class Stage extends EngineObject {
 	constructor(backgroundName, blockName) {
 		super(vec2(0), vec2(1), undefined, 0, undefined, -1);
@@ -6,11 +6,17 @@ class Stage extends EngineObject {
 		this.name = backgroundName;
 		console.log('loading stage ' + this.name);
 
-		let bgTexture = Textures().tile('backgrounds', backgroundName);
+		let farBackground = Textures().tile('backgrounds', backgroundName);
+		let farBackgroundObj = [];
+
+		let nearBackground = Textures().tile('backgrounds', backgroundName + '2');
+		let nearBackgroundObj = [];
+
 		let blockSize = vec2(255, 36);
-		let blocks = [];
+		let groundObj = [];
+
 		for (let i = 0; i <= 3; i++) {
-			blocks.push(
+			groundObj.push(
 				new EngineObject(
 					vec2(blockSize.x * i, 0),
 					blockSize,
@@ -22,21 +28,30 @@ class Stage extends EngineObject {
 			);
 		}
 
-		let images = [];
 		for (let i = 0; i < 4; i++) {
-			images.push(
+			farBackgroundObj.push(
 				new EngineObject(
 					vec2(width * i, height * 0.6),
 					vec2(width + 2, height),
-					bgTexture,
+					farBackground,
 					0,
 					rgb(1, 1, 1),
 					-1,
 				),
 			);
+			nearBackgroundObj.push(
+				new EngineObject(
+					vec2(width * i, height * 0.6),
+					vec2(width + 2, height),
+					nearBackground,
+					0,
+					rgb(1, 1, 1),
+					-randInt(1, 3), // sometimes hide the nearBackgroundObj behind the farBackgroundObj
+				),
+			);
 		}
 
-		this.background = [images, blocks];
+		this.background = [farBackgroundObj, nearBackgroundObj, groundObj];
 
 		FPO.map({
 			arr: FPO.flatten({ v: this.background }),
@@ -54,8 +69,12 @@ class Stage extends EngineObject {
 		for (let obj of this.background[0])
 			obj.velocity = vec2(settings.backgroundScroll * 0.01, 0);
 
-		// close background
+		// near background
 		for (let obj of this.background[1])
+			obj.velocity = vec2(settings.backgroundScroll * 0.01 * 1.5, 0);
+
+		// ground
+		for (let obj of this.background[2])
 			obj.velocity = vec2(settings.backgroundScroll * 0.01 * 2, 0);
 
 		this.rivalAttackTimer = new Timer(2);

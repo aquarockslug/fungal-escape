@@ -243,19 +243,19 @@ function Textures() {
 			tiles: {
 				red_shroomy: {
 					pos: vec2(0),
-					size: vec2(56, 38),
+					size: vec2(57, 38),
 				},
 				blue_shroomy: {
-					pos: vec2(70, 0),
-					size: vec2(60, 60),
+					pos: vec2(79, 0),
+					size: vec2(62, 62),
 				},
 				green_shroomy: {
-					pos: vec2(170, 0),
-					size: vec2(45, 60),
+					pos: vec2(175, 0),
+					size: vec2(39, 58),
 				},
 				purple_shroomy: {
-					pos: vec2(245, 0),
-					size: vec2(75, 55),
+					pos: vec2(250, 0),
+					size: vec2(72, 57),
 				},
 				yellow_shroomy: {
 					pos: vec2(352, 0),

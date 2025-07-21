@@ -1,20 +1,20 @@
 class Rival extends EngineObject {
 	constructor(pos, player, sheetName = 'blue_shroomy') {
-		let idleTI = Textures().tile(sheetName, 'idle');
+		let isSecurity = sheetName.includes('security');
+		let idleTI = isSecurity
+			? Textures().tile(sheetName, 'idle')
+			: Textures().tile('rival_flyer', sheetName);
 		super(pos, idleTI.size.divide(vec2(2)), idleTI, PI * 2);
 		this.idleTI = idleTI;
-		this.walkTI = Textures().tile(sheetName, 'walk');
 		this.bulletTI = Textures().tile(sheetName, 'bullet');
 		this.sheetName = sheetName;
+		this.isSecurity = isSecurity;
 
 		this.player = player;
 
 		this.gravityScale = 0;
 		this.mass = 0;
 		this.setCollision();
-		// if (this.sheetName !== 'security') this.emitter.emitParticle(); // TODO fix particle emitter's broken texture
-		// if (this.sheetName !== 'security')
-		// 	this.emitter = new ParticleEmitter(this.pos, 0, ...vfx.jetpack);
 	}
 	update() {
 		super.update();
@@ -24,7 +24,7 @@ class Rival extends EngineObject {
 		drawTile(
 			this.pos,
 			this.size,
-			this.idleTI.frame(frame),
+			this.isSecurity ? this.idleTI.frame(frame) : this.idleTI.offset(vec2(0)),
 			undefined,
 			this.angle,
 			true,

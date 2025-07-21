@@ -237,6 +237,32 @@ function Textures() {
 				},
 			},
 		},
+		{
+			name: 'rival_flyer',
+			path: 'assets/characters/rivals.png',
+			tiles: {
+				red_shroomy: {
+					pos: vec2(0),
+					size: vec2(56, 38),
+				},
+				blue_shroomy: {
+					pos: vec2(70, 0),
+					size: vec2(60, 60),
+				},
+				green_shroomy: {
+					pos: vec2(170, 0),
+					size: vec2(45, 60),
+				},
+				purple_shroomy: {
+					pos: vec2(245, 0),
+					size: vec2(75, 55),
+				},
+				yellow_shroomy: {
+					pos: vec2(350, 0),
+					size: vec2(65, 58),
+				},
+			},
+		},
 	];
 
 	// automatically label the tilesheets with their index in the tilesheets
@@ -254,7 +280,10 @@ function Textures() {
 			let s = sheet(sheetName);
 			if (!s) console.log(`sheet "${sheetName}" was not found!`);
 			let t = s.tiles[tileName];
-			if (!t) console.log(`tile "${tileName}" was not found!`);
+			if (!t)
+				console.log(
+					`tile "${tileName}" was not found on sheet "${sheetName}"!`,
+				);
 			return new TileInfo(t.pos, t.size, s.index);
 		},
 		// returns a list of all the tilesheet paths

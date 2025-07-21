@@ -258,7 +258,7 @@ function Textures() {
 					size: vec2(75, 55),
 				},
 				yellow_shroomy: {
-					pos: vec2(350, 0),
+					pos: vec2(352, 0),
 					size: vec2(65, 58),
 				},
 			},

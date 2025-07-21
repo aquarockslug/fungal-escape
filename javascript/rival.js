@@ -20,11 +20,14 @@ class Rival extends EngineObject {
 		super.update();
 	}
 	render() {
-		let frame = ((time * 4) % 2) | 0;
 		drawTile(
 			this.pos,
 			this.size,
-			this.isSecurity ? this.idleTI.frame(frame) : this.idleTI.offset(vec2(0)),
+			this.isSecurity
+				? this.idleTI.frame(((time * 3) % 2) | 0)
+				: this.idleTI.offset(
+						vec2(0, this.size.y * 2 * Math.floor((time * 3) % 2)),
+					),
 			undefined,
 			this.angle,
 			true,

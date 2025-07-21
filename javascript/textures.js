@@ -15,6 +15,10 @@ function Textures() {
 					pos: vec2(0, 81),
 					size: vec2(35, 24),
 				},
+				fly: {
+					pos: vec2(0, 81),
+					size: vec2(35, 24),
+				},
 				bullet: {
 					pos: vec2(21, 0),
 					size: vec2(12),
@@ -33,6 +37,10 @@ function Textures() {
 					pos: vec2(0, 90),
 					size: vec2(34, 34),
 				},
+				fly: {
+					pos: vec2(0, 81),
+					size: vec2(35, 24),
+				},
 				bullet: {
 					pos: vec2(24, 0),
 					size: vec2(12),
@@ -48,6 +56,10 @@ function Textures() {
 					size: vec2(35, 34),
 				},
 				walk: {
+					pos: vec2(0, 85),
+					size: vec2(34, 34),
+				},
+				fly: {
 					pos: vec2(0, 85),
 					size: vec2(34, 34),
 				},
@@ -69,6 +81,10 @@ function Textures() {
 					pos: vec2(0, 90),
 					size: vec2(34, 34),
 				},
+				fly: {
+					pos: vec2(0, 85),
+					size: vec2(34, 34),
+				},
 				bullet: {
 					pos: vec2(8, 5),
 					size: vec2(12),
@@ -85,6 +101,10 @@ function Textures() {
 				},
 				walk: {
 					pos: vec2(0, 90),
+					size: vec2(34, 34),
+				},
+				fly: {
+					pos: vec2(0, 85),
 					size: vec2(34, 34),
 				},
 				bullet: {

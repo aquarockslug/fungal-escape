@@ -17,6 +17,10 @@ class Rival extends EngineObject {
 		this.setCollision();
 	}
 	update() {
+		// float up and down with a sin wave
+		if (!this.isSecurity) this.pos.y = this.pos.y + Math.sin(time * 2) / 4;
+
+		// TODO add engine particles
 		super.update();
 	}
 	render() {

@@ -4,7 +4,7 @@ class ElectricPlant extends Stage {
 
 		this.player = new Player(vec2(center.x, 16));
 		this.rival = new Rival(
-			center.multiply(vec2(1, 1.8)),
+			center.multiply(vec2(1, 1.65)),
 			this.player,
 			'green_shroomy',
 		);

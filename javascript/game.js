@@ -14,7 +14,7 @@ function gameInit() {
 
 	messageDisplay = document.getElementById('message');
 
-	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
+	clearParticles();
 	setCanvasFixedSize(settings.screenResolution);
 }
 function gameStart() {
@@ -123,6 +123,7 @@ function characterSelect() {
 // load the next stage in the stage sequence after showing the transition screen for the given amount of seconds
 function nextStage(transitionLength = 3) {
 	console.log('stage end');
+	clearParticles();
 	this.stageTimerDisplay.style.display = 'none';
 	this.messageDisplay.style.display = 'flex';
 	started = false;
@@ -145,6 +146,9 @@ function nextStage(transitionLength = 3) {
 		},
 		selectedStages[stageIndex],
 	);
+}
+function clearParticles() {
+	grid = Grid(width, height, vec2(0, 10), rgb(0, 0, 0));
 }
 async function after(ms, fn, ...args) {
 	await new Promise((resolve) => setTimeout(resolve, ms));

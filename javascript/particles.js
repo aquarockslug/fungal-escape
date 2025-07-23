@@ -12,56 +12,23 @@ function particleUpdate() {
 	grid.apply(
 		FPO.std.pipe([
 			grid.values,
-			findParticles('warm'),
-			fadeParticles(0.005, 0, 0),
-		])(),
-	);
-
-	grid.apply(
-		FPO.std.pipe([
-			grid.values,
-			findParticles('hot'),
+			findParticles('active'),
 			moveParticles,
-			fadeParticles(rand(0.005, 0.025), 0, 0),
+			fadeParticles(0.05, 0.05, 0.05),
 		])(),
 	);
 
-	grid.apply(
-		FPO.std.pipe([
-			grid.values,
-			findParticles('cool'),
-			fadeParticles(0, 0, 0.005),
-		])(),
-	);
-
-	grid.apply(
-		FPO.std.pipe([grid.values, findParticles('cold'), spreadParticles])(),
-	);
-
-	grid.apply(
-		FPO.std.pipe([
-			grid.values,
-			findParticles('cold'),
-			fadeParticles(0, 0, rand(0.01, 0.25)),
-		])(),
-	);
-}
-// set all particles to black
-function clearParticles() {
-	grid.apply(FPO.std.pipe([grid.values, (v) => particle(v, rgb(0, 0, 0))])());
+	// grid.apply(
+	// 	FPO.std.pipe([grid.values, findParticles('active'), moveParticles])(),
+	// );
 }
 // find all particles which match the given state
 function findParticles(stateName) {
-	// find the state of the squares from the color values
-	// TODO create a function that determines the state of the particle
-	if (stateName === 'hot')
-		state = ({ i, v }) => (v?.color.r > 0.5 && v?.color.b <= 0 ? i : -1);
-	else if (stateName === 'warm')
-		state = ({ i, v }) => (v?.color.r <= 0.5 && v?.color.b <= 0 ? i : -1);
-	else if (stateName === 'cold')
-		state = ({ i, v }) => (v?.color.b > 0.5 ? i : -1);
-	else if (stateName === 'cool')
-		state = ({ i, v }) => (v?.color.b <= 0.5 ? i : -1);
+	if (stateName == 'active')
+		state = ({ i, v }) => {
+			if (v) return v.color.r + v.color.g + v.color.b < 0.25 ? -1 : i;
+			else return -1;
+		};
 	else state = ({ i, v }) => -1;
 
 	return (values) => {
@@ -110,6 +77,7 @@ function fadeParticles(r, g, b) {
 					v.value.color.g - g,
 					v.value.color.b - b,
 				);
+				if (!c) c = new Color(0, 0, 0);
 				return particle(v.square, c ? c : rgb(0, 0, 0));
 			},
 		});

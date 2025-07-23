@@ -19,10 +19,6 @@ function Textures() {
 					pos: vec2(0, 81),
 					size: vec2(35, 24),
 				},
-				bullet: {
-					pos: vec2(21, 0),
-					size: vec2(12),
-				},
 			},
 		},
 		{
@@ -41,10 +37,6 @@ function Textures() {
 					pos: vec2(0, 81),
 					size: vec2(35, 24),
 				},
-				bullet: {
-					pos: vec2(24, 0),
-					size: vec2(12),
-				},
 			},
 		},
 		{
@@ -62,10 +54,6 @@ function Textures() {
 				fly: {
 					pos: vec2(0, 85),
 					size: vec2(34, 34),
-				},
-				bullet: {
-					pos: vec2(45, 0),
-					size: vec2(12),
 				},
 			},
 		},
@@ -124,10 +112,6 @@ function Textures() {
 				walk: {
 					pos: vec2(0),
 					size: vec2(84, 106),
-				},
-				bullet: {
-					pos: vec2(70, 104),
-					size: vec2(16, 12),
 				},
 			},
 		},
@@ -245,21 +229,45 @@ function Textures() {
 					pos: vec2(0),
 					size: vec2(57, 38),
 				},
+				red_shroomy_bullet: {
+					pos: vec2(58, 225),
+					size: vec2(9),
+				},
 				blue_shroomy: {
 					pos: vec2(79, 0),
 					size: vec2(62, 62),
+				},
+				blue_shroomy_bullet: {
+					pos: vec2(58, 247),
+					size: vec2(9),
 				},
 				green_shroomy: {
 					pos: vec2(175, 0),
 					size: vec2(39, 58),
 				},
+				green_shroomy_bullet: {
+					pos: vec2(56, 266),
+					size: vec2(12, 9),
+				},
 				purple_shroomy: {
 					pos: vec2(250, 0),
 					size: vec2(72, 57),
 				},
+				purple_shroomy_bullet: {
+					pos: vec2(56, 288),
+					size: vec2(12, 9),
+				},
 				yellow_shroomy: {
-					pos: vec2(352, 0),
+					pos: vec2(351, 0),
 					size: vec2(65, 58),
+				},
+				yellow_shroomy_bullet: {
+					pos: vec2(56, 309),
+					size: vec2(12),
+				},
+				security_bullet: {
+					pos: vec2(55, 203),
+					size: vec2(13, 8),
 				},
 			},
 		},

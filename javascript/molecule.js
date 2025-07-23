@@ -5,6 +5,7 @@ class Molecule extends EngineObject {
 		this.velocity = vec2(0)
 			.setAngle(angle + randInt(PI / 4, PI / 3))
 			.multiply(vec2(5));
+		this.bulletTI = tileInfo;
 		this.hasTrail = true;
 		this.maxBounces = 2;
 		this.bounces = 0;
@@ -12,26 +13,9 @@ class Molecule extends EngineObject {
 		this.damage = 1;
 		this.setCollision();
 
-		this.color = rgb(0, 1, 0);
+		this.color = rgb(1, 1, 1);
 		this.trailThickness = 15;
-
-		if (state === 'cold') {
-			this.color = rgb(0, 0, 1);
-			this.trailThickness = 50;
-			this.canBounce = false;
-		} else if (state === 'cool') {
-			this.color = rgb(0, 0, 0.5);
-			this.trailThickness = 50;
-			this.canBounce = false;
-		} else if (state === 'hot') {
-			this.color = rgb(1, 0, 0);
-			this.trailThickness = 15;
-			this.canBounce = true;
-		} else if (state === 'warm') {
-			this.color = rgb(0.5, 0, 0);
-			this.trailThickness = 15;
-			this.canBounce = true;
-		}
+		this.canBounce = true;
 	}
 
 	update() {
@@ -43,11 +27,8 @@ class Molecule extends EngineObject {
 	}
 
 	render() {
+		// drawTile(this.pos, vec2(1), this.bulletTI);
 		super.render();
-	}
-
-	under(molecule) {
-		return [molecule.center(), ...grid.neighborsOf(molecule.center())];
 	}
 
 	// bounce off the sides of the grid
@@ -84,5 +65,9 @@ class Molecule extends EngineObject {
 		for (let col = 0; col < width * height; col += height)
 			if (Math.round(grid.positions()[col].x) === Math.round(this.pos.x))
 				return col + findRow(col);
+	}
+
+	under(molecule) {
+		return [molecule.center(), ...grid.neighborsOf(molecule.center())];
 	}
 }

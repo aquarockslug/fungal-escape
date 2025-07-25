@@ -9,13 +9,17 @@
 }
 #stage-select {
       display: none;
-      flex-direction: column;
-      background-color: white;
-      margin: 20px;
-      width: 33%;
+      background-color: transparent;
+      height: 100px;
+      width: 66%;
+      padding: 20px;
 }
 #stage-select button {
-      margin: 0px 40px 0px 40px;
+      margin: 0px 60px 0px 60px;
+}
+#main-menu {
+	position: absolute;
+	top: 225px;
 }
 #health-bar {
       display: none;
@@ -35,7 +39,7 @@
 	width: 190px;
 	height: 40px;
 	left: 310px;
-	bottom: 450px;
+	bottom: 425px;
 	background-color: #959ea6
 }
 #timer {

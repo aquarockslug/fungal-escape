@@ -10,25 +10,35 @@
 </head>
 <body>
   <div id="ui">
-    <img id="main-menu" src='assets/fungal-escape-titlemenu.png'/>
+
+    <div id="main-menu">
+    <img id="title" style="position: absolute; top: 150px; left: 25px" src="assets/title.png"/>
+    <img src="assets/menu.png"/>
     <div
       id="start-button"
       onclick="
+		document.getElementById('main-menu').style['top'] = '525px'
+		document.getElementById('title').style.display = 'none';
 		document.getElementById('start-button').style.display = 'none';
-		document.getElementById('main-menu').style.display = 'none';
 		document.getElementById('stage-select').style.display = 'flex';
 		document.getElementById('ui').style.display = 'flex';
 		document.getElementById('ui').style['justify-content'] = 'flex-end';
 	"
     >
-      <h1>START</h1>
+      <img style='position: absolute; scale: 1.5' src='assets/button.png'>
+      <h1 style='position: absolute; top: 5px'>CHOOSE A CHARACTER</h1>
+      </img>
     </div>
+    </div>
+
     <div id="health-bar" class="snes-container"></div>
     <div id="timer" class="snes-container"></div>
     <div id="message" class="snes-container"> you continue running... </div>
-    <div id="stage-select" class="snes-form-group snes-container">
+
+    <div id="stage-select">
+    <div class="snes-form-group">
       <label>CHARACTER SELECT</label>
-      <div class="snes-radio snes-radio--vertical">
+      <div class="snes-radio snes-radio">
         <label class="snes-radio__item has-ember-icon">
           <input type="radio" name="player-select" value="0" checked />
           <span class="snes-radio__item__content">DEIMOS</span>
@@ -46,10 +56,14 @@
           <span class="snes-radio__item__content">IO</span>
         </label>
       </div>
+    </div>
         <button
           class="snes-button has-phantom-color"
+	  style="margin:0px 0px 0px 75px"
           onclick="
 		document.getElementById('stage-select').style.display = 'none';
+		document.getElementById('title').style.display = 'none';
+		document.getElementById('main-menu').style.display = 'none';
 		document.getElementById('health-bar').style.display = 'block';
 		gameStart();
 	"
@@ -57,6 +71,7 @@
           PLAY
         </button>
     </div>
+
   </div>
   <script src="javascript/lib/littlejs.js"></script>
   <script src="javascript/lib/fpo.src.js"></script>

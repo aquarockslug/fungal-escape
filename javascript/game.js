@@ -59,7 +59,6 @@ function gameOver() {
 function stageSequences(characterName) {
 	return {
 		red: [
-			'dawnforest',
 			'greenhouse',
 			'backstreets',
 			'nightcity',

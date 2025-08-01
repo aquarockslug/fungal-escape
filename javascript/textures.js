@@ -114,8 +114,8 @@ function Textures() {
 					size: vec2(84, 106),
 				},
 				bullet: {
-					pos: vec2(80, 97),
-					size: vec2(11, 14),
+					pos: vec2(70, 106),
+					size: vec2(15, 9),
 				},
 			},
 		},

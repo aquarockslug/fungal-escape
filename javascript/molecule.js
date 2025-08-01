@@ -27,6 +27,7 @@ class Molecule extends EngineObject {
 	}
 
 	render() {
+		// point in the direction that the projectile is moving
 		this.angle = this.velocity.angle();
 		super.render();
 	}

@@ -6,7 +6,7 @@ class DawnForest extends Stage {
 		this.rival = new Rival(
 			center.multiply(vec2(1, 1.65)),
 			this.player,
-			'security',
+			'heavy_security',
 		);
 	}
 	start() {

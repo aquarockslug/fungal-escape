@@ -5,7 +5,9 @@ class Rival extends EngineObject {
 			? Textures().tile(sheetName, 'idle')
 			: Textures().tile('rival_flyer', sheetName);
 		super(pos, idleTI.size.divide(vec2(2)), idleTI, PI * 2);
-		this.bulletTI = Textures().tile('rival_flyer', sheetName + '_bullet');
+		if (!isSecurity)
+			this.bulletTI = Textures().tile('rival_flyer', sheetName + '_bullet');
+		else this.bulletTI = Textures().tile(sheetName, 'bullet');
 		this.idleTI = idleTI;
 		this.sheetName = sheetName;
 		this.isSecurity = isSecurity;

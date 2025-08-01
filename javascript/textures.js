@@ -113,6 +113,28 @@ function Textures() {
 					pos: vec2(0),
 					size: vec2(84, 106),
 				},
+				bullet: {
+					pos: vec2(80, 97),
+					size: vec2(11, 14),
+				},
+			},
+		},
+		{
+			name: 'heavy_security',
+			path: 'assets/characters/flying-destroyer.png',
+			tiles: {
+				idle: {
+					pos: vec2(0),
+					size: vec2(103, 94),
+				},
+				walk: {
+					pos: vec2(0),
+					size: vec2(103, 94),
+				},
+				bullet: {
+					pos: vec2(80, 97),
+					size: vec2(11, 14),
+				},
 			},
 		},
 		{

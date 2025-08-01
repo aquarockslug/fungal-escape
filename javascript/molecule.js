@@ -27,7 +27,7 @@ class Molecule extends EngineObject {
 	}
 
 	render() {
-		// drawTile(this.pos, vec2(1), this.bulletTI);
+		this.angle = this.velocity.angle();
 		super.render();
 	}
 

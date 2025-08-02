@@ -244,6 +244,16 @@ function Textures() {
 			},
 		},
 		{
+			name: 'shapes',
+			path: 'assets/shapes.png',
+			tiles: {
+				circle: {
+					pos: vec2(0),
+					size: vec2(16),
+				},
+			},
+		},
+		{
 			name: 'rival_flyer',
 			path: 'assets/characters/rivals.png',
 			tiles: {

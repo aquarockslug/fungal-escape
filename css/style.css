@@ -40,7 +40,7 @@
 	height: 40px;
 	left: 310px;
 	bottom: 425px;
-	background-color: #959ea6
+	background-color: #959ea6;
 }
 #timer {
       display: none;
@@ -59,4 +59,7 @@
 }
 html {
 	background-color: black;
+}
+h1 {
+	font-size: 12px;
 }

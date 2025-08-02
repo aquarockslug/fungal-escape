@@ -26,8 +26,8 @@
 		document.getElementById('ui').style['justify-content'] = 'flex-end';
 	"
     >
-      <img style='position: absolute; scale: 1.5' src='assets/button.png'>
-      <h1 style='position: absolute; top: 5px'>CHOOSE A CHARACTER</h1>
+      <img style='position: absolute;' src='assets/button.png'>
+      <h1 style='position: absolute; top: 25px; left: 35px'>CHOOSE A CHARACTER</h1>
       </img>
     </div>
     </div>
@@ -38,7 +38,7 @@
 
     <div id="stage-select">
     <div class="snes-form-group">
-      <label>CHARACTER SELECT</label>
+      <label style="font-size: 12px" >CHARACTER SELECT</label>
       <div class="snes-radio snes-radio">
         <label class="snes-radio__item has-ember-icon">
           <input type="radio" name="player-select" value="0" checked />
@@ -58,19 +58,22 @@
         </label>
       </div>
     </div>
-        <button
-          class="snes-button has-phantom-color"
-	  style="margin:0px 0px 0px 75px"
-          onclick="
+
+        <div
+	     onclick="
 		document.getElementById('stage-select').style.display = 'none';
 		document.getElementById('title').style.display = 'none';
 		document.getElementById('main-menu').style.display = 'none';
 		document.getElementById('health-bar').style.display = 'block';
 		gameStart();
-	"
+		">
+      	<img style='position: absolute; scale: 0.5; left: 525px' src='assets/button.png'
         >
-          PLAY
-        </button>
+	</img>
+      		<h1 style='position: relative; left: 120px; top: 30px'>PLAY</h1>
+	</div>
+
+
     </div>
 
   </div>

@@ -11,6 +11,7 @@ class Player extends EngineObject {
 		this.healthbar.style.display = 'flex';
 		this.healthbar.style.width = this.health * 3 + 'px';
 		this.health = 100;
+
 		this.setCollision();
 	}
 	update() {

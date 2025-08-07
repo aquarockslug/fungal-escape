@@ -1,4 +1,3 @@
-// Written by Aquarocks
 function gameInit() {
 	[width, height] = [210, 140];
 	center = vec2(width / 2, height / 2);
@@ -26,7 +25,7 @@ function gameStart() {
 	stageTimer = new Timer(settings.stageTimerLength);
 	stageTimerDisplay.style.display = 'inline';
 	started = true;
-	sfx.chime.play();
+	// sfx.chime.play();
 }
 function gameUpdate() {
 	if (!started) return;
@@ -43,7 +42,7 @@ function gameUpdate() {
 function gameUpdatePost() {}
 function gameRender() {}
 function gameRenderPost() {
-	if (!started && stageIndex == 0) return characterSelect();
+	if (!started && stageIndex === 0) return characterSelect();
 	if (!started && stageIndex >= 1) return showCharacterArt();
 	for (let i = 0; i < width * height; i++) {
 		let pixelColor = grid.values()[i].color;
@@ -55,6 +54,7 @@ function gameRenderPost() {
 function gameOver() {
 	// TODO create ending screen
 	console.log('game over');
+	this.messageDisplay.style.display = 'none';
 }
 function stageSequences(characterName) {
 	return {
@@ -129,15 +129,14 @@ function nextStage(transitionLength = 3) {
 	started = false;
 	stage.stop();
 	stageIndex++;
-	if (!selectedStages[stageIndex]) gameOver();
+	if (!selectedStages[stageIndex]) {
+		gameOver();
+		return;
+	}
 	after(
 		transitionLength * 1000,
 		(stageName) => {
 			stage = loadStage(stageName);
-			if (!stage) {
-				console.log("couldn't load " + stageName);
-				return;
-			}
 			started = true;
 			stageTimer = new Timer(5);
 			stage.start();

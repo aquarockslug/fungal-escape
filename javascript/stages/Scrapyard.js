@@ -16,7 +16,7 @@ class Scrapyard extends Stage {
 	update() {
 		if (!started) return;
 		if (this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player, 'hot');
+			this.rival.attack(this.player, 'cold');
 			this.rivalAttackTimer = new Timer(2);
 		}
 

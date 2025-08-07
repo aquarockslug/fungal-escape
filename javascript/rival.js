@@ -70,13 +70,26 @@ class Rival extends EngineObject {
 		this.angle = target.pos.subtract(this.pos).angle();
 	}
 	attack(target, moleculeType) {
-		new Molecule(
-			this.pos.add(vec2(0, 8)),
-			vec2(12),
-			this.bulletTI,
-			abs(randVector().angle()) - PI / 2, // randomly shoot upwards
-			moleculeType,
-		);
+		switch (moleculeType) {
+			case 'hot':
+				new Molecule(
+					this.pos.add(vec2(0, 8)),
+					vec2(12),
+					this.bulletTI,
+					abs(randVector().angle()) - PI / 2, // randomly shoot upwards
+					moleculeType,
+				);
+				break
+			case 'cold':
+				new Molecule(
+					this.pos.add(vec2(0, 8)),
+					vec2(12),
+					this.bulletTI,
+					this.player.pos.subtract(this.pos).angle(),
+					moleculeType,
+				);
+				break
+		}
 	}
 	destroy() {
 		if (this.effect) this.effect.destroy();

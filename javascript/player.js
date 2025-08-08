@@ -75,11 +75,13 @@ class Player extends EngineObject {
 			this.velocity.x -= 1;
 		}
 
+		// jump
 		if (this.isGrounded() && keyWasPressed('ArrowUp')) {
 			this.applyAcceleration(vec2(0, 500));
+			sfx.jump.play();
 		}
 
-		if (this.isGrounded()) this.pos.y = 27;
+		if (this.isGrounded()) this.pos.y = 27; // TODO use a settings var?
 		this.velocity.x *= 0.3;
 
 		this.pos.x = clamp(
@@ -92,6 +94,7 @@ class Player extends EngineObject {
 		if (o.damage) {
 			this.health -= o.damage;
 			this.healthbar.style.width = this.health * 3 + 'px';
+			sfx.damage.play();
 		}
 	}
 }

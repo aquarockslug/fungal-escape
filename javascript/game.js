@@ -25,7 +25,6 @@ function gameStart() {
 	stageTimer = new Timer(settings.stageTimerLength);
 	stageTimerDisplay.style.display = 'inline';
 	started = true;
-	// sfx.chime.play();
 }
 function gameUpdate() {
 	if (!started) return;
@@ -99,6 +98,8 @@ function showCharacterArt() {
 			fn: ({ v }) => v.checked,
 		})[0].value,
 	);
+	// TODO play button sound when the char changes
+	// if (characterSelect())
 	drawTile(
 		cameraPos,
 		settings.screenResolution.divide(vec2(3)),

@@ -24,6 +24,7 @@
 		document.getElementById('stage-select').style.display = 'flex';
 		document.getElementById('ui').style.display = 'flex';
 		document.getElementById('ui').style['justify-content'] = 'flex-end';
+      		sfx.button.play()
 	"
     >
       <img style='position: absolute;' src='assets/button.png'>
@@ -65,6 +66,7 @@
 		document.getElementById('title').style.display = 'none';
 		document.getElementById('main-menu').style.display = 'none';
 		document.getElementById('health-bar').style.display = 'block';
+	     	sfx.button.play()
 		gameStart();
 		">
       	<img style='position: absolute; scale: 0.5; left: 525px' src='assets/button.png'
@@ -96,73 +98,9 @@
     }
 
     sfx = {
-      chime: new Sound([
-        0.2,
-        ,
-        531,
-        0.08,
-        0.29,
-        0.36,
-        ,
-        0.2,
-        ,
-        ,
-        472,
-        0.06,
-        0.09,
-        ,
-        ,
-        ,
-        ,
-        0.8,
-        0.16,
-        ,
-        846,
-      ]),
-      shoot: new Sound([
-        ,
-        ,
-        173,
-        ,
-        0.03,
-        0.2,
-        2,
-        1.4,
-        -17,
-        15,
-        ,
-        ,
-        ,
-        0.9,
-        ,
-        ,
-        ,
-        0.58,
-        0.2,
-      ]),
-      shoot2: new Sound([
-        1.2,
-        ,
-        99,
-        ,
-        0.04,
-        0.06,
-        3,
-        3.8,
-        -14,
-        -4,
-        ,
-        ,
-        ,
-        ,
-        ,
-        0.3,
-        0.2,
-        0.6,
-        0.17,
-        ,
-        585,
-      ]),
+	    jump: new Sound([1.4,,289,.01,.03,.06,1,2.3,,76,,,,.3,,.1,.01,.99,.02]),
+	    damage: new Sound([.5,,73,.01,.01,.02,3,3.4,,,,,,1.7,,,,.64,.06,.19,419]),
+	    button: new Sound([1.1,,379,.01,.03,.01,3,.6,-0.1,,,,,.2,-1,,.02,.43,,.34,-1320]),
     };
   </script>
   <script src="javascript/textures.js"></script>

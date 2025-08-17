@@ -1,4 +1,4 @@
-# Spore Shooter
+# Fungal Escape
 ================
 
 A bullet hell game

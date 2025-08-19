@@ -54,6 +54,11 @@ function gameOver() {
 	// TODO create ending screen
 	console.log('game over');
 	this.messageDisplay.style.display = 'none';
+	document.getElementById('start-button').style.display = 'flex';
+	document.getElementById('main-menu').style.display = '';
+	document.getElementById('main-menu').style.position = 'absolute';
+	document.getElementById('main-menu').style.top = '525px';
+	document.getElementById('stage-select').style.display = 'flex';
 }
 function stageSequences(characterName) {
 	return {

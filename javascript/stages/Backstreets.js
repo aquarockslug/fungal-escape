@@ -16,7 +16,7 @@ class Backstreets extends Stage {
 	update() {
 		if (!started) return;
 		if (this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player, 'cold');
+			this.rival.attack(this.player.pos, 'cold');
 			this.rivalAttackTimer = new Timer(2);
 		}
 

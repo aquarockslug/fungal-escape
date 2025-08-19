@@ -16,7 +16,7 @@ class Greenhouse extends Stage {
 	update() {
 		if (!started) return;
 		if (this.rival && this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player, 'hot');
+			this.rival.attack(this.player.pos, 'hot');
 			this.rivalAttackTimer = new Timer(2);
 		}
 

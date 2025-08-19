@@ -2,9 +2,7 @@ class Molecule extends EngineObject {
 	constructor(pos, size, tileInfo, angle, state) {
 		super(pos, size, tileInfo, angle);
 		this.pulse = new Timer(1);
-		this.velocity = vec2(0)
-			.setAngle(angle + randInt(PI / 4, PI / 3))
-			.multiply(vec2(5));
+		this.velocity = vec2(0).setAngle(angle).multiply(vec2(5));
 		this.bulletTI = tileInfo;
 		this.hasTrail = true;
 		this.maxBounces = 2;

@@ -14,35 +14,6 @@ class Rival extends EngineObject {
 
 		this.player = player;
 
-		if (this.isSecurity)
-			this.effect = new ParticleEmitter(
-				this.pos,
-				0,
-				25,
-				0,
-				10,
-				3.14,
-				Textures().tile('shapes', 'circle'),
-				new Color(1, 1, 1, 1),
-				new Color(1, 1, 1, 1),
-				new Color(1, 1, 1, 0),
-				new Color(1, 1, 1, 0),
-				0.5,
-				1,
-				7,
-				0.1,
-				0.05,
-				1,
-				1,
-				0,
-				3.14,
-				0.1,
-				0.2,
-				0,
-				0,
-				1,
-			);
-
 		this.gravityScale = 0;
 		this.mass = 0;
 		this.setCollision();
@@ -79,16 +50,25 @@ class Rival extends EngineObject {
 					abs(randVector().angle()) - PI / 2, // randomly shoot upwards
 					moleculeType,
 				);
-				break
+				break;
 			case 'cold':
 				new Molecule(
-					this.pos.add(vec2(0, 8)),
+					this.pos.add(vec2(2, 0)),
 					vec2(12),
 					this.bulletTI,
-					this.player.pos.subtract(this.pos).angle(),
+					target.subtract(this.pos).angle(),
 					moleculeType,
 				);
-				break
+				break;
+			case 'burst':
+				new Molecule(
+					this.pos.add(vec2(2, 0)),
+					vec2(6),
+					this.bulletTI,
+					target.subtract(this.pos).angle(),
+					moleculeType,
+				);
+				break;
 		}
 	}
 	destroy() {

@@ -10,14 +10,14 @@ class Scrapyard extends Stage {
 		);
 	}
 	start() {
-		this.rivalAttackTimer = new Timer(2);
+		this.rivalAttackTimer = new Timer(0.2);
 		super.start();
 	}
 	update() {
 		if (!started) return;
 		if (this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player, 'cold');
-			this.rivalAttackTimer = new Timer(2);
+			this.rival.attack(this.player.pos, 'burst');
+			this.rivalAttackTimer = new Timer(0.2);
 		}
 
 		super.update();

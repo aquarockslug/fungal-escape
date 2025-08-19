@@ -16,7 +16,7 @@ class DawnForest extends Stage {
 	update() {
 		if (!started) return;
 		if (this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player, 'hot');
+			this.rival.attack(this.player.pos, 'hot');
 			this.rivalAttackTimer = new Timer(2);
 		}
 

@@ -1,10 +1,11 @@
 class Molecule extends EngineObject {
-	constructor(pos, size, tileInfo, angle, state) {
+	constructor(pos, size, tileInfo, angle, type) {
 		super(pos, size, tileInfo, angle);
 		this.pulse = new Timer(1);
-		this.velocity = vec2(0).setAngle(angle).multiply(vec2(5));
+		this.velocity = vec2(0).setAngle(angle);
 		this.bulletTI = tileInfo;
-		this.hasTrail = true;
+
+		// defaults
 		this.maxBounces = 2;
 		this.bounces = 0;
 		this.bounceOnCeiling = false;
@@ -12,10 +13,34 @@ class Molecule extends EngineObject {
 		this.setCollision();
 
 		this.color = rgb(1, 1, 1);
-		this.trailThickness = 15;
-		this.canBounce = true;
+		this.setType(type);
 	}
-
+	setType(type) {
+		switch (type) {
+			case 'hot':
+				this.hasTrail = true;
+				this.canBounce = true;
+				this.trailThickness = 15;
+				this.velocity = this.velocity.multiply(vec2(4));
+				this.damage = 3;
+				break;
+			case 'cold':
+				this.hasTrail = true;
+				this.canBounce = false;
+				this.trailThickness = 15;
+				this.gravityScale = 0;
+				this.damage = 3;
+				this.velocity = this.velocity.multiply(vec2(2));
+				break;
+			case 'fast':
+				this.canBounce = false;
+				this.hasTrail = false;
+				this.gravityScale = 0;
+				this.angle = this.angle + rand() - 0.5;
+				this.velocity = this.velocity.multiply(vec2(4));
+				break;
+		}
+	}
 	update() {
 		if (this.pulse.elapsed()) {
 			this.pulse = new Timer(1);

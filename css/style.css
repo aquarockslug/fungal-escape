@@ -16,7 +16,7 @@
       left:0px;
       flex-direction: column;
       animation-name: fadeIn;
-      animation-duration: 2s;
+      animation-duration: 1s;
 }
 #stage-select {
       display: none;

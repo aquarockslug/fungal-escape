@@ -10,14 +10,19 @@ class ElectricPlant extends Stage {
 		);
 	}
 	start() {
-		this.rivalAttackTimer = new Timer(2);
+		this.rivalAttackTimer = new Timer(4);
 		super.start();
 	}
 	update() {
 		if (!started) return;
 		if (this.rivalAttackTimer.elapsed()) {
-			this.rival.attack(this.player.pos, 'cold');
-			this.rivalAttackTimer = new Timer(2);
+			this.rivalAttackTimer = new Timer(4);
+			for (let i = 0; i <= 2; i++)
+				new Promise(() =>
+					setTimeout(() => {
+						this.rival.attack(this.player.pos, 'hot');
+					}, i * 500),
+				);
 		}
 
 		super.update();

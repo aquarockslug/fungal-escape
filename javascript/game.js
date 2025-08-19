@@ -13,6 +13,11 @@ function gameInit() {
 
 	messageDisplay = document.getElementById('message');
 
+	framesSinceLastCharacterChange = 1000;
+	document.getElementById('stage-select').addEventListener('change', () => {
+		framesSinceLastCharacterChange = 1;
+	});
+
 	clearParticles();
 	setCanvasFixedSize(settings.screenResolution);
 }
@@ -30,6 +35,8 @@ function gameUpdate() {
 	if (!started) return;
 
 	stageTimerDisplay.innerHTML = formatTime(abs(stageTimer.get()));
+
+	if (stage.player.health <= 1) gameOver();
 
 	if (particleTimer.elapsed()) {
 		particleUpdate();
@@ -53,7 +60,11 @@ function gameRenderPost() {
 function gameOver() {
 	// TODO create ending screen
 	console.log('game over');
-	this.messageDisplay.style.display = 'none';
+	stage.stop();
+	stageIndex = 0;
+	started = false;
+	stageTimerDisplay.style.display = 'none';
+	messageDisplay.style.display = 'none';
 	document.getElementById('start-button').style.display = 'flex';
 	document.getElementById('main-menu').style.display = '';
 	document.getElementById('main-menu').style.position = 'absolute';
@@ -97,16 +108,19 @@ function stageSequences(characterName) {
 	}[characterName];
 }
 function showCharacterArt() {
+	framesSinceLastCharacterChange++;
 	let selectedCharacterFrame = Number(
 		FPO.filter({
 			arr: document.getElementsByName('player-select'),
 			fn: ({ v }) => v.checked,
 		})[0].value,
 	);
+	let fadeAmount = 1 - 10 / framesSinceLastCharacterChange;
 	drawTile(
 		cameraPos,
 		settings.screenResolution.divide(vec2(3)),
 		Textures().tile('art', 'characters').frame(selectedCharacterFrame),
+		rgb(fadeAmount, fadeAmount, fadeAmount),
 	);
 	return selectedCharacterFrame;
 }
@@ -142,7 +156,7 @@ function nextStage(transitionLength = 3) {
 		(stageName) => {
 			stage = loadStage(stageName);
 			started = true;
-			stageTimer = new Timer(5);
+			stageTimer = new Timer(settings.stageTimerLength);
 			stage.start();
 			this.messageDisplay.style.display = 'none';
 			this.stageTimerDisplay.style.display = 'flex';

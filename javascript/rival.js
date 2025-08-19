@@ -41,6 +41,7 @@ class Rival extends EngineObject {
 		this.angle = target.pos.subtract(this.pos).angle();
 	}
 	attack(target, moleculeType) {
+		// TODO define the angle in the molecule file so there doesnt have to be a switch here
 		switch (moleculeType) {
 			case 'hot':
 				new Molecule(
@@ -53,16 +54,18 @@ class Rival extends EngineObject {
 				break;
 			case 'cold':
 				new Molecule(
-					this.pos.add(vec2(2, 0)),
-					vec2(12),
+					this.pos.add(vec2(0, 0)),
+					vec2(18),
 					this.bulletTI,
 					target.subtract(this.pos).angle(),
 					moleculeType,
 				);
 				break;
-			case 'burst':
+			case 'fast':
 				new Molecule(
-					this.pos.add(vec2(2, 0)),
+					this.pos.add(
+						vec2(this.isSecurity ? 0 : -2, this.isSecurity ? -15 : 0),
+					),
 					vec2(6),
 					this.bulletTI,
 					target.subtract(this.pos).angle(),
